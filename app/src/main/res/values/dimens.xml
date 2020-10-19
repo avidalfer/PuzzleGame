@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="appDefaultTextSize">24sp</dimen>
+
+    <dimen name="appDefaultMargin">24dp</dimen>
+</resources>
