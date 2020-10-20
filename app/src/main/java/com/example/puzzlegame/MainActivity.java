@@ -16,7 +16,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = Utils.createToolbar(this);
-        ActionBar actionBar = Utils.configDefaultAppBar(this);
+        Utils.createToolbar(this);
+        Utils.configDefaultAppBar(this);
     }
 }

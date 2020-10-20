@@ -1,6 +1,10 @@
 package com.example.puzzlegame.common;
 
+import android.annotation.SuppressLint;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +12,8 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.puzzlegame.R;
+
+import static android.R.color.white;
 
 /**
  * Contains static functions for common activities behaviour (i.e. create a common toolbar)
@@ -17,6 +23,7 @@ public class Utils {
     //common static toolbar functions
     /**
      * Sets toolbar as a main activity actionBar
+     * Sets color item icons to white
      * @param activity
      * @return
      */
@@ -27,6 +34,12 @@ public class Utils {
         toolbar = activity.findViewById(R.id.main_toolbar);
         activity.setSupportActionBar(toolbar);
 
+        MenuItem item;
+        for (int i = 0; i < toolbar.getMenu().size(); i++) {
+             item = toolbar.getMenu().getItem(i);
+            final Drawable icon = item.getIcon();
+            icon.setColorFilter(activity.getResources().getColor(white), PorterDuff.Mode.SRC_ATOP);
+        }
         return toolbar;
     }
 
@@ -44,8 +57,6 @@ public class Utils {
         try {
             if (activity.getSupportActionBar() != null) {
                 actionBar = activity.getSupportActionBar();
-
-                actionBar.setDisplayShowTitleEnabled(false);
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_open_24);
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }

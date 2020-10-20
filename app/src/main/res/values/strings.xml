@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">PuzzleGame</string>
+    <string name="app_name">Mapuzzle</string>
     <string name="action_help">Ayuda</string>
-    <string name="jugar">jugar</string>
+    <string name="continue_game">Continuar Puzle</string>
+    <string name="new_game">Nuevo Puzle</string>
+    <string name="previous_games">Puzles anteriores</string>
+    <string name="selector_welcome_msg">¡Bienvenido/a Usuaria!</string>
+    <string name="selector_selectGameOptions">¿Qué mapeteche hacer hoy?</string>
 </resources>
