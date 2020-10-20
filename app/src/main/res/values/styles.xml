@@ -11,7 +11,7 @@
     </style>
 
     <!-- App Button Theme red -->
-    <style name="AppDefaultButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+    <style name="AppRedButton" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:textSize">20sp</item>
@@ -19,14 +19,33 @@
         <item name="android:background">@drawable/rounded_corners</item>
     </style>
     <!-- App Button Theme orange -->
-    <style name="AppOrangeButton" parent="AppDefaultButton">
+    <style name="AppOrangeButton" parent="AppRedButton">
         <item name="android:background">@drawable/orange_round_corner</item>
     </style>
 
-    <!-- App Button Theme orange -->
-    <style name="AppPurpleButton" parent="AppDefaultButton">
+    <!-- App Button Theme purple -->
+    <style name="AppPurpleButton" parent="AppRedButton">
         <item name="android:background">@drawable/purple_round_corner</item>
     </style>
+
+    <!-- smallbuttons -->
+    <style name="SmallPurpleButton" parent="AppPurpleButton">
+        <item name="android:layout_width">76dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:textSize">11.5sp</item>
+        <item name="android:background">@drawable/purple_round_corner</item>
+    </style>
+    76 28 11.5
+
+
+    <!-- Credit titles -->
+    <style name="CreditTitlesText">
+        <item name="android:fontFamily">@font/blueberry</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:background">EA8894</item>
+    </style>
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorAccent">@android:color/white</item>

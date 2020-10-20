@@ -12,6 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+       <!-- <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/logo">
+        </androidx.appcompat.widget.AppCompatImageView> -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleBar"
             android:fontFamily="@font/blueberry"
@@ -19,7 +24,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/appDefaultTextSize"
-            android:text="@string/app_name">
+            android:text="@string/app_name"
+            android:enabled="false">
         </androidx.appcompat.widget.AppCompatTextView>
 
 </androidx.appcompat.widget.Toolbar>
