@@ -3,4 +3,5 @@
     <dimen name="appDefaultTextSize">24sp</dimen>
 
     <dimen name="appDefaultMargin">24dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

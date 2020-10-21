@@ -13,8 +13,9 @@
     <!-- App Button Theme red -->
     <style name="AppRedButton" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">300dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:fontFamily">@font/blueberry</item>
         <item name="android:background">@drawable/rounded_corners</item>
     </style>
