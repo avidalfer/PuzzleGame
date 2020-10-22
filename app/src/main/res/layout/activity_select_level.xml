@@ -63,8 +63,6 @@
             android:layout_marginTop="144dp"
             android:layout_marginEnd="40dp"
             android:layout_toEndOf="@+id/easy_txt"
-            android:checked="true"
-            android:onClick="setLevelGame"
             tools:checked="true"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
@@ -90,7 +88,6 @@
             android:layout_marginTop="55dp"
             android:layout_marginEnd="40dp"
             android:layout_toEndOf="@+id/medium_txt"
-            android:onClick="setLevelGame"
             android:enabled="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
@@ -116,7 +113,6 @@
             android:layout_marginTop="56dp"
             android:layout_marginEnd="40dp"
             android:layout_toEndOf="@+id/hard_text"
-            android:onClick="setLevelGame"
             android:enabled="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 

@@ -1,37 +1,26 @@
 package com.example.puzzlegame.ui;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.text.Layout;
+
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import android.widget.CompoundButton;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.models.User;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.logging.Level;
-
 public class SelectLevelActivity extends BaseActivity {
 
-    private Switch[] switches;
+    private CompoundButton[] switches;
     private int userlvl;
+    private int lvl;
     private int selectedLvl;
     private User user;
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,13 +34,28 @@ public class SelectLevelActivity extends BaseActivity {
 
         final ViewGroup levelChoseLayout = findViewById(R.id.levelChooseLayout);
 
-        final Switch easySW = levelChoseLayout.findViewById(R.id.easy_switch);
-        final Switch mediumSW = levelChoseLayout.findViewById(R.id.medium_switch);
-        final Switch hardSW = levelChoseLayout.findViewById(R.id.hard_switch);
+        final CompoundButton easySW = levelChoseLayout.findViewById(R.id.easy_switch);
+        final CompoundButton mediumSW = levelChoseLayout.findViewById(R.id.medium_switch);
+        final CompoundButton hardSW = levelChoseLayout.findViewById(R.id.hard_switch);
 
-        switches = new Switch[] { easySW, mediumSW, hardSW };
+        switches = new CompoundButton[] { easySW, mediumSW, hardSW };
 
+        addSwitchListeners(switches);
         allowsAsUserLevel(switches);
+    }
+
+    private void addSwitchListeners(final CompoundButton[] switches) {
+
+        for (CompoundButton sw : switches) {
+            sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        setLevelGame(buttonView);
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -59,7 +63,7 @@ public class SelectLevelActivity extends BaseActivity {
      * case 1 is always enabled. Don't use break to get cascade behaviour
      * @param switches
      */
-    private void allowsAsUserLevel(Switch[] switches) {
+    private void allowsAsUserLevel(CompoundButton[] switches) {
 
         switch (userlvl) {
             case 3: switches[2].setEnabled(true);
@@ -67,13 +71,9 @@ public class SelectLevelActivity extends BaseActivity {
         }
     }
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
-    public void setLevelGame (View view) {
+    private void setLevelGame (CompoundButton btnSelected) {
 
-        Switch sw = (Switch) view;
-        setAllSwitchesOn(false);
-
-        switch (sw.getId()){
+        switch (btnSelected.getId()){
             case R.id.easy_switch:
                 selectedLvl = 1;
                 break;
@@ -84,12 +84,14 @@ public class SelectLevelActivity extends BaseActivity {
                 selectedLvl = 3;
                 break;
         }
-        sw.setChecked(true);
+        setRestLevelsOff(btnSelected);
     }
 
-    private void setAllSwitchesOn(boolean in) {
-        for (Switch sw : switches) {
-            sw.setChecked(in);
+    private void setRestLevelsOff(CompoundButton btnSelected) {
+        for (CompoundButton sw : switches) {
+            if (!sw.equals(btnSelected)) {
+                sw.setChecked(false);
+            }
         }
     }
 
