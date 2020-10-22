@@ -6,99 +6,127 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/fondo"
-    tools:context=".ui.SelectGameActivity">
+    android:background="@drawable/fondo_amarillo"
+    tools:context=".ui.SelectLevelActivity">
 
     <!-- Main AppBar -->
+
     <include
         android:id="@+id/main_bar"
-        layout="@layout/app_bar_main" />
-
-    <!-- Game Selection layout -->
+        layout="@layout/app_bar_main"
+    />
 
     <TextView
         android:id="@+id/welcome_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:fontFamily="@font/alefregular"
+        android:fontFamily="@font/alefbold"
         android:gravity="center"
-        android:text="@string/selector_welcome_msg"
-        android:textSize="@dimen/appDefaultTextSize"
+        android:text="@string/select_level"
+        android:textSize="@dimen/bigSizeTextFont"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_bar">
-
     </TextView>
 
-    <TextView
-        android:id="@+id/userName_txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/blueberry"
-        android:gravity="center"
-        android:text="@string/user"
-        android:textSize="@dimen/appDefaultTextSize"
+    <RelativeLayout
+        android:id="@+id/levelChooseLayout"
+        android:layout_width="351dp"
+        android:layout_height="406dp"
+        android:layout_marginTop="152dp"
+        android:background="@drawable/fondo_ganar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_msg">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </TextView>
+        <TextView
+            android:id="@+id/easy_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="142dp"
+            android:text="@string/Easy"
+            android:textSize="@dimen/appDefaultTextSize" />
 
-    <TextView
-        android:id="@+id/selectGame_msg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:fontFamily="@font/alefregular"
-        android:gravity="center"
-        android:text="@string/selector_selectGameOptions"
-        android:textSize="@dimen/appDefaultTextSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_msg">
+        <Switch
+            android:id="@+id/easy_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="86dp"
+            android:layout_marginTop="144dp"
+            android:layout_marginEnd="40dp"
+            android:layout_toEndOf="@+id/easy_txt"
+            android:onClick="setLevelGame"
+            android:showText="false"
+            tools:checked="false"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-    </TextView>
+        <TextView
+            android:id="@+id/medium_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_below="@+id/easy_txt"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/Medium"
+            android:textSize="@dimen/appDefaultTextSize" />
 
-    <Button
-        android:id="@+id/btn_newGame"
-        style="@style/AppOrangeButton"
-        android:layout_width="300dp"
-        android:layout_marginTop="36dp"
-        android:elevation="10dp"
-        android:onClick="newGame"
-        android:text="@string/new_game"
+        <Switch
+            android:id="@+id/medium_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/easy_switch"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="40dp"
+            android:layout_toEndOf="@+id/medium_txt"
+            android:onClick="setLevelGame"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <TextView
+            android:id="@+id/hard_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_below="@+id/medium_txt"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/Hard"
+            android:textSize="@dimen/appDefaultTextSize" />
+
+        <Switch
+            android:id="@+id/hard_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medium_switch"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="40dp"
+            android:layout_toEndOf="@+id/hard_text"
+            android:onClick="setLevelGame"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/AppRedButton"
+        android:onClick="goToImageSelectionActivity"
+        android:layout_marginTop="20dp"
+        android:text="@string/play_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectGame_msg" />
-
-    <Button
-        android:id="@+id/btn_continueGame"
-        style="@style/AppOrangeButton"
-        android:layout_marginTop="40dp"
-        android:elevation="10dp"
-        android:onClick="continueGame"
-        android:text="@string/continue_game"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_newGame" />
-
-    <Button
-        android:id="@+id/btn_previousGames"
-        style="@style/AppOrangeButton"
-        android:layout_marginTop="40dp"
-        android:elevation="10dp"
-        android:onclick="viewPreviousGames"
-        android:text="@string/previous_games"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_continueGame" />
-
+        app:layout_constraintTop_toBottomOf="@+id/levelChooseLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
