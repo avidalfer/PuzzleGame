@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="appDefaultTextSize">24sp</dimen>
+    <dimen name="bigSizeTextFont">30sp</dimen>
 
     <dimen name="appDefaultMargin">24dp</dimen>
     <dimen name="text_margin">16dp</dimen>

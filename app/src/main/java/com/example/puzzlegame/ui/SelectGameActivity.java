@@ -1,22 +1,32 @@
 package com.example.puzzlegame.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.ui.common.BaseActivity;
 
-public class SelectGameActivity extends AppCompatActivity {
+import static android.R.color.white;
+
+public class SelectGameActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_game);
+
+        Utils.createToolbar(this);
+        Utils.configDefaultAppBar(this);
 
 //        Muestra el nombre de usuario o mapache
 //
@@ -31,9 +41,8 @@ public class SelectGameActivity extends AppCompatActivity {
     }
 
     public void newGame(View view) {
-        //Intent intent = new Intent(this, SelectLevelGame.class);
-        //startActivity(intent);
-        Utils.TODO(this, view);
+        Intent intent = new Intent(this, SelectLevelActivity.class);
+        startActivity(intent);
     }
 
     public void continueGame(View view) {

@@ -7,4 +7,9 @@
     <string name="selector_welcome_msg">¡Bienvenido/a Usuaria!</string>
     <string name="selector_selectGameOptions">¿Qué mapeteche hacer hoy?</string>
     <string name="user">Mapache</string>
+    <string name="select_level">Selecciona el nivel \n de dificultad</string>
+    <string name="Easy">Fácil : 3 x 3</string>
+    <string name="play_game">JUGAR</string>
+    <string name="Medium">Intermedio : 4 x 4</string>
+    <string name="Hard">Dificil : 5 x 5</string>
 </resources>

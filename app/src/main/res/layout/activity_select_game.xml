@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/fondo"
+    android:background="@drawable/fondo_morado"
     tools:context=".ui.SelectGameActivity">
 
     <!-- Main AppBar -->
@@ -69,7 +69,6 @@
         style="@style/AppOrangeButton"
         android:layout_width="300dp"
         android:layout_marginTop="36dp"
-        android:elevation="10dp"
         android:onClick="newGame"
         android:text="@string/new_game"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +80,6 @@
         android:id="@+id/btn_continueGame"
         style="@style/AppOrangeButton"
         android:layout_marginTop="40dp"
-        android:elevation="10dp"
         android:onClick="continueGame"
         android:text="@string/continue_game"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +91,7 @@
         android:id="@+id/btn_previousGames"
         style="@style/AppOrangeButton"
         android:layout_marginTop="40dp"
-        android:elevation="10dp"
-        android:onclick="viewPreviousGames"
+        android:onClick="viewPreviousGames"
         android:text="@string/previous_games"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"

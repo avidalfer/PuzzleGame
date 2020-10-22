@@ -43,6 +43,7 @@ public class BaseActivity extends AppCompatActivity {
                 //call helpView fragment
                 toast = Toast.makeText(getApplicationContext(), "Calling to HelpView Fragment", Toast.LENGTH_SHORT); //provisional
                 toast.show();
+                return true;
             default:
                 toast = Toast.makeText(getApplicationContext(), "Action not implemented", Toast.LENGTH_SHORT);
                 toast.show();
