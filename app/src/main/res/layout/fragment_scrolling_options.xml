@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="On/Off                                               "
+            android:text="@string/on_off"
             android:textAllCaps="false"
             android:textColor="?attr/colorAccent"
             android:textSize="16dp" />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="64dp"
+            android:layout_marginEnd="64dp"
             android:text="@string/volumen"
             android:layout_alignParentStart="true"
             android:textSize="16dp"
@@ -66,9 +66,43 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp"
-            android:text="Pista"
+            android:layout_marginStart="50dp"
+            android:text="@string/pista"
             android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/mapuzzled_official_theme"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/cargar_canci_n_propia"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/btn_newGame"
+            style="@style/SmallPurpleButton"
+            android:layout_width="100dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="260dp"
+            android:text="@string/select"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
 
         <TextView
             style="@style/CreditTitlesText"
