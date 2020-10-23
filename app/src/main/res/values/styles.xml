@@ -43,7 +43,6 @@
     <style name="CreditTitlesText">
         <item name="android:fontFamily">@font/blueberry</item>
         <item name="android:textSize">26sp</item>
-        <item name="android:background">#EA8894</item>
     </style>
 
 
@@ -53,5 +52,10 @@
     </style>
 
     <style name="AppDefaultButton">AppDefaultButton</style>
+
+    <style name="RegularText">
+        <item name="android:fontFamily">@font/alefregular</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
 </resources>

@@ -191,7 +191,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton6"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton6"/>
 
         <TextView
             style="@style/CreditTitlesText"
@@ -204,6 +204,28 @@
             android:textSize="24sp" />
 
         <TextView
+            style="@style/RegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/detalle_creditos"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btn_saber_mas"
+            style="@style/SmallPurpleButton"
+            android:layout_width="100dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="260dp"
+            android:text="@string/saber_mas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton6"/>
+
+        <TextView
             style="@style/CreditTitlesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -212,6 +234,52 @@
             android:text="@string/salir"
             android:textColor="#EA8894"
             android:textSize="24sp" />
+
+        <TextView
+            style="@style/RegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/desea_salir"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/si_reiniciar"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/no_reiniciar"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/btn_salir"
+            style="@style/SmallPurpleButton"
+            android:layout_width="100dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginEnd="260dp"
+            android:text="@string/salir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton9"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>
