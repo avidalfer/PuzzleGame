@@ -7,10 +7,12 @@
         android:layout_height="match_parent"
         android:background="@drawable/fondo_morado">
     <!-- TopSide -->
+
     <include
         layout="@layout/app_bar_main"
-        android:id="@+id/main_toolbar"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/textView2"
@@ -105,6 +107,7 @@
             style="@style/AppPurpleButton"
             android:layout_marginTop="24dp"
             android:text="@string/toHoF"
+            android:onClick="goToHoF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
