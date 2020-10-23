@@ -43,9 +43,14 @@
     <style name="CreditTitlesText">
         <item name="android:fontFamily">@font/blueberry</item>
         <item name="android:textSize">26sp</item>
-        <item name="android:background">#EA8894</item>
     </style>
 
+
+    <!-- Regular text -->
+    <style name="RegularText">
+        <item name="android:fontFamily">@font/alefregular</item>
+        <item name="android:textSize">26sp</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@color/colorPrimaryDark</item>

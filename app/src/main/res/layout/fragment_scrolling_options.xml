@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/fondo"
+    tools:context=".ScrollingFragmentOptions">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:scrollbarSize="20dp"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <TextView
+            style="@style/CreditTitlesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:text="@string/musica"
+            android:textColor="#EA8894"
+            android:textSize="24sp" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="On/Off                                               "
+            android:textAllCaps="false"
+            android:textColor="?attr/colorAccent"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="64dp"
+            android:text="@string/volumen"
+            android:layout_alignParentStart="true"
+            android:textSize="16dp"
+            tools:checked="true" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="174dp"
+            android:layout_marginTop="-32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="64dp"
+            tools:checked="true"
+            android:layout_toEndOf="@+id/text2"/>
+
+
+
+        <TextView
+            style="@style/RegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:text="Pista"
+            android:textSize="24sp" />
+
+        <TextView
+            style="@style/CreditTitlesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:text="@string/reiniciar"
+            android:textColor="#EA8894"
+            android:textSize="24sp" />
+
+        <TextView
+            style="@style/CreditTitlesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:text="@string/creditos"
+            android:textColor="#EA8894"
+            android:textSize="24sp" />
+
+        <TextView
+            style="@style/CreditTitlesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:text="@string/salir"
+            android:textColor="#EA8894"
+            android:textSize="24sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.core.widget.NestedScrollView>
