@@ -13,7 +13,8 @@
         android:orientation="vertical"
         android:scrollbarSize="20dp"
         android:visibility="visible"
-        tools:visibility="visible">
+        tools:visibility="visible"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
 
         <TextView
             style="@style/CreditTitlesText"
@@ -33,7 +34,7 @@
             android:text="@string/on_off"
             android:textAllCaps="false"
             android:textColor="?attr/colorAccent"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -44,7 +45,7 @@
             android:layout_marginEnd="64dp"
             android:text="@string/volumen"
             android:layout_alignParentStart="true"
-            android:textSize="16dp"
+            android:textSize="16sp"
             tools:checked="true" />
 
         <SeekBar
@@ -54,10 +55,8 @@
             android:layout_marginStart="174dp"
             android:layout_marginTop="-32dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginLeft="64dp"
             tools:checked="true"
             android:layout_toEndOf="@+id/text2"/>
-
 
 
         <TextView
@@ -93,7 +92,7 @@
             android:textColor="?attr/colorAccent"
             android:textSize="24sp" />
         <Button
-            android:id="@+id/btn_newGame"
+            android:id="@+id/btn_seleccionar"
             style="@style/SmallPurpleButton"
             android:layout_width="100dp"
             android:layout_marginTop="32dp"
@@ -104,6 +103,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
 
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/Cancion_guardada_1"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/Cancion_guardada_2"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/Cancion_guardada_3"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+
         <TextView
             style="@style/CreditTitlesText"
             android:layout_width="wrap_content"
@@ -113,6 +148,50 @@
             android:text="@string/reiniciar"
             android:textColor="#EA8894"
             android:textSize="24sp" />
+
+        <TextView
+            style="@style/RegularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/desea_reiniciar"
+            android:textSize="24sp" />
+        <RadioButton
+            android:id="@+id/radioButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/si_reiniciar"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/radioButton7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:buttonTint="@color/cardview_light_background"
+            android:text="@string/no_reiniciar"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/btn_reiniciar"
+            style="@style/SmallPurpleButton"
+            android:layout_width="100dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="260dp"
+            android:text="@string/reiniciar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioButton6"
 
         <TextView
             style="@style/CreditTitlesText"
