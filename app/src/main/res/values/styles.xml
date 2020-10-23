@@ -21,6 +21,10 @@
     </style>
 
     <!-- App Button Theme red -->
+    <style name="AppWhiteBtn">
+        <item name="android:background">@drawable/btn_white_states</item>
+    </style>
+
     <style name="AppRedButton" parent="Widget.AppCompat.Button.Borderless.Colored">
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">60dp</item>

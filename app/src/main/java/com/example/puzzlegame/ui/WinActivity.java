@@ -1,5 +1,6 @@
 package com.example.puzzlegame.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.puzzlegame.common.Utils;
@@ -23,5 +24,12 @@ public class WinActivity extends BaseActivity {
 
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
+    }
+
+    public void goToHoF(View view) {
+
+        Intent intent = new Intent(this, HallOfFameActivity.class);
+        startActivity(intent);
+
     }
 }

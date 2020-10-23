@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.HallOfFameActivity" />
         <activity android:name=".ui.WinActivity" />
         <activity android:name=".ui.SelectLevelActivity" />
         <activity android:name=".ui.SelectGameActivity" />

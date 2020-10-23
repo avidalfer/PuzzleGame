@@ -20,7 +20,9 @@
     <string name="previous">Previous</string>
     <string name="congrats">¡¡¡Enhorabuena!!!</string>
     <string name="win_msg">¡Mapachiona \n ganar!</string>
-    <string name="your_time_is">Tu tiempo ha sido de:</string>
+    <string name="your_time_is">Lo has resuelto en solo</string>
     <string name="toHoF">Ver Hall of Fame</string>
     <string name="name_label">Inserta aquí tu nombre</string>
+    <string name="local_HoF_txt">LOCAL HALL OF FAME</string>
+    <string name="local_txt">Local</string>
 </resources>
