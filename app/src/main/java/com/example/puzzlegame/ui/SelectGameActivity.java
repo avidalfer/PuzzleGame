@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,8 @@ import com.example.puzzlegame.ui.common.BaseActivity;
 import static android.R.color.white;
 
 public class SelectGameActivity extends BaseActivity {
+
+    Button btnNewGame, btnContinueGame, btnViewPreviousGames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,39 @@ public class SelectGameActivity extends BaseActivity {
 //            userNameTxt.setText(receivedName);
 //        }
 //
+        setButtonListeners();
     }
 
-    public void newGame(View view) {
-        Intent intent = new Intent(this, SelectLevelActivity.class);
+    private void setButtonListeners() {
+
+        btnNewGame = findViewById(R.id.btn_newGame);
+        btnContinueGame = findViewById(R.id.btn_continueGame);
+        btnViewPreviousGames = findViewById(R.id.btn_previousGames);
+
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame(v);
+            }
+        });
+
+        btnContinueGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                continueGame(v);
+            }
+        });
+
+        btnViewPreviousGames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPreviousGames(v);
+            }
+        });
+    }
+
+    private void newGame(View view) {
+        Intent intent = new Intent(view.getContext(), SelectLevelActivity.class);
         startActivity(intent);
     }
 
