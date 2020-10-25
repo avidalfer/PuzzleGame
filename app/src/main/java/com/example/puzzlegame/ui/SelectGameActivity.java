@@ -1,27 +1,20 @@
 package com.example.puzzlegame.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
-
-import static android.R.color.white;
 
 public class SelectGameActivity extends BaseActivity {
 
     Button btnNewGame, btnContinueGame, btnViewPreviousGames;
+    TextView userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,49 +25,48 @@ public class SelectGameActivity extends BaseActivity {
         Utils.configDefaultAppBar(this);
 
 //        Muestra el nombre de usuario o mapache
-//
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//            String receivedName = intent, getStringExtra (LoggingActivity.EXTRA_MESSAGE);
-//
-//            TextView userNameTxt = findViewById(R.id.userName_txt);
-//            userNameTxt.setText(receivedName);
-//        }
-//
+//          Posibles implementaciones:  MVVM con acceso a la base de datos y muestra el nombre de usuario
+//                                      Recibe un Intent con el texto del usuario, recuperado del caso de uso login o signup
+
+        setViews();
         setButtonListeners();
     }
 
-    private void setButtonListeners() {
-
+    private void setViews() {
+        userName = findViewById(R.id.userName_txt);
         btnNewGame = findViewById(R.id.btn_newGame);
         btnContinueGame = findViewById(R.id.btn_continueGame);
         btnViewPreviousGames = findViewById(R.id.btn_previousGames);
+    }
 
-        btnNewGame.setOnClickListener(new View.OnClickListener() {
+    private void setButtonListeners() {
+        new Thread() {
             @Override
-            public void onClick(View v) {
-                newGame(v);
+            public void run() {
+                btnNewGame.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        newGame(v);
+                    }
+                });
+                btnContinueGame.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        continueGame(v);
+                    }
+                });
+                btnViewPreviousGames.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewPreviousGames(v);
+                    }
+                });
             }
-        });
-
-        btnContinueGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                continueGame(v);
-            }
-        });
-
-        btnViewPreviousGames.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewPreviousGames(v);
-            }
-        });
+        }.start();
     }
 
     private void newGame(View view) {
-        Intent intent = new Intent(view.getContext(), SelectLevelActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(getApplicationContext(), SelectLevelActivity.class));
     }
 
     public void continueGame(View view) {

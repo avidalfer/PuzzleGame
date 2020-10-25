@@ -66,7 +66,7 @@
 
     <Button
         android:id="@+id/btn_newGame"
-        style="@style/AppOrangeButton"
+        style="@style/AppRedButton"
         android:layout_width="300dp"
         android:layout_marginTop="36dp"
         android:text="@string/new_game"
@@ -87,7 +87,7 @@
 
     <Button
         android:id="@+id/btn_previousGames"
-        style="@style/AppOrangeButton"
+        style="@style/AppPurpleButton"
         android:layout_marginTop="40dp"
         android:text="@string/previous_games"
         app:layout_constraintEnd_toEndOf="parent"
