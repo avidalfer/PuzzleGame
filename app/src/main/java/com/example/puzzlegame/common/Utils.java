@@ -6,11 +6,13 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.puzzlegame.R;
@@ -42,7 +44,27 @@ public class Utils {
             final Drawable icon = item.getIcon();
             icon.setColorFilter(activity.getResources().getColor(white), PorterDuff.Mode.SRC_ATOP);
         }
+
+        setTitleTextClickListener(activity);
         return toolbar;
+    }
+
+    public static void setTitleTextClickListener(final AppCompatActivity activity) {
+        final ImageButton titleImg = activity.findViewById(R.id.title);
+
+        titleImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //navigate to HomeActivity
+                final Animation bounceAnim = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.bounce_anim);
+                BounceInterpolation interpolator = new BounceInterpolation(0.2, 20);
+                bounceAnim.setInterpolator(interpolator);
+                titleImg.startAnimation(bounceAnim);
+
+                Toast t = Toast.makeText(activity.getApplicationContext(), "Calling to HomeActivity", Toast.LENGTH_SHORT);
+                t.show();
+            }
+        });
     }
 
     /**

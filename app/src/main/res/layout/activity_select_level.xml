@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo_amarillo"
-    tools:context=".ui.SelectLevelActivity">
+    tools:context=".ui.SelectLevel.SelectLevelActivity">
 
     <!-- Main AppBar -->
 
@@ -48,7 +49,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="142dp"
             android:text="@string/Easy"
             android:textSize="@dimen/appDefaultTextSize" />
@@ -63,7 +64,7 @@
             android:layout_marginTop="144dp"
             android:layout_marginEnd="40dp"
             android:layout_toEndOf="@+id/easy_txt"
-            tools:checked="true"
+            android:checked="true"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
@@ -73,10 +74,12 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_below="@+id/easy_txt"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
             android:text="@string/Medium"
-            android:textSize="@dimen/appDefaultTextSize" />
+            android:textSize="@dimen/appDefaultTextSize"
+            app:drawableTint="@color/colorPrimaryDark"
+            app:drawableEndCompat="@drawable/ic_baseline_lock_24" />
 
         <Switch
             android:id="@+id/medium_switch"
@@ -92,16 +95,18 @@
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
-            android:id="@+id/hard_text"
+            android:id="@+id/hard_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:layout_below="@+id/medium_txt"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="50dp"
             android:text="@string/Hard"
-            android:textSize="@dimen/appDefaultTextSize" />
+            android:textSize="@dimen/appDefaultTextSize"
+            app:drawableTint="@color/colorPrimaryDark"
+            app:drawableEndCompat="@drawable/ic_baseline_lock_24" />
 
         <Switch
             android:id="@+id/hard_switch"
@@ -112,19 +117,20 @@
             android:layout_marginStart="75dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="40dp"
-            android:layout_toEndOf="@+id/hard_text"
+            android:layout_toEndOf="@+id/hard_txt"
             android:enabled="false"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_play"
         style="@style/AppRedButton"
-        android:onClick="goToImageSelectionActivity"
         android:layout_marginTop="20dp"
         android:text="@string/play_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/levelChooseLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

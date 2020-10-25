@@ -15,22 +15,28 @@
         android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-       <!-- <androidx.appcompat.widget.AppCompatImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/logo">
-        </androidx.appcompat.widget.AppCompatImageView> -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/titleBar"
-            android:fontFamily="@font/blueberry"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginHorizontal="@dimen/appDefaultMargin"
+                android:background="@drawable/logo">
+            </ImageButton>
+        <TextView
+            android:id="@+id/timer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
+            android:fontFamily="@font/blueberry"
             android:gravity="center"
-            android:textSize="@dimen/appDefaultTextSize"
             android:text="@string/app_name"
-            android:enabled="false">
-        </androidx.appcompat.widget.AppCompatTextView>
+            android:textSize="@dimen/appDefaultTextSize"
+            android:visibility="invisible"/>
+        </RelativeLayout>
 
-</androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 </com.google.android.material.appbar.AppBarLayout>

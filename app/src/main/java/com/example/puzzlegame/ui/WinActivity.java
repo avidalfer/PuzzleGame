@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.puzzlegame.R;
 
@@ -24,12 +26,18 @@ public class WinActivity extends BaseActivity {
 
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
+
+        setListeners();
     }
 
-    public void goToHoF(View view) {
+    private void setListeners() {
+        Button btnToHOF = findViewById(R.id.btn_toHoF);
 
-        Intent intent = new Intent(this, HallOfFameActivity.class);
-        startActivity(intent);
-
+        btnToHOF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
+            }
+        });
     }
 }
