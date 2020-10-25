@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.HallOfFameActivity" />
         <activity android:name=".ui.WinActivity" />
-        <activity android:name=".ui.SelectLevelActivity" />
+        <activity android:name=".ui.SelectLevel.SelectLevelActivity" />
         <activity android:name=".ui.SelectGameActivity" />
         <activity android:name=".ui.common.BaseActivity" />
         <activity android:name=".MainActivity">
