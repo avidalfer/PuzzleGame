@@ -1,9 +1,5 @@
 package com.example.puzzlegame;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +9,6 @@ import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.ui.SelectGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
-import com.example.puzzlegame.ui.winscreen.WinScreenViewModel;
 
 public class MainActivity extends BaseActivity {
 

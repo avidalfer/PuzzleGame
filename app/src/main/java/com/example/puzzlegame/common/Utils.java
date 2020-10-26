@@ -1,6 +1,7 @@
 package com.example.puzzlegame.common;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.puzzlegame.MainActivity;
 import com.example.puzzlegame.R;
 
 import static android.R.color.white;
@@ -61,8 +63,9 @@ public class Utils {
                 bounceAnim.setInterpolator(interpolator);
                 titleImg.startAnimation(bounceAnim);
 
-                Toast t = Toast.makeText(activity.getApplicationContext(), "Calling to HomeActivity", Toast.LENGTH_SHORT);
-                t.show();
+                Intent intent = new Intent (activity, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
             }
         });
     }

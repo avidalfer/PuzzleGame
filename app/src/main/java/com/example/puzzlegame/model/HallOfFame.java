@@ -5,12 +5,22 @@ import java.util.List;
 
 public class HallOfFame {
 
-    private List<GameSession> sessions;
-    private User user;
-    private Time bestTime;
+    private short position;
 
+    private List<GameSession> sessions;
+
+    private String winnerName;
+    private Long bestTime;
 
     public HallOfFame() { }
+
+    public short getPosition() {
+        return position;
+    }
+
+    public void setPosition(short position) {
+        this.position = position;
+    }
 
     public List<GameSession> getSessions() {
         return sessions;
@@ -20,19 +30,19 @@ public class HallOfFame {
         this.sessions = sessions;
     }
 
-    public User getUser() {
-        return user;
+    public String getWinnerName() {
+        return winnerName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setWinnerName(String winnerName) {
+        this.winnerName = winnerName;
     }
 
-    public Time getBestTime() {
+    public Long getBestTime() {
         return bestTime;
     }
 
-    public void setBestTime(Time bestTime) {
+    public void setBestTime(Long bestTime) {
         this.bestTime = bestTime;
     }
 }

@@ -51,17 +51,23 @@
             android:layout_height="match_parent"
             android:background="@drawable/round_corner_purple"
             android:backgroundTint="@android:color/holo_purple"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/appDefaultMargin">
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/blueberry"
                 android:text="@string/local_HoF_txt"
+                android:gravity="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/appDefaultTextSize"
                 android:textStyle="bold" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/list_scores">
+            </ListView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
