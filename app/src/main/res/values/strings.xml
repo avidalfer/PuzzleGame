@@ -7,10 +7,13 @@
     <string name="selector_welcome_msg">¡Bienvenido/a Usuaria!</string>
     <string name="selector_selectGameOptions">¿Qué mapeteche \n hacer hoy?</string>
     <string name="select_level">Selecciona el nivel \n de dificultad</string>
-    <string name="Easy">Fácil : 3 x 3</string>
+    <string name="easy_txt">Fácil : 3 x 3</string>
     <string name="play_game">JUGAR</string>
-    <string name="Medium">Intermedio : 4 x 4</string>
-    <string name="Hard">Difícil : 5 x 5</string>
+    <string name="medium_txt">Intermedio : 4 x 4</string>
+    <string name="hard_txt">Difícil : 5 x 5</string>
+    <string name="easy_btn">FÁCIL</string>
+    <string name="medium_btn">INTERMEDIO</string>
+    <string name="hard_btn">DIFÍCIL</string>
     <string name="title_activity_navigation_drawer">navigationDrawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

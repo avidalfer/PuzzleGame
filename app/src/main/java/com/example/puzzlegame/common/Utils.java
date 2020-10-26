@@ -95,4 +95,28 @@ public class Utils {
         Toast toast = Toast.makeText(activity.getApplicationContext(), "Function not implemented yet", Toast.LENGTH_SHORT);
         toast.show();
     }
+
+    public static String FormatTime(long winTime) {
+        String formatedTime = "";
+
+        long mil = 1;
+        long sec = 1000 * mil;
+        long min = 60 * sec;
+        long hr = 60 * min;
+        long result = Math.abs(winTime);
+
+        int hour = (int) (result / hr);
+        result %= hr;
+        int minutes = (int) (result / min);
+        result %= min;
+        int seconds = (int) (result / sec);
+        result %= sec;
+
+        if (winTime < 0) { formatedTime = "-"; }
+        if (hour > 0) { formatedTime += hour + "h "; }
+        if (minutes > 0) { formatedTime += minutes + "m "; }
+        if (seconds > 0) { formatedTime += seconds + "s "; }
+
+        return formatedTime;
+    }
 }
