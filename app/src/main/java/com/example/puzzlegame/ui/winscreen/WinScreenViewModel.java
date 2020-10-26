@@ -2,9 +2,9 @@ package com.example.puzzlegame.ui.winscreen;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.puzzlegame.models.GameSession;
-import com.example.puzzlegame.models.LocalHOF;
-import com.example.puzzlegame.models.User;
+import com.example.puzzlegame.model.GameSession;
+import com.example.puzzlegame.model.HallOfFame;
+import com.example.puzzlegame.model.User;
 
 public class WinScreenViewModel extends ViewModel {
 
@@ -13,7 +13,7 @@ public class WinScreenViewModel extends ViewModel {
     private User user;
 
     public WinScreenViewModel() {
-        LocalHOF localHoF = LocalHOF.getLocalHof();
+        HallOfFame localHoF = HallOfFame.getHof();
         //user se saca del login.
         //User user = GameApp.getUser(id);
         //sessionId se pasa por intent desde la activity de juego

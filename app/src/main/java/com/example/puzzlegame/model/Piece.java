@@ -1,4 +1,4 @@
-package Model;
+package com.example.puzzlegame.model;
 
 import android.graphics.Bitmap;
 import android.media.Image;

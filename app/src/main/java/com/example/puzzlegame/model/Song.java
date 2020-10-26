@@ -1,4 +1,4 @@
-package Model;
+package com.example.puzzlegame.model;
 
 public class Song {
     private String source;

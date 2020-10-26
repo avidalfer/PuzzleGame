@@ -1,4 +1,4 @@
-package Model;
+package com.example.puzzlegame.model;
 
 import java.util.List;
 

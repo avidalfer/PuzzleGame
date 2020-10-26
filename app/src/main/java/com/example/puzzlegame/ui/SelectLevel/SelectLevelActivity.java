@@ -3,6 +3,7 @@ package com.example.puzzlegame.ui.SelectLevel;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -27,7 +28,11 @@ public class SelectLevelActivity extends BaseActivity {
     private CompoundButton[] switches;
     private Button btnPlay;
 
+    private boolean automaticChanged;
+        //true when switches change automatically ; false when the change is caused by user action
+
     private int userlvl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,9 @@ public class SelectLevelActivity extends BaseActivity {
         Utils.configDefaultAppBar(this);
 
         setViews();
+        allowsAsUserLevel();
         setListeners();
         getLastLevelPlayed();
-        allowsAsUserLevel();
     }
 
 
@@ -55,16 +60,17 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void setListeners() {
-        new Thread() {
-            @Override
-            public void run() {
                 //Switches
                 for (CompoundButton sw : switches) {
                     sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                setLvl(buttonView);
+                            if (!automaticChanged) {
+                                if (isChecked) {
+                                    setLvl(buttonView);
+                                }
+                                buttonView.setChecked(true);
+                                automaticChanged = false;
                             }
                         }
                     });
@@ -76,8 +82,6 @@ public class SelectLevelActivity extends BaseActivity {
                         goToImageSelectionActivity();
                     }
                 });
-            }
-        }.start();
         //LiveData
         final Observer<Integer> observer = new Observer<Integer>() {
             @Override
@@ -93,6 +97,7 @@ public class SelectLevelActivity extends BaseActivity {
      * case 1 is always enabled. Don't use break to get cascade behaviour
      */
     private void allowsAsUserLevel() {
+        userlvl = 3;
         TextView levelTxt;
 
         switch (userlvl) {
@@ -108,7 +113,7 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void getLastLevelPlayed() {
-        userlvl = 3;
+
         int lastGameLevel = 1;
         //userlvl = user.playedgames.last
         //if (userlvl != null)
@@ -146,18 +151,19 @@ public class SelectLevelActivity extends BaseActivity {
     private void setLvl(int levelId) {
         switch (levelId) {
             case 1:
-                setRestLevelsOff(easySW);
+                easySW.setChecked(true);
                 break;
             case 2:
-                setRestLevelsOff(mediumSW);
+                mediumSW.setChecked(true);
                 break;
             case 3:
-                setRestLevelsOff(hardSW);
+                hardSW.setChecked(true);
                 break;
         }
     }
 
     private void setRestLevelsOff(CompoundButton btnSelected) {
+        automaticChanged = true;
         for (CompoundButton sw : switches) {
             sw.setChecked(sw.equals(btnSelected));
         }
