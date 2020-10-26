@@ -61,6 +61,7 @@ public class Utils {
                 bounceAnim.setInterpolator(interpolator);
                 titleImg.startAnimation(bounceAnim);
 
+                //Navegar a través de navigation hacia la main o home activity
                 Toast t = Toast.makeText(activity.getApplicationContext(), "Calling to HomeActivity", Toast.LENGTH_SHORT);
                 t.show();
             }
@@ -113,7 +114,7 @@ public class Utils {
         result %= sec;
 
         if (winTime < 0) { formatedTime = "-"; }
-        if (hour > 0) { formatedTime += hour + "h "; }
+        if (hour > 0)    { formatedTime += hour + "h "; }
         if (minutes > 0) { formatedTime += minutes + "m "; }
         if (seconds > 0) { formatedTime += seconds + "s "; }
 

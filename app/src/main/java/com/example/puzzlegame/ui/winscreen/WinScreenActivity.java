@@ -4,20 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.puzzlegame.common.Utils;
-import com.example.puzzlegame.ui.HallOfFameActivity;
+import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.SystemClock;
-import android.view.Choreographer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
 
