@@ -63,12 +63,12 @@ class ScrollingFragmentOptions extends Fragment {
     }
 */
     public void SeleccionReiniciar (View view){
-        if (radioButton6.isChecked() == true) MainActivity.onRestart();
+        if (radioButton6.isChecked()) {}//MainActivity.onRestart();
            /*Intent i = getBaseContext().getPackageManager()
                     .getLaunchIntentForPackage( getBaseContext().getPackageName() );
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);*/
-        else if (radioButton7.isChecked() == true){
+        else if (radioButton7.isChecked()){
 
         }
     }

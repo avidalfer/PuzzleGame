@@ -11,9 +11,9 @@ import android.widget.Button;
 
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.ui.SelectGameActivity;
-import com.example.puzzlegame.ui.SelectLevelActivity;
-import com.example.puzzlegame.ui.WinActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
+import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
+import com.example.puzzlegame.ui.winscreen.WinScreenViewModel;
 
 public class MainActivity extends BaseActivity {
 
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), WinActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WinScreenActivity.class);
                 startActivity(intent);
             }
         });

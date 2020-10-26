@@ -39,4 +39,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <include
+        layout="@layout/fragment_scrolling_options"/>
 </com.google.android.material.appbar.AppBarLayout>

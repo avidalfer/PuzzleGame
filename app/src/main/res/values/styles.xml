@@ -45,7 +45,7 @@
     <!-- Credit titles -->
     <style name="CreditTitlesText">
         <item name="android:fontFamily">@font/blueberry</item>
-        <item name="android:textColor">"#EA8894"</item>
+        <item name="android:textColor">#EA8894</item>
         <item name="android:textSize">24sp</item>
     </style>
 

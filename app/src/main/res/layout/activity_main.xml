@@ -32,5 +32,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.582" />
+    <Button
+           android:id="@+id/button1"
+           android:layout_marginTop="52dp"
+            android:text="Button"
+            style="@style/AppRedButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_marginTop="140dp"
+            android:text="Button"
+            style="@style/AppOrangeButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.544"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/AppPurpleButton"
+            android:layout_marginTop="340dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.549"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/SmallPurpleButton"
+            android:layout_marginTop="224dp"
+            android:text="Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

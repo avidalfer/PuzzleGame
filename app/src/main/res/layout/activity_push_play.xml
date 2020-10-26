@@ -15,7 +15,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/rounded_corners"
+        android:background="@drawable/btn_red_states"
         android:fontFamily="@font/blueberry"
         android:text="@string/play_game"
         android:textColor="#ffffff"
