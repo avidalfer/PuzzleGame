@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text1" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/win_editText_name"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_below="@+id/win_img"
@@ -109,10 +109,10 @@
         android:id="@+id/btn_toHoF"
         style="@style/AppPurpleButton"
         android:layout_marginTop="24dp"
-        android:text="@string/toHoF"
+        android:text="@string/store_score"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/win_editText_name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

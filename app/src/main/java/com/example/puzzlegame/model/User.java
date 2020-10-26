@@ -1,5 +1,6 @@
 package com.example.puzzlegame.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -11,12 +12,12 @@ public class User {
     private List<GameSession> playedGames;
 
 
-    public User(long idUser, String name, Level userLvl, Language language, List<GameSession> playedGames) {
+    public User(long idUser, String name, Language language) {
         this.idUser = idUser;
         this.name = name;
-        this.userLvl = userLvl;
+        //this.userLvl = GameApp.getLevelById(1);
         this.language = language;
-        this.playedGames = playedGames;
+        this.playedGames = new ArrayList<>();
     }
 
     public long getIdUser() {

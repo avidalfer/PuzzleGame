@@ -5,18 +5,12 @@ import java.util.List;
 
 public class HallOfFame {
 
-    private static HallOfFame hof = new HallOfFame();
     private List<GameSession> sessions;
     private User user;
     private Time bestTime;
 
 
-    private HallOfFame() {
-    }
-
-    public static HallOfFame getHof() {
-        return hof;
-    }
+    public HallOfFame() { }
 
     public List<GameSession> getSessions() {
         return sessions;

@@ -26,6 +26,7 @@ import com.example.puzzlegame.R;
 public class WinScreenActivity extends BaseActivity {
 
     private WinScreenViewModel winScreenViewModel;
+    private EditText winnerNameTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +43,20 @@ public class WinScreenActivity extends BaseActivity {
     private void setViews() {
         winScreenViewModel = new ViewModelProvider(this).get(WinScreenViewModel.class);
 
-        long winTime = getWinTime();
-        TextView chronometer = findViewById(R.id.time);
-        String formattedWinTime = Utils.FormatTime(winTime);
-        chronometer.setText(formattedWinTime);
+        TextView winTimeTxt = findViewById(R.id.time);
+        winTimeTxt.setText(getWinnerTime());
+
+        winnerNameTxt = findViewById(R.id.win_editText_name);
+        winnerNameTxt.setText(getUserName());
         }
 
-    private long getWinTime() {
-        return winScreenViewModel.getWinTime();
-
+    private String getUserName() {
+        return winScreenViewModel.getUserName();
     }
 
+    private String getWinnerTime() {
+        return winScreenViewModel.getFormattedTime();
+    }
 
     private void setListeners() {
         Button btnToHOF = findViewById(R.id.btn_toHoF);
@@ -60,6 +64,8 @@ public class WinScreenActivity extends BaseActivity {
         btnToHOF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String winnerName = winnerNameTxt.getText().toString();
+                winScreenViewModel.setWinnerName(winnerName);
                 startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
             }
         });
