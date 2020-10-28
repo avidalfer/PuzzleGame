@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-class ScrollingFragmentOptions extends Fragment {
+public class ScrollingFragmentOptions extends Fragment {
 
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5,
             radioButton6, radioButton7, radioButton8, radioButton9;
@@ -28,6 +28,10 @@ class ScrollingFragmentOptions extends Fragment {
         this.radioButton7 = radioButton7;
         this.radioButton8 = radioButton8;
         this.radioButton9 = radioButton9;
+    }
+
+    public ScrollingFragmentOptions(){
+
     }
 
     @Nullable
@@ -63,12 +67,12 @@ class ScrollingFragmentOptions extends Fragment {
     }
 */
     public void SeleccionReiniciar (View view){
-        if (radioButton6.isChecked()) {}//MainActivity.onRestart();
+        if (radioButton6.isChecked() == true);
            /*Intent i = getBaseContext().getPackageManager()
                     .getLaunchIntentForPackage( getBaseContext().getPackageName() );
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);*/
-        else if (radioButton7.isChecked()){
+        else if (radioButton7.isChecked() == true){
 
         }
     }

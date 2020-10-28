@@ -14,11 +14,12 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="SeleccionSalir"
         android:orientation="vertical"
         android:scrollbarSize="20dp"
         android:visibility="visible"
-        tools:visibility="visible"
-        tools:ignore="UseSwitchCompatOrMaterialXml">
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+        tools:visibility="visible">
 
         <TextView
             style="@style/CreditTitlesText"
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="44dp"
-            android:text="@string/musica"/>
+            android:text="@string/musica" />
 
         <Switch
             android:id="@+id/switch1"
@@ -39,18 +40,18 @@
             android:textAllCaps="false"
             android:textColor="?attr/colorAccent"
             android:textSize="18sp"
-            tools:visibility="visible"
-            tools:ignore="RtlCompat" />
+            tools:ignore="RtlCompat"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="64dp"
             android:text="@string/volumen"
-            android:layout_alignParentStart="true"
             android:textSize="24sp"
             tools:checked="true" />
 
@@ -61,8 +62,8 @@
             android:layout_marginStart="174dp"
             android:layout_marginTop="-32dp"
             android:layout_marginEnd="16dp"
-            tools:checked="true"
-            android:layout_toEndOf="@+id/text2"/>
+            android:layout_toEndOf="@+id/text2"
+            tools:checked="true" />
 
 
         <TextView
@@ -70,10 +71,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
             android:text="@string/pista"
             android:textSize="24sp" />
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,8 +110,8 @@
             android:id="@+id/btn_seleccionar"
             style="@style/SmallPurpleButton"
             android:layout_width="100dp"
-            android:layout_marginTop="32dp"
             android:layout_marginStart="260dp"
+            android:layout_marginTop="32dp"
             android:text="@string/select"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
@@ -164,15 +166,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="44dp"
-            android:text="@string/reiniciar"/>
+            android:text="@string/reiniciar" />
 
         <TextView
             style="@style/RegularText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/desea_reiniciar"
             android:textSize="24sp" />
 
@@ -212,13 +214,13 @@
             android:id="@+id/btn_reiniciar"
             style="@style/SmallPurpleButton"
             android:layout_width="100dp"
-            android:layout_marginTop="32dp"
             android:layout_marginStart="260dp"
+            android:layout_marginTop="32dp"
             android:text="@string/reiniciar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton6"/>
+            app:layout_constraintTop_toBottomOf="@+id/radioButton6" />
 
         <TextView
             style="@style/CreditTitlesText"
@@ -233,8 +235,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:text="@string/detalle_creditos"
             android:textSize="24sp" />
 
@@ -242,13 +244,13 @@
             android:id="@+id/btn_saber_mas"
             style="@style/SmallPurpleButton"
             android:layout_width="100dp"
-            android:layout_marginTop="32dp"
             android:layout_marginStart="260dp"
+            android:layout_marginTop="32dp"
             android:text="@string/saber_mas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton6"/>
+            app:layout_constraintTop_toBottomOf="@+id/radioButton6" />
 
         <TextView
             style="@style/CreditTitlesText"
@@ -256,16 +258,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="44dp"
-            android:text="@string/salir"/>
+            android:text="@string/salir" />
 
         <TextView
             style="@style/RegularText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            android:text="@string/desea_salir"/>
+            android:layout_marginTop="20dp"
+            android:text="@string/desea_salir" />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -280,7 +282,6 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:buttonTint="@color/cardview_light_background"
-                android:onClick="SeleccionSalir"
                 android:text="@string/si_reiniciar"
                 android:textColor="?attr/colorAccent"
                 android:textSize="24sp" />
@@ -293,7 +294,6 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:buttonTint="@color/cardview_light_background"
-                android:onClick="SeleccionSalir"
                 android:text="@string/no_reiniciar"
                 android:textColor="?attr/colorAccent"
                 android:textSize="24sp" />
@@ -303,14 +303,15 @@
             android:id="@+id/btn_salir"
             style="@style/SmallPurpleButton"
             android:layout_width="100dp"
-            android:layout_marginTop="32dp"
             android:layout_marginStart="260dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="260dp"
             android:text="@string/salir"
+            android:onClick="SeleccionSalir"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton9"/>
+            app:layout_constraintTop_toBottomOf="@+id/radioButton9" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.core.widget.NestedScrollView>

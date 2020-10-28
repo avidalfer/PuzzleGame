@@ -48,6 +48,7 @@ public class Utils {
         }
 
         setTitleTextClickListener(activity);
+
         return toolbar;
     }
 

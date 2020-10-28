@@ -35,8 +35,17 @@
             android:text="@string/app_name"
             android:textSize="@dimen/appDefaultTextSize"
             android:visibility="invisible"/>
+
+
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
+    <fragment
+        android:id="@+id/article_fragment"
+        android:name="com.example.puzzlegame.ScrollingFragmentOptions"
+        android:layout_width="53dp"
+        android:layout_height="47dp"
+        android:layout_weight="10" />
 
 </com.google.android.material.appbar.AppBarLayout>
