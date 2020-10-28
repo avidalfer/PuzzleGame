@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
-import com.example.puzzlegame.model.HallOfFame;
 import com.example.puzzlegame.model.Language;
 import com.example.puzzlegame.model.User;
 

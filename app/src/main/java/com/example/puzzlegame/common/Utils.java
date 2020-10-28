@@ -115,10 +115,10 @@ public class Utils {
         int seconds = (int) (result / sec);
         result %= sec;
 
-        if (winTime < 0) { formatedTime = "-"; }
-        if (hour > 0) { formatedTime += hour + "h "; }
-        if (minutes > 0) { formatedTime += minutes + "m "; }
-        if (seconds > 0) { formatedTime += seconds + "s "; }
+        if (winTime < 0) { formatedTime = "- "; }
+        if (hour > 0) { formatedTime += hour + " h "; }
+        if (minutes > 0) { formatedTime += minutes + " m "; }
+        if (seconds > 0) { formatedTime += seconds + " s "; }
 
         return formatedTime;
     }

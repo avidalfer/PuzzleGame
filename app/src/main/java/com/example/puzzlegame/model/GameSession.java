@@ -2,34 +2,33 @@ package com.example.puzzlegame.model;
 
 import android.media.Image;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class GameSession {
 
-    public String user;
+    public User user;
     public Image bgImage;
     public Level gameLvl;
-    public LocalDateTime initTime;
-    public LocalDateTime endTime;
+    public Long endTime;
     private List<Piece> placedPieces;
 
 
-    public GameSession(String user, Image bgImage, Level gameLvl, LocalDateTime initTime, LocalDateTime endTime, List<Piece> placedPieces) {
-        this.user = user;
-        this.bgImage = bgImage;
-        this.gameLvl = gameLvl;
-        this.initTime = initTime;
-        this.endTime = endTime;
-        this.placedPieces = placedPieces;
+    public GameSession() {
     }
 
-    public String getUser() {
+    public GameSession(User user, Level level) {
+        this.user = user;
+        this.gameLvl = level;
+        this.endTime = 0L;
+        this.placedPieces = new ArrayList<>();
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -49,19 +48,11 @@ public class GameSession {
         this.gameLvl = gameLvl;
     }
 
-    public LocalDateTime getInitTime() {
-        return initTime;
-    }
-
-    public void setInitTime(LocalDateTime initTime) {
-        this.initTime = initTime;
-    }
-
-    public LocalDateTime getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 

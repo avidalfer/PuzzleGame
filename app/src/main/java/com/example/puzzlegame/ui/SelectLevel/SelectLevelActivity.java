@@ -48,7 +48,6 @@ public class SelectLevelActivity extends BaseActivity {
         getLastLevelPlayed();
     }
 
-
     private void setViews() {
         levelViewModel = new ViewModelProvider(this).get(SelectLevelViewModel.class);
         easySW = findViewById(R.id.easy_switch);
