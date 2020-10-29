@@ -1,8 +1,10 @@
 package com.example.puzzlegame.ui.halloffame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,12 +25,9 @@ public class HallOfFameActivity extends BaseActivity {
     private Button btnNewGame;
     private ImageButton changeHoF;
 
-    private HallOfFame hof;
-    private List<Score> scores;
+    private long scoreId;
 
     private RecyclerView winnersListView;
-    private RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> adapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,8 @@ public class HallOfFameActivity extends BaseActivity {
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
 
+        Intent intent = getIntent();
+        scoreId = intent.getExtras().getLong("scoreId");
         setViews();
     }
 
@@ -48,16 +49,17 @@ public class HallOfFameActivity extends BaseActivity {
         winnersListView = findViewById(R.id.winners_list);
         winnersListView.setHasFixedSize(false);
 
-        layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         winnersListView.setLayoutManager(layoutManager);
 
         showLocalHallOfFame();
     }
 
     private void showLocalHallOfFame() {
-        hof = (LocalHallOfFame) hallOfFameViewModel.getLocalHof().getValue();
-        scores = hallOfFameViewModel.getScores(hof).getValue();
-        adapter = new HallOfFameAdapter(this, hof, scores);
+        HallOfFame hof = (LocalHallOfFame) hallOfFameViewModel.getLocalHof().getValue();
+        assert hof != null;
+        List<Score> scores = hallOfFameViewModel.getScores(hof).getValue();
+        RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> adapter = new HallOfFameAdapter(scores, scoreId);
         winnersListView.setAdapter(adapter);
     }
 

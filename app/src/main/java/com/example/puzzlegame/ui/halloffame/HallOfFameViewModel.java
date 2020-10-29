@@ -31,26 +31,8 @@ public class HallOfFameViewModel extends ViewModel {
     }
 
     public LiveData<HallOfFame> getLocalHof() {
-        LocalHallOfFame hof = LocalHallOfFame.getLocalHallOfFame();//get halloffame from repository
-        User user = new User(1, "Ramón", Language.ES);
-        Level level = new Level(1, "Fácil", 9);
-        GameSession session = new GameSession(user, level);
-        session.setEndTime(50000L);
-        GameSession session1 = new GameSession(user, level);
-        session1.setEndTime(60000L);
-        GameSession session2 = new GameSession(user, level);
-        session2.setEndTime(75000L);
-        GameSession session3 = new GameSession(user, level);
-        session3.setEndTime(95000L);
-        Score score = new Score(session, "Ariadna");
-        Score score1 = new Score(session1, "Gael");
-        Score score2 = new Score(session2, "Mamá");
-        Score score3 = new Score(session3, "Papá");
-        hof.addScore(score);
-        hof.addScore(score1);
-        hof.addScore(score2);
-        hof.addScore(score3);
-        this.hof.setValue(hof);
+        // call repository to get the LocalHallOfFame
+        //this.hof.setValue(hof);
         return this.hof;
     }
 

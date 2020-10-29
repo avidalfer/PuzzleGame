@@ -7,6 +7,7 @@ import java.util.List;
 
 public class GameSession {
 
+    public Long id;
     public User user;
     public Image bgImage;
     public Level gameLvl;
@@ -22,6 +23,14 @@ public class GameSession {
         this.gameLvl = level;
         this.endTime = 0L;
         this.placedPieces = new ArrayList<>();
+    }
+
+    public void setId(long id){
+        this.id = id;
+    }
+
+    public long getId(){
+        return id;
     }
 
     public User getUser() {

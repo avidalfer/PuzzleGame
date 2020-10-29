@@ -14,16 +14,16 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" >
 
         <TextView
             android:id="@+id/position"
             style="@style/RegularText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="0.75"
             android:fontFamily="@font/alefbold"
-            android:gravity="end"
+            android:gravity="center"
             android:textColor="@color/colorPrimaryDark" />
 
         <TextView
