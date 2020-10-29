@@ -8,13 +8,17 @@ public class Level {
     private int id;
     private String name;
     private int numPieces;
+    private int numCols;
+    private int numRows;
     private List<GameSession> playedGames;
 
 
-    public Level(int id, String name, int numPieces) {
+    public Level(int id, String name, int cols, int rows) {
         this.id = id;
         this.name = name;
-        this.numPieces = numPieces;
+        this.numCols = cols;
+        this.numRows = rows;
+        this.numPieces = numCols * numRows;
         this.playedGames = new ArrayList<>();
     }
 
@@ -40,6 +44,22 @@ public class Level {
 
     public void setNumPieces(int numPieces) {
         this.numPieces = numPieces;
+    }
+
+    public int getNumCols() {
+        return numCols;
+    }
+
+    public void setNumCols(int numCols) {
+        this.numCols = numCols;
+    }
+
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public void setNumRows(int numRows) {
+        this.numRows = numRows;
     }
 
     public List<GameSession> getPlayedGames() {

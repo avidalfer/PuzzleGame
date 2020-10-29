@@ -30,7 +30,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         holder.bind(galleryImages.get(position));
     }
 
@@ -48,11 +47,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         public MyViewHolder(@NonNull ViewGroup viewGroup) {
             super(viewGroup);
             this.viewGroup = viewGroup;
-            this.imageView = viewGroup.findViewById(R.id.);
+            this.imageView = viewGroup.findViewById(R.id.gridImageview);
         }
 
         public void bind(Image image) {
-            imageView
+            imageView.setImageBitmap();
         }
     }
 }

@@ -7,20 +7,33 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.example.puzzlegame.model.Level;
+
 public class SelectLevelViewModel extends ViewModel {
 
-    private MutableLiveData<Integer> lvl;
+    private MutableLiveData<Level> lvl;
 
     public SelectLevelViewModel(){
         lvl = new MutableLiveData<>();
-        lvl.setValue(1);
+        //lvl.setValue(userRepository.getLevel())
+        Level testLevel = new Level(1, "fácil", 3, 4);
+        lvl.setValue(testLevel);
     }
 
-    public LiveData<Integer> getGameLevel() {
+    public LiveData<Level> getGameLevel() {
+        if (lvl == null) {
+            lvl = new MutableLiveData<Level>();
+        }
         return lvl;
     }
 
-    public void setGameLevel(int gameLevel) {
+    public void setGameLevel(Level gameLevel) {
         lvl.postValue(gameLevel);
+    }
+
+    public void setGameLevelById(int lvlId) {
+        //lvl.setValue(userRepository.getLevel(lvlId))
+        Level testLevel = new Level(1, "fácil", 3, 4);
+        lvl.postValue(testLevel);
     }
 }

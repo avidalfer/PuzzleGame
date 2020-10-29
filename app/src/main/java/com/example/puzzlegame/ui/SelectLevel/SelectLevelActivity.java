@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
 import java.util.Objects;
@@ -82,9 +83,9 @@ public class SelectLevelActivity extends BaseActivity {
                     }
                 });
         //LiveData
-        final Observer<Integer> observer = new Observer<Integer>() {
+        final Observer<Level> observer = new Observer<Level>() {
             @Override
-            public void onChanged(Integer lvl) {
+            public void onChanged(Level lvl) {
                 levelViewModel.setGameLevel(lvl);
             }
         };
@@ -144,7 +145,7 @@ public class SelectLevelActivity extends BaseActivity {
         }
 
         setRestLevelsOff(switchBtn);
-        levelViewModel.setGameLevel(lvl);
+        levelViewModel.setGameLevelById(lvl);
     }
 
     private void setLvl(int levelId) {

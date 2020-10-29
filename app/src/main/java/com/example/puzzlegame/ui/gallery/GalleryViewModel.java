@@ -9,14 +9,12 @@ import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.Image;
 
 import java.util.List;
-import java.util.Objects;
-
-import javax.net.ssl.SSLSession;
 
 public class GalleryViewModel extends ViewModel {
 
     private MutableLiveData<Gallery> gallery;
     private MutableLiveData<List<Image>> galleryImages;
+    private final GameAppRepository gameAppRepository = GameAppRepository.getGameAppRepository();
 
     public GalleryViewModel() {
         gallery = new MutableLiveData<>();
@@ -30,11 +28,20 @@ public class GalleryViewModel extends ViewModel {
 
     public LiveData<List<Image>> getGalleryImages() {
         try {
-            galleryImages.setValue(Objects.requireNonNull(gallery.getValue()).getImageList());
+            if (galleryImages == null) {
+                galleryImages = new MutableLiveData<List<Image>>();
+            }
+            galleryImages.setValue(gallery.getGalleryFromRepository()).getImageList();
             return galleryImages;
         } catch (NullPointerException e) {
             Debug.logStack("GalleryViewModelError", "Null Gallery object", 1);
         }
         return null;
+    }
+
+    private List<Image> getGalleryFromRepository () {
+        return gameAppRepository.getGallery();
+    }
+    public void addImageToGallery(List<Image> images) {
     }
 }
