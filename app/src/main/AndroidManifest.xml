@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.puzzlegame">
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -9,18 +9,27 @@
         android:roundIcon="@drawable/racoon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.HallOfFameActivity" />
-        <activity android:name=".ui.winscreen.WinScreenActivity" />
-        <activity android:name=".ui.SelectLevel.SelectLevelActivity" />
-        <activity android:name=".ui.SelectGameActivity" />
-        <activity android:name=".ui.common.BaseActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".PuzzleActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
