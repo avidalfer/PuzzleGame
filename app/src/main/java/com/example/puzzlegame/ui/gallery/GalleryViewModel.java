@@ -28,7 +28,7 @@ public class GalleryViewModel extends ViewModel {
             if (galleryImages == null) {
                 galleryImages = new MutableLiveData<List<Image>>();
             }
-            galleryImages.setValue(gameAppRepository.getGallery(context));
+            galleryImages.postValue(gameAppRepository.getGallery(context));
             return galleryImages;
     }
 

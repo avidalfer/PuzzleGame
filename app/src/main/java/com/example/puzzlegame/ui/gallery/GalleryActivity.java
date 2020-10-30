@@ -14,6 +14,7 @@ import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.ui.PuzzleGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
+import com.example.puzzlegame.ui.halloffame.HallOfFameAdapter;
 
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
     }
 
     private void showGallery() {
-        galleryImages = galleryViewModel.getGalleryImages(this).getValue();
         RecyclerView.Adapter<GalleryAdapter.MyViewHolder> adapter = new GalleryAdapter(galleryImages, this);
+        galleryGridView.setAdapter(adapter);
     }
 
     @Override

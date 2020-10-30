@@ -13,9 +13,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Level;
+import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.gallery.GalleryActivity;
+
+import java.util.List;
 
 public class SelectLevelActivity extends BaseActivity {
 
@@ -24,6 +28,8 @@ public class SelectLevelActivity extends BaseActivity {
     private CompoundButton easySW, mediumSW, hardSW;
     private CompoundButton[] switches;
     private Button btnPlay;
+
+    private User currentUser;
 
     private boolean automaticChanged;
     //true when switches change automatically ; false when the change is caused by user action
@@ -36,6 +42,8 @@ public class SelectLevelActivity extends BaseActivity {
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
 
+        Intent intent = getIntent();
+        currentUser = (User) intent.getSerializableExtra("currentUser");
         setViews();
         allowsAsUserLevel();
         setListeners();
@@ -90,10 +98,8 @@ public class SelectLevelActivity extends BaseActivity {
      * case 1 is always enabled. Don't use break to get cascade behaviour
      */
     private void allowsAsUserLevel() {
-        int userlvl = 3;
         TextView levelTxt;
-
-        switch (userlvl) {
+        switch (currentUser.getUserLvl().getId()) {
             case 3:
                 switches[2].setEnabled(true);
                 levelTxt = findViewById(R.id.hard_txt);
@@ -106,13 +112,11 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void getLastLevelPlayed() {
-
-        int lastGameLevel = 1;
-        //userlvl = user.playedgames.last
-        //if (userlvl != null)
-        //lvl = userlvl
-        //levelViewModel.setGameLevel(lvl);
-        setLvl(lastGameLevel);
+        int levelId = currentUser.getCurrentGameSession().getGameLvl().getId();
+        if (levelId == 0) {
+            levelId = currentUser.getUserLvl().getId();
+        }
+        setLvl(levelId);
     }
 
     @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})

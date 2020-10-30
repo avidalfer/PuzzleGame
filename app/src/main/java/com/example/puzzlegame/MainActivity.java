@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.GameApp;
+import com.example.puzzlegame.model.Level;
+import com.example.puzzlegame.repository.GameAppRepository;
 import com.example.puzzlegame.ui.SelectGame.SelectGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
@@ -14,6 +17,7 @@ public class MainActivity extends BaseActivity {
 
     Button btn1, btn2;
     Button[] buttons;
+    GameAppRepository gameAppRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +27,14 @@ public class MainActivity extends BaseActivity {
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
 
+        gameAppRepository = GameAppRepository.getGameAppRepository();
+
         getViews();
         startButtons();
     }
 
     private void getViews() {
+
         btn1 = findViewById(R.id.button1);
         btn2 = findViewById(R.id.button2);
     }

@@ -37,21 +37,22 @@ public class SelectGameActivity extends BaseActivity {
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
 
+        selectGameViewModel = new ViewModelProvider(this).get(SelectGameViewModel.class);
+        Intent intent = getIntent();
+        currentUser = (User) intent.getSerializableExtra("currentUser");
+        if (currentUser == null) {
+            currentUser = selectGameViewModel.getUser().getValue();
+        }
         setViews();
-        getUser();
         setButtonListeners();
     }
 
     private void setViews() {
-        selectGameViewModel = new ViewModelProvider(this).get(SelectGameViewModel.class);
+
         userNameTxtView = findViewById(R.id.userName_txt);
         btnNewGame = findViewById(R.id.btn_newGame);
         btnContinueGame = findViewById(R.id.btn_continueGame);
         btnViewPreviousGames = findViewById(R.id.btn_previousGames);
-    }
-
-    private void getUser() {
-        currentUser = selectGameViewModel.getUser().getValue();
     }
 
     private void setButtonListeners() {
@@ -90,7 +91,9 @@ public class SelectGameActivity extends BaseActivity {
     }
         //LiveData userPlayingGames
     private void newGame(View view) {
-        startActivity(new Intent(getApplicationContext(), SelectLevelActivity.class));
+        Intent intent = new Intent(getApplicationContext(), SelectLevelActivity.class);
+        intent.putExtra("currentUser", currentUser);
+        startActivity(intent);
     }
 
     public void continueGame(View view) {

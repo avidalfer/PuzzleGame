@@ -12,12 +12,14 @@ public class User implements Serializable {
     private Language language;
     private GameSession currentGameSession;
     private List<GameSession> playedGames;
+    private GameApp gameApp;
 
 
     public User(long idUser, String name, Language language) {
         this.idUser = idUser;
         this.name = name;
-        setUserLvl(GameApp.getGameApp().getLevelById(1));
+        this.gameApp = GameApp.getGameApp();
+        setUserLvl(gameApp.getLevelById(1));
         this.language = language;
         this.playedGames = new ArrayList<>();
     }

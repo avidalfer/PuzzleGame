@@ -14,14 +14,16 @@ import java.util.List;
 public class SelectGameViewModel extends ViewModel {
     private final MutableLiveData<User> user;
     private List<GameSession> playingGames;
+    private GameAppRepository gameAppRepository;
 
     public SelectGameViewModel() {
         user = new MutableLiveData<User>();
         playingGames = new ArrayList<>();
+        gameAppRepository = GameAppRepository.getGameAppRepository();
     }
 
     public LiveData<User> getUser() {
-        user.postValue(GameAppRepository.getGameAppRepository().getCurrentUser());
+        user.postValue(gameAppRepository.getCurrentUser());
         return user;
     }
 

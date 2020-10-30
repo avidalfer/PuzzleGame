@@ -1,5 +1,7 @@
 package com.example.puzzlegame.model;
 
+import android.app.Activity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class GameApp {
     private static GameApp gameApp;
     private User user;
     private ArrayList<User> users;
-
+    private ArrayList<Level> levels;
     public ArrayList<User> getUsers() {
         return users;
     }
@@ -18,8 +20,6 @@ public class GameApp {
         }
         return gameApp;
     }
-
-    private List<Level> levels;
 
     private GameApp(){
         levels = new ArrayList<>();
@@ -54,7 +54,7 @@ public class GameApp {
     }
 
     public void setLevels(List<Level> levels) {
-        this.levels = levels;
+        this.levels = (ArrayList<Level>) levels;
     }
 
     public void addLevel(Level newLevel) {
