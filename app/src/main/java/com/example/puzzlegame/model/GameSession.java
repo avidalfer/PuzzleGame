@@ -2,10 +2,11 @@ package com.example.puzzlegame.model;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSession {
+public class GameSession implements Serializable {
 
     public Long id;
     public User user;
@@ -13,7 +14,6 @@ public class GameSession {
     public Level gameLvl;
     public Long endTime;
     private List<Piece> placedPieces;
-
 
     public GameSession() {
     }

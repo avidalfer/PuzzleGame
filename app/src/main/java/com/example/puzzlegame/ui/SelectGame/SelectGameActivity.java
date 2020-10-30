@@ -1,20 +1,33 @@
-package com.example.puzzlegame.ui;
+package com.example.puzzlegame.ui.SelectGame;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.GameSession;
+import com.example.puzzlegame.model.User;
+import com.example.puzzlegame.ui.PuzzleGameActivity;
 import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
+import com.example.puzzlegame.ui.SelectPreviousGames.SelectPreviousGamesActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
+
+import java.util.List;
 
 public class SelectGameActivity extends BaseActivity {
 
+    SelectGameViewModel selectGameViewModel;
     Button btnNewGame, btnContinueGame, btnViewPreviousGames;
-    TextView userName;
+    TextView userNameTxtView;
+    List<GameSession> userPlayingGames;
+    User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,22 +37,25 @@ public class SelectGameActivity extends BaseActivity {
         Utils.createToolbar(this);
         Utils.configDefaultAppBar(this);
 
-//        Muestra el nombre de usuario o mapache
-//          Posibles implementaciones:  MVVM con acceso a la base de datos y muestra el nombre de usuario
-//                                      Recibe un Intent con el texto del usuario, recuperado del caso de uso login o signup
-
         setViews();
+        getUser();
         setButtonListeners();
     }
 
     private void setViews() {
-        userName = findViewById(R.id.userName_txt);
+        selectGameViewModel = new ViewModelProvider(this).get(SelectGameViewModel.class);
+        userNameTxtView = findViewById(R.id.userName_txt);
         btnNewGame = findViewById(R.id.btn_newGame);
         btnContinueGame = findViewById(R.id.btn_continueGame);
         btnViewPreviousGames = findViewById(R.id.btn_previousGames);
     }
 
+    private void getUser() {
+        currentUser = selectGameViewModel.getUser().getValue();
+    }
+
     private void setButtonListeners() {
+        //Buttons
         new Thread() {
             @Override
             public void run() {
@@ -63,24 +79,35 @@ public class SelectGameActivity extends BaseActivity {
                 });
             }
         }.start();
-    }
 
+        final Observer<User> userObserver = new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                userNameTxtView.setText(user.getName());
+            }
+        };
+        selectGameViewModel.getUser().observe(this, userObserver);
+    }
+        //LiveData userPlayingGames
     private void newGame(View view) {
         startActivity(new Intent(getApplicationContext(), SelectLevelActivity.class));
     }
 
     public void continueGame(View view) {
-        // llamada a repositorio: último GameSession de la lista de jugados por el jugador
-        // o
-        // llamada a actividad nueva que cargue el juego guardado
-        Utils.TODO(this, view);
+        GameSession currentGame = currentUser.getCurrentGameSession();
+        Intent intent = new Intent(getApplicationContext(), PuzzleGameActivity.class);
+        intent.putExtra("continueGame", currentGame);
+        startActivity(intent);
     }
 
     public void viewPreviousGames(View view) {
-        // llamada a repositorio: lista de GameSessions.
-        // o
-        // llamada a actividad nueva que cargue el juego guardado
-        Utils.TODO(this, view);
+        if (userPlayingGames.size() == 0) {
+            Toast toast = Toast.makeText(this, this.getResources().getText(R.string.no_prev_games), Toast.LENGTH_LONG);
+            toast.show();
+        } else {
+            Intent intent = new Intent(getApplicationContext(), SelectPreviousGamesActivity.class);
+            intent.putExtra("userPlayedGames", currentUser);
+            startActivity(intent);
+        }
     }
-
 }

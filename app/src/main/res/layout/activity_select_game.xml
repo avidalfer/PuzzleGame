@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo_morado"
-    tools:context=".ui.SelectGameActivity">
+    tools:context=".ui.SelectGame.SelectGameActivity">
 
     <!-- Main AppBar -->
     <include

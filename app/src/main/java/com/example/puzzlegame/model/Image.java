@@ -1,25 +1,21 @@
 package com.example.puzzlegame.model;
 
-public class Image {
+import android.graphics.Bitmap;
 
-    private String source;
+import java.io.Serializable;
+
+public class Image implements Serializable {
+
     private String imgName;
-    private Double size;
-    private Double length;
+    private Bitmap bitmap;
+    private int width;
+    private int heigth;
 
-    public Image(String source, String imgName, Double size, Double length) {
-        this.source = source;
+    public Image(String imgName, Bitmap bitmap, int width, int height) {
         this.imgName = imgName;
-        this.size = size;
-        this.length = length;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
+        this.bitmap = bitmap;
+        this.width = width;
+        this.heigth = height;
     }
 
     public String getImgName() {
@@ -30,19 +26,27 @@ public class Image {
         this.imgName = imgName;
     }
 
-    public Double getSize() {
-        return size;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setSize(Double size) {
-        this.size = size;
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
-    public Double getLength() {
-        return length;
+    public int getWidth() {
+        return width;
     }
 
-    public void setLength(Double length) {
-        this.length = length;
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeigth() {
+        return heigth;
+    }
+
+    public void setHeigth(int heigth) {
+        this.heigth = heigth;
     }
 }

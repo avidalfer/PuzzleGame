@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Mapuzzle</string>
     <string name="action_help">Ayuda</string>
     <string name="continue_game">Continuar Puzle</string>
     <string name="new_game">Nuevo Puzle</string>
@@ -56,4 +55,6 @@
     <string name="saber_mas">Saber más</string>
     <string name="detalle_creditos">Mapuzzled 2020-21 created by A3</string>
     <string name="desea_salir">¿Desea salir?</string>
+    <string name="app_name">Mapuzzle</string>
+    <string name="no_prev_games">No hay partidas empezadas</string>
 </resources>

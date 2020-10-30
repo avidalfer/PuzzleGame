@@ -5,12 +5,17 @@ import java.util.List;
 
 public class Gallery {
 
-    private static Gallery gallery = new Gallery();
+    private static Gallery gallery;
     private List<Image> imageList;
 
-    private Gallery(){ imageList = new ArrayList<>(); }
+    private Gallery() {
+        imageList = new ArrayList<>();
+    }
 
     public static Gallery getGallery() {
+        if (gallery == null) {
+            gallery = new Gallery();
+        }
         return gallery;
     }
 

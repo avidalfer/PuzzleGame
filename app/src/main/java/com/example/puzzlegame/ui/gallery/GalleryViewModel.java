@@ -1,5 +1,7 @@
 package com.example.puzzlegame.ui.gallery;
 
+import android.content.Context;
+
 import androidx.constraintlayout.motion.widget.Debug;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -7,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.Image;
+import com.example.puzzlegame.repository.GameAppRepository;
 
 import java.util.List;
 
@@ -21,27 +24,21 @@ public class GalleryViewModel extends ViewModel {
         galleryImages = new MutableLiveData<>();
     }
 
-    public LiveData<Gallery> getGallery() {
-        return gallery;
-    }
-        // get gallery from repository
-
-    public LiveData<List<Image>> getGalleryImages() {
-        try {
+    public LiveData<List<Image>> getGalleryImages(Context context) {
             if (galleryImages == null) {
                 galleryImages = new MutableLiveData<List<Image>>();
             }
-            galleryImages.setValue(gallery.getGalleryFromRepository()).getImageList();
+            galleryImages.setValue(gameAppRepository.getGallery(context));
             return galleryImages;
-        } catch (NullPointerException e) {
-            Debug.logStack("GalleryViewModelError", "Null Gallery object", 1);
-        }
-        return null;
     }
 
-    private List<Image> getGalleryFromRepository () {
-        return gameAppRepository.getGallery();
+    public void addImageToGallery(Image image, Context context) {
+        List<Image> tempList = getGalleryImages(context).getValue();
+        tempList.add(image);
+        setGalleryImages(tempList);
     }
-    public void addImageToGallery(List<Image> images) {
+
+    public void setGalleryImages(List<Image> images) {
+        this.galleryImages.setValue(images);
     }
 }

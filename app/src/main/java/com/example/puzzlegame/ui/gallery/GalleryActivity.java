@@ -1,45 +1,42 @@
 package com.example.puzzlegame.ui.gallery;
 
-import android.content.res.AssetManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
-import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.Image;
+import com.example.puzzlegame.model.Level;
+import com.example.puzzlegame.ui.PuzzleGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
 import java.util.List;
 
-public class GalleryActivity extends BaseActivity {
+public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnImageListener {
 
     private GalleryViewModel galleryViewModel;
+    private Level levelSelected;
+    private List<Image> galleryImages;
+    RecyclerView galleryGridView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
+        Intent intent = getIntent();
+        levelSelected = (Level) intent.getSerializableExtra("levelSelected");
         setViews();
     }
 
     private void setViews() {
-        galleryViewModel = new GalleryViewModel();
-        RecyclerView galleryGridView = findViewById(R.id.gridGallery);
+        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
+        galleryGridView = findViewById(R.id.gridGallery);
         galleryGridView.setHasFixedSize(true);
 
         setListeners();
@@ -58,14 +55,22 @@ public class GalleryActivity extends BaseActivity {
         final Observer<List<Image>> galleryImagesObserver = new Observer<List<Image>>() {
             @Override
             public void onChanged(List<Image> images) {
-                galleryViewModel.addImageToGallery(images);
+                showGallery();
             }
         };
-        galleryViewModel.getGalleryImages().observe(this, galleryImagesObserver);
+        galleryViewModel.getGalleryImages(this).observe(this, galleryImagesObserver);
     }
 
     private void showGallery() {
-        List<Image> galleryImages = galleryViewModel.getGalleryImages().getValue();
-        RecyclerView.Adapter<GalleryAdapter.MyViewHolder> adapter = new GalleryAdapter(galleryImages);
+        galleryImages = galleryViewModel.getGalleryImages(this).getValue();
+        RecyclerView.Adapter<GalleryAdapter.MyViewHolder> adapter = new GalleryAdapter(galleryImages, this);
+    }
+
+    @Override
+    public void onImageClick(int position) {
+        Intent intent = new Intent(this, PuzzleGameActivity.class);
+        intent.putExtra("bgImage", galleryImages.get(position));
+        intent.putExtra("gameLevel", levelSelected);
+        startActivity(intent);
     }
 }

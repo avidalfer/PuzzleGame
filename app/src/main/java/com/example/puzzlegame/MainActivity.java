@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.puzzlegame.common.Utils;
-import com.example.puzzlegame.ui.SelectGameActivity;
+import com.example.puzzlegame.ui.SelectGame.SelectGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
 
