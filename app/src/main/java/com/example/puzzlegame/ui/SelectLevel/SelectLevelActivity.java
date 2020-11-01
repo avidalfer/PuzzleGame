@@ -1,24 +1,26 @@
 package com.example.puzzlegame.ui.SelectLevel;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.ColorInt;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.GameSession;
+import com.example.puzzlegame.model.Level;
+import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.ui.common.BaseActivity;
+import com.example.puzzlegame.ui.gallery.GalleryActivity;
 
-import java.util.Objects;
+import java.util.List;
 
 public class SelectLevelActivity extends BaseActivity {
 
@@ -28,26 +30,26 @@ public class SelectLevelActivity extends BaseActivity {
     private CompoundButton[] switches;
     private Button btnPlay;
 
+    private User currentUser;
+
     private boolean automaticChanged;
-        //true when switches change automatically ; false when the change is caused by user action
-
-    private int userlvl;
-
+    //true when switches change automatically ; false when the change is caused by user action
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_level);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
 
+        Intent intent = getIntent();
+        currentUser = (User) intent.getSerializableExtra("currentUser");
         setViews();
         allowsAsUserLevel();
         setListeners();
         getLastLevelPlayed();
     }
-
 
     private void setViews() {
         levelViewModel = new ViewModelProvider(this).get(SelectLevelViewModel.class);
@@ -60,32 +62,32 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void setListeners() {
-                //Switches
-                for (CompoundButton sw : switches) {
-                    sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (!automaticChanged) {
-                                if (isChecked) {
-                                    setLvl(buttonView);
-                                }
-                                buttonView.setChecked(true);
-                                automaticChanged = false;
-                            }
+        //Switches
+        for (CompoundButton sw : switches) {
+            sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (!automaticChanged) {
+                        if (isChecked) {
+                            setLvl(buttonView);
                         }
-                    });
-                }
-                //Button
-                btnPlay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        goToImageSelectionActivity();
+                        buttonView.setChecked(true);
+                        automaticChanged = false;
                     }
-                });
-        //LiveData
-        final Observer<Integer> observer = new Observer<Integer>() {
+                }
+            });
+        }
+        //Button
+        btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(Integer lvl) {
+            public void onClick(View v) {
+                goToGalleryActivity();
+            }
+        });
+        //LiveData
+        final Observer<Level> observer = new Observer<Level>() {
+            @Override
+            public void onChanged(Level lvl) {
                 levelViewModel.setGameLevel(lvl);
             }
         };
@@ -97,10 +99,8 @@ public class SelectLevelActivity extends BaseActivity {
      * case 1 is always enabled. Don't use break to get cascade behaviour
      */
     private void allowsAsUserLevel() {
-        userlvl = 3;
         TextView levelTxt;
-
-        switch (userlvl) {
+        switch (currentUser.getUserLvl().getId()) {
             case 3:
                 switches[2].setEnabled(true);
                 levelTxt = findViewById(R.id.hard_txt);
@@ -113,13 +113,14 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void getLastLevelPlayed() {
+        GameSession lastSession = currentUser.getCurrentGameSession();
+        int levelId = 1;
+        if (lastSession == null) {
+            levelId = currentUser.getUserLvl().getId();
+        } else
+            levelId = lastSession.getGameLvl().getId();
 
-        int lastGameLevel = 1;
-        //userlvl = user.playedgames.last
-        //if (userlvl != null)
-        //lvl = userlvl
-        //levelViewModel.setGameLevel(lvl);
-        setLvl(lastGameLevel);
+        setLvl(levelId);
     }
 
     @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})
@@ -145,7 +146,7 @@ public class SelectLevelActivity extends BaseActivity {
         }
 
         setRestLevelsOff(switchBtn);
-        levelViewModel.setGameLevel(lvl);
+        levelViewModel.setGameLevelById(lvl);
     }
 
     private void setLvl(int levelId) {
@@ -169,18 +170,11 @@ public class SelectLevelActivity extends BaseActivity {
         }
     }
 
-        private void goToImageSelectionActivity () {
-            String debug;
-            debug = Objects.requireNonNull(levelViewModel.getGameLevel().getValue()).toString();
-            Toast t = Toast.makeText(getApplicationContext(), debug, Toast.LENGTH_SHORT);
-            t.show();
+    private void goToGalleryActivity() {
+        Intent intent = new Intent(this, GalleryActivity.class);
+        Level selectedLevel = levelViewModel.getGameLevel().getValue();
+        intent.putExtra("levelSelected", selectedLevel);
+        startActivity(intent);
 
-            //Posibles implementaciones
-            //Intent intent = new Intent(this, ImageSelectionActivity.class);
-            //intent.putExtra("levelInt", selectedLevel);
-            //startActivity(intent);
-
-            //pasamos el nivel a la capa de repositorio donde se crea una gameSession y se accede desde todas las activities a la misma sesión para añadir más configuraciones.
-            //se eliminará la sesión si no se ha llegado a iniciar.
-        }
     }
+}

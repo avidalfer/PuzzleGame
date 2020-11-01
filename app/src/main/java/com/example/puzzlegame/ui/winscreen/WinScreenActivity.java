@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
@@ -18,17 +20,26 @@ public class WinScreenActivity extends BaseActivity {
 
     private WinScreenViewModel winScreenViewModel;
     private EditText winnerNameTxt;
+    private long gameSessionId;
+    private GameSession gameSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
+
+        Intent intent = getIntent();
+        gameSessionId = intent.getExtras().getLong("gameSessionId");
 
         setViews();
         setListeners();
+    }
+
+    private void getDBData(){
+        gameSession = winScreenViewModel.getGameSessionById(gameSessionId);
     }
 
     private void setViews() {
@@ -56,8 +67,10 @@ public class WinScreenActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String winnerName = winnerNameTxt.getText().toString();
-                winScreenViewModel.setWinnerName(winnerName);
-                startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
+                long scoreId = winScreenViewModel.addNewScore(winnerName, gameSession);
+                Intent intent = new Intent(getApplicationContext(), HallOfFameActivity.class);
+                intent.putExtra("scoreId", scoreId);
+                startActivity(intent);
             }
         });
     }

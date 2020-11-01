@@ -1,25 +1,25 @@
 package com.example.puzzlegame.model;
 
-public class Image {
+import android.graphics.Bitmap;
 
-    private String source;
+import java.io.Serializable;
+
+public class Image implements Serializable {
+
     private String imgName;
-    private Double size;
-    private Double length;
+    private Bitmap bitmap;
+    private int photoWidth;
+    private int photoHeight;
 
-    public Image(String source, String imgName, Double size, Double length) {
-        this.source = source;
+    public Image(String imgName, Bitmap thumbBitmap, int photoWidth, int photoHeight) {
         this.imgName = imgName;
-        this.size = size;
-        this.length = length;
+        this.bitmap = thumbBitmap;
+        this.photoWidth = photoWidth;
+        this.photoHeight = photoHeight;
     }
 
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
+    public Image(String src) {
+        imgName = src;
     }
 
     public String getImgName() {
@@ -30,19 +30,27 @@ public class Image {
         this.imgName = imgName;
     }
 
-    public Double getSize() {
-        return size;
+    public int getPhotoWidth() {
+        return photoWidth;
     }
 
-    public void setSize(Double size) {
-        this.size = size;
+    public void setPhotoWidth(int photoWidth) {
+        this.photoWidth = photoWidth;
     }
 
-    public Double getLength() {
-        return length;
+    public int getPhotoHeight() {
+        return photoHeight;
     }
 
-    public void setLength(Double length) {
-        this.length = length;
+    public void setPhotoHeight(int photoHeight) {
+        this.photoHeight = photoHeight;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

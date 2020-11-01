@@ -63,11 +63,12 @@
                 android:textSize="@dimen/appDefaultTextSize"
                 android:textStyle="bold" />
 
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/list_scores">
-            </ListView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/winners_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

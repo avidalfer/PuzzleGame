@@ -2,8 +2,13 @@ package com.example.puzzlegame.common;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +23,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.puzzlegame.MainActivity;
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.model.Image;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static android.R.color.white;
 
@@ -25,75 +34,6 @@ import static android.R.color.white;
  * Contains static functions for common activities behaviour (i.e. create a common toolbar)
  */
 public class Utils {
-
-    //common static toolbar functions
-    /**
-     * Sets toolbar as a main activity actionBar
-     * Sets color item icons to white
-     * @param activity
-     * @return
-     */
-    public static Toolbar createToolbar (AppCompatActivity activity) {
-
-        Toolbar toolbar;
-
-        toolbar = activity.findViewById(R.id.main_toolbar);
-        activity.setSupportActionBar(toolbar);
-
-        MenuItem item;
-        for (int i = 0; i < toolbar.getMenu().size(); i++) {
-             item = toolbar.getMenu().getItem(i);
-            final Drawable icon = item.getIcon();
-            icon.setColorFilter(activity.getResources().getColor(white), PorterDuff.Mode.SRC_ATOP);
-        }
-
-        setTitleTextClickListener(activity);
-
-        return toolbar;
-    }
-
-    public static void setTitleTextClickListener(final AppCompatActivity activity) {
-        final ImageButton titleImg = activity.findViewById(R.id.title);
-
-        titleImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //navigate to HomeActivity
-                final Animation bounceAnim = AnimationUtils.loadAnimation(activity.getApplicationContext(), R.anim.bounce_anim);
-                BounceInterpolation interpolator = new BounceInterpolation(0.2, 20);
-                bounceAnim.setInterpolator(interpolator);
-                titleImg.startAnimation(bounceAnim);
-
-                Intent intent = new Intent (activity, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-            }
-        });
-    }
-
-    /**
-     * Default config for actionbar
-     * - disable title
-     * - enable homeButton
-     * - set different icon for homeButton
-     * @param activity
-     * @return
-     */
-    public static ActionBar configDefaultAppBar(AppCompatActivity activity) {
-
-        ActionBar actionBar = null;
-        try {
-            if (activity.getSupportActionBar() != null) {
-                actionBar = activity.getSupportActionBar();
-                actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_open_24);
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
-        } catch (NullPointerException e) {
-            Log.d("Error", "Error on SupportAppBar config. Not finalized");
-        }
-
-        return actionBar;
-    }
 
     public static void TODO(AppCompatActivity activity, View view) {
         Toast toast = Toast.makeText(activity.getApplicationContext(), "Function not implemented yet", Toast.LENGTH_SHORT);
@@ -116,11 +56,64 @@ public class Utils {
         int seconds = (int) (result / sec);
         result %= sec;
 
-        if (winTime < 0) { formatedTime = "-"; }
-        if (hour > 0) { formatedTime += hour + "h "; }
-        if (minutes > 0) { formatedTime += minutes + "m "; }
-        if (seconds > 0) { formatedTime += seconds + "s "; }
+        if (winTime < 0) {
+            formatedTime = "- ";
+        }
+        if (hour > 0) {
+            formatedTime += hour + " h ";
+        }
+        if (minutes > 0) {
+            formatedTime += minutes + " m ";
+        }
+        if (seconds > 0) {
+            formatedTime += seconds + " s ";
+        }
 
         return formatedTime;
+    }
+
+    public static Image createImage(AssetManager assetManager, String src) {
+
+        int thumbW = 120;
+        int thumbH = 120;
+
+        try {
+            InputStream is = assetManager.open("img/" + src);
+
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            is.reset();
+
+            Bitmap b = getScaledBitmap(assetManager, src, photoW, thumbW, photoH, thumbH);
+
+            return new Image(src, b, photoW, photoH);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Bitmap getScaledBitmap(AssetManager assetManager, String src, int originalW, int targetW, int originalH, int targetH) {
+
+        InputStream is = null;
+        try {
+            is = assetManager.open("img/" + src);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = Math.min(originalW / targetW, originalH / targetH);
+
+            Bitmap b = BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
+
+            return b;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

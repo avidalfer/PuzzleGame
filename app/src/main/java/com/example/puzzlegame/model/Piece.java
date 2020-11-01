@@ -1,81 +1,58 @@
 package com.example.puzzlegame.model;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.widget.ImageView;
 
-public class Piece {
-    private GameSession session;
-    private Bitmap croppedImage;
-    private int length;
-    private int width;
-    private short left;
-    private short top;
-    private Image parentImage;
+public class Piece extends androidx.appcompat.widget.AppCompatImageView {
+    private int xCoord;
+    private int yCoord;
+    private int pieceWidth;
+    private int pieceHeight;
+    private boolean canMove = true;
 
-    public Piece(GameSession session, Bitmap croppedImage, int length, int width, short left, short top, Image parentImage) {
-        this.session = session;
-        this.croppedImage = croppedImage;
-        this.length = length;
-        this.width = width;
-        this.left = left;
-        this.top = top;
-        this.parentImage = parentImage;
+    public Piece(Context context) {
+        super(context);
     }
 
-    public GameSession getSession() {
-        return session;
+    public int getxCoord() {
+        return xCoord;
     }
 
-    public void setSession(GameSession session) {
-        this.session = session;
+    public void setxCoord(int xCoord) {
+        this.xCoord = xCoord;
     }
 
-    public Bitmap getCroppedImage() {
-        return croppedImage;
+    public int getyCoord() {
+        return yCoord;
     }
 
-    public void setCroppedImage(Bitmap croppedImage) {
-        this.croppedImage = croppedImage;
+    public void setyCoord(int yCoord) {
+        this.yCoord = yCoord;
     }
 
-    public int getLength() {
-        return length;
+    public int getPieceWidth() {
+        return pieceWidth;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setPieceWidth(int pieceWidth) {
+        this.pieceWidth = pieceWidth;
     }
 
-    public int getWidth() {
-        return width;
+    public int getPieceHeight() {
+        return pieceHeight;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public void setPieceHeight(int pieceHeight) {
+        this.pieceHeight = pieceHeight;
     }
 
-    public int getLeft() {
-        return left;
+    public boolean canMove() {
+        return canMove;
     }
 
-    public void setLeft(short left) {
-        this.left = left;
+    public void canMove(boolean canMove) {
+        this.canMove = canMove;
     }
-
-    public int getTop() {
-        return top;
-    }
-
-    public void setTop(short top) {
-        this.top = top;
-    }
-
-    public Image getParentImage() {
-        return parentImage;
-    }
-
-    public void setParentImage(Image parentImage) {
-        this.parentImage = parentImage;
-    }
-
 }

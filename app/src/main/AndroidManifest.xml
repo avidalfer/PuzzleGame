@@ -12,8 +12,9 @@
         <activity android:name=".ui.halloffame.HallOfFameActivity" />
         <activity android:name=".ui.winscreen.WinScreenActivity" />
         <activity android:name=".ui.SelectLevel.SelectLevelActivity" />
-        <activity android:name=".ui.SelectGameActivity" />
+        <activity android:name=".ui.SelectGame.SelectGameActivity" />
         <activity android:name=".ui.common.BaseActivity" />
+        <activity android:name=".ui.game.PuzzleGameActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.gallery.GalleryActivity" />
     </application>
 
 </manifest>

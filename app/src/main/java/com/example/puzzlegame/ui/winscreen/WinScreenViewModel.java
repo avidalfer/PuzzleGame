@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
-import com.example.puzzlegame.model.HallOfFame;
 import com.example.puzzlegame.model.Language;
+import com.example.puzzlegame.model.Score;
 import com.example.puzzlegame.model.User;
 
 public class WinScreenViewModel extends ViewModel {
@@ -45,5 +45,15 @@ public class WinScreenViewModel extends ViewModel {
             return user.getName();
         }
         return "";
+    }
+
+    public GameSession getGameSessionById(long gameSessionId) {
+        //find in repository gameSession by id
+        return new GameSession();
+    }
+
+    public long addNewScore(String winnerName, GameSession gameSession) {
+        //call LocalHallOfFame repository to create new score with this params.
+        return 0;
     }
 }

@@ -4,17 +4,23 @@ import java.util.List;
 
 public class PlayList {
 
-    private List<Song> playList;
+    private static PlayList playList;
+    private List<Song> listOfSongs;
 
-    public PlayList(List<Song> playList) {
-        this.playList = playList;
-    }
+    private PlayList(){ }
 
-    public List<Song> getPlayList() {
+    public static PlayList getPlayList () {
+        if (playList == null) {
+            playList = new PlayList();
+        }
         return playList;
     }
 
-    public void setPlayList(List<Song> playList) {
-        this.playList = playList;
+    public List<Song> getListOfSongs() {
+        return listOfSongs;
+    }
+
+    public void setListOfSongs(List<Song> listOfSongs) {
+        this.listOfSongs = listOfSongs;
     }
 }
