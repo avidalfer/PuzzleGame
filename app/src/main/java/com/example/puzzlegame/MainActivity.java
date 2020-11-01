@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.GameApp;
@@ -28,8 +29,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
 
         gameAppRepository = GameAppRepository.getGameAppRepository();
 
@@ -40,8 +41,13 @@ public class MainActivity extends BaseActivity {
     }
 
     private void updateGallery() {
-        AssetManager am = getAssets();
-        gallery.updateImageList(am);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AssetManager am = getAssets();
+                gallery.updateImageList(am);
+            }
+        }).start();
     }
 
     private void setViews() {

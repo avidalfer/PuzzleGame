@@ -25,14 +25,12 @@
                 android:layout_marginHorizontal="@dimen/appDefaultMargin"
                 android:background="@drawable/logo">
             </ImageButton>
-        <TextView
+        <Chronometer
             android:id="@+id/timer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
             android:fontFamily="@font/blueberry"
             android:gravity="center"
-            android:text="@string/app_name"
             android:textSize="@dimen/appDefaultTextSize"
             android:visibility="invisible"/>
         </RelativeLayout>

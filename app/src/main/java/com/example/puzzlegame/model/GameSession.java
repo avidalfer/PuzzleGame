@@ -1,6 +1,6 @@
 package com.example.puzzlegame.model;
 
-import android.media.Image;
+import com.example.puzzlegame.model.Image;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -63,6 +63,10 @@ public class GameSession implements Serializable {
 
     public void setEndTime(long endTime) {
         this.endTime = endTime;
+    }
+
+    public void addPlacedPiece(Piece piece) {
+        this.placedPieces.add(piece);
     }
 
     public List<Piece> getPlacedPieces() {

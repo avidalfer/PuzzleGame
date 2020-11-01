@@ -10,16 +10,12 @@ public class Image implements Serializable {
     private Bitmap bitmap;
     private int photoWidth;
     private int photoHeight;
-    private int thumbWidth;
-    private int thumbHeight;
 
-    public Image(String imgName, Bitmap bitmap, int photoWidth, int photoHeight, int thumbWidth, int thumbHeight) {
+    public Image(String imgName, Bitmap thumbBitmap, int photoWidth, int photoHeight) {
         this.imgName = imgName;
-        this.bitmap = bitmap;
+        this.bitmap = thumbBitmap;
         this.photoWidth = photoWidth;
         this.photoHeight = photoHeight;
-        this.thumbWidth = thumbWidth;
-        this.thumbHeight = thumbHeight;
     }
 
     public Image(String src) {
@@ -48,22 +44,6 @@ public class Image implements Serializable {
 
     public void setPhotoHeight(int photoHeight) {
         this.photoHeight = photoHeight;
-    }
-
-    public int getThumbWidth() {
-        return thumbWidth;
-    }
-
-    public void setThumbWidth(int thumbWidth) {
-        this.thumbWidth = thumbWidth;
-    }
-
-    public int getThumbHeight() {
-        return thumbHeight;
-    }
-
-    public void setThumbHeight(int thumbHeight) {
-        this.thumbHeight = thumbHeight;
     }
 
     public Bitmap getBitmap() {

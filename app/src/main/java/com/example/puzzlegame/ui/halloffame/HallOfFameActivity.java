@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.LocalHallOfFame;
 import com.example.puzzlegame.model.Score;
@@ -34,8 +35,8 @@ public class HallOfFameActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hof);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
 
         Intent intent = getIntent();
         scoreId = intent.getExtras().getLong("scoreId");

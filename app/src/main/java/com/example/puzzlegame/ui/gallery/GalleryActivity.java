@@ -1,6 +1,5 @@
 package com.example.puzzlegame.ui.gallery;
 
-import android.app.Application;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -13,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Level;
-import com.example.puzzlegame.ui.PuzzleGameActivity;
+import com.example.puzzlegame.ui.game.PuzzleGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
-import com.example.puzzlegame.ui.halloffame.HallOfFameAdapter;
 
 import java.util.List;
 
@@ -36,8 +35,8 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
 
         Intent intent = getIntent();
         levelSelected = (Level) intent.getSerializableExtra("levelSelected");
@@ -70,7 +69,6 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
                 }
                     inflateGallery(assetManager);
                     adapter.notifyDataSetChanged();
-                    galleryViewModel.saveImageList(images);
                 }
         };
         galleryViewModel.getImageListObserver().observe(this, galleryImagesObserver);
@@ -84,7 +82,7 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
     @Override
     public void onImageClick(int position) {
         Intent intent = new Intent(this, PuzzleGameActivity.class);
-        intent.putExtra("bgImage", galleryImages.get(position));
+        galleryViewModel.setImageToBackground(galleryImages.get(position));
         intent.putExtra("gameLevel", levelSelected);
         startActivity(intent);
     }

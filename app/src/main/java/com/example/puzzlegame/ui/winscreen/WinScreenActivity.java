@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
@@ -27,8 +28,8 @@ public class WinScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
 
         Intent intent = getIntent();
         gameSessionId = intent.getExtras().getLong("gameSessionId");

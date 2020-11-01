@@ -32,12 +32,17 @@ public class GalleryViewModel extends ViewModel {
     }
 
     private void init() {
-        getImageList(assetManager);
+        getImageList();
     }
 
-    private void getImageList(AssetManager assetManager) {
+    private void updateGallery(AssetManager assetManager) {
+        galleryRepository.updateImageList(assetManager);
+        galleryImages.postValue(galleryRepository.getImageList());
+    }
+
+    private void getImageList() {
         List<Image> tempImageList = galleryRepository.getImageList();
-        galleryImages.setValue(tempImageList);
+        galleryImages.postValue(tempImageList);
     }
 
     public MutableLiveData<List<Image>> getImageListObserver() {
@@ -46,5 +51,10 @@ public class GalleryViewModel extends ViewModel {
 
     public void saveImageList(List<Image> images) {
         galleryRepository.setImageList(images);
+        galleryImages.postValue(images);
+    }
+
+    public void setImageToBackground(Image image) {
+        galleryRepository.setCurrentBGBitmap(image);
     }
 }

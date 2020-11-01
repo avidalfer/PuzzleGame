@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.ui.common.BaseActivity;
@@ -23,6 +24,8 @@ public class SelectPreviousGamesActivity extends BaseActivity {
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
 
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
         previousGamesViewModel = new ViewModelProvider(this).get(SelectPreviousGamesViewModel.class);
         getPlayingGames();
     }

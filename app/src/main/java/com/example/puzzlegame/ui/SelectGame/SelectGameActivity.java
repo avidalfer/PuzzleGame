@@ -11,10 +11,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.User;
-import com.example.puzzlegame.ui.PuzzleGameActivity;
+import com.example.puzzlegame.ui.game.PuzzleGameActivity;
 import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
 import com.example.puzzlegame.ui.SelectPreviousGames.SelectPreviousGamesActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
@@ -34,8 +35,8 @@ public class SelectGameActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_game);
 
-        Utils.createToolbar(this);
-        Utils.configDefaultAppBar(this);
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
 
         selectGameViewModel = new ViewModelProvider(this).get(SelectGameViewModel.class);
         Intent intent = getIntent();

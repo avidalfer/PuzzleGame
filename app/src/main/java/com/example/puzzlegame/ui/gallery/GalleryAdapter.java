@@ -47,7 +47,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewGroup galleryView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.activity_gallery_adapter, parent, false);
-        return new MyViewHolder(galleryView, onImageListener, am);
+        return new MyViewHolder(galleryView, onImageListener);
     }
 
     @Override
@@ -69,20 +69,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         private final ImageView imageView;
         private final OnImageListener onImageListener;
-        private final AssetManager am;
-        private Image image;
 
-        public MyViewHolder(@NonNull View view, OnImageListener onImageListener, AssetManager am) {
+        public MyViewHolder(@NonNull View view, OnImageListener onImageListener) {
             super(view);
             this.imageView = (ImageView) view.findViewById(R.id.gridImageview);
             this.onImageListener = onImageListener;
-            this.am = am;
 
             imageView.setOnClickListener(this);
         }
 
         public void bind(Image img) {
-            this.image = img;
             imageView.setImageBitmap(img.getBitmap());
         }
 
