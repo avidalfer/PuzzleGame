@@ -2,10 +2,11 @@ package com.example.puzzlegame.model;
 
 import android.app.Activity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameApp {
+public class GameApp implements Serializable {
     private static GameApp gameApp;
     private User user;
     private ArrayList<User> users;

@@ -1,44 +1,50 @@
 package com.example.puzzlegame.ui.gallery;
 
+import android.app.Application;
 import android.content.Context;
+import android.content.res.AssetManager;
 
 import androidx.constraintlayout.motion.widget.Debug;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.Image;
+import com.example.puzzlegame.repository.GalleryRepository;
 import com.example.puzzlegame.repository.GameAppRepository;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 public class GalleryViewModel extends ViewModel {
 
-    private MutableLiveData<Gallery> gallery;
-    private MutableLiveData<List<Image>> galleryImages;
-    private final GameAppRepository gameAppRepository = GameAppRepository.getGameAppRepository();
+    private final MutableLiveData<List<Image>> galleryImages;
+    private final AssetManager assetManager;
+    private final GalleryRepository galleryRepository = GalleryRepository.getGalleryRepository();
 
-    public GalleryViewModel() {
-        gallery = new MutableLiveData<>();
+    public GalleryViewModel(AssetManager am) {
         galleryImages = new MutableLiveData<>();
+        assetManager = am;
+        init();
     }
 
-    public LiveData<List<Image>> getGalleryImages(Context context) {
-            if (galleryImages == null) {
-                galleryImages = new MutableLiveData<List<Image>>();
-            }
-            galleryImages.postValue(gameAppRepository.getGallery(context));
-            return galleryImages;
+    private void init() {
+        getImageList(assetManager);
     }
 
-    public void addImageToGallery(Image image, Context context) {
-        List<Image> tempList = getGalleryImages(context).getValue();
-        tempList.add(image);
-        setGalleryImages(tempList);
+    private void getImageList(AssetManager assetManager) {
+        List<Image> tempImageList = galleryRepository.getImageList();
+        galleryImages.setValue(tempImageList);
     }
 
-    public void setGalleryImages(List<Image> images) {
-        this.galleryImages.setValue(images);
+    public MutableLiveData<List<Image>> getImageListObserver() {
+        return galleryImages;
+    }
+
+    public void saveImageList(List<Image> images) {
+        galleryRepository.setImageList(images);
     }
 }

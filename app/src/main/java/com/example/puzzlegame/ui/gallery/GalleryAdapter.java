@@ -1,6 +1,13 @@
 package com.example.puzzlegame.ui.gallery;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +19,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.model.Image;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
-    private List<Image> galleryImages = new ArrayList<>();
-    private OnImageListener onImageListener;
+    private final AssetManager am;
+    private List<Image> galleryImages;
+    private final OnImageListener onImageListener;
+    private final Context context;
 
-    public GalleryAdapter(List<Image> galleryImages, OnImageListener onImageListener) {
+    public GalleryAdapter(Context context, List<Image> galleryImages, OnImageListener onImageListener, AssetManager am) {
         this.galleryImages = galleryImages;
         this.onImageListener = onImageListener;
+        this.context = context;
+        this.am = am;
+    }
+
+    public void setGalleryImages(List<Image> images) {
+        this.galleryImages = images;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewGroup galleryView = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_gallery_adapter, parent, false);
-        return new MyViewHolder(galleryView, onImageListener);
+        ViewGroup galleryView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.activity_gallery_adapter, parent, false);
+        return new MyViewHolder(galleryView, onImageListener, am);
     }
 
     @Override
@@ -39,7 +57,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (galleryImages == null){
+            return 0;
+        }
+        return this.galleryImages.size();
     }
 
 
@@ -48,17 +69,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         private final ImageView imageView;
         private final OnImageListener onImageListener;
+        private final AssetManager am;
+        private Image image;
 
-        public MyViewHolder(@NonNull ViewGroup viewGroup, OnImageListener onImageListener) {
-            super(viewGroup);
-            this.imageView = viewGroup.findViewById(R.id.gridImageview);
+        public MyViewHolder(@NonNull View view, OnImageListener onImageListener, AssetManager am) {
+            super(view);
+            this.imageView = (ImageView) view.findViewById(R.id.gridImageview);
             this.onImageListener = onImageListener;
+            this.am = am;
 
             imageView.setOnClickListener(this);
         }
 
-        public void bind(Image image) {
-            imageView.setImageBitmap(image.getBitmap());
+        public void bind(Image img) {
+            this.image = img;
+            imageView.setImageBitmap(img.getBitmap());
         }
 
         @Override

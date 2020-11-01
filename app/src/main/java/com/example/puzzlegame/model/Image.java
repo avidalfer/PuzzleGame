@@ -8,14 +8,22 @@ public class Image implements Serializable {
 
     private String imgName;
     private Bitmap bitmap;
-    private int width;
-    private int heigth;
+    private int photoWidth;
+    private int photoHeight;
+    private int thumbWidth;
+    private int thumbHeight;
 
-    public Image(String imgName, Bitmap bitmap, int width, int height) {
+    public Image(String imgName, Bitmap bitmap, int photoWidth, int photoHeight, int thumbWidth, int thumbHeight) {
         this.imgName = imgName;
         this.bitmap = bitmap;
-        this.width = width;
-        this.heigth = height;
+        this.photoWidth = photoWidth;
+        this.photoHeight = photoHeight;
+        this.thumbWidth = thumbWidth;
+        this.thumbHeight = thumbHeight;
+    }
+
+    public Image(String src) {
+        imgName = src;
     }
 
     public String getImgName() {
@@ -26,27 +34,43 @@ public class Image implements Serializable {
         this.imgName = imgName;
     }
 
+    public int getPhotoWidth() {
+        return photoWidth;
+    }
+
+    public void setPhotoWidth(int photoWidth) {
+        this.photoWidth = photoWidth;
+    }
+
+    public int getPhotoHeight() {
+        return photoHeight;
+    }
+
+    public void setPhotoHeight(int photoHeight) {
+        this.photoHeight = photoHeight;
+    }
+
+    public int getThumbWidth() {
+        return thumbWidth;
+    }
+
+    public void setThumbWidth(int thumbWidth) {
+        this.thumbWidth = thumbWidth;
+    }
+
+    public int getThumbHeight() {
+        return thumbHeight;
+    }
+
+    public void setThumbHeight(int thumbHeight) {
+        this.thumbHeight = thumbHeight;
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeigth() {
-        return heigth;
-    }
-
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
     }
 }

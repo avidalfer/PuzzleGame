@@ -41,7 +41,7 @@ public class SelectGameActivity extends BaseActivity {
         Intent intent = getIntent();
         currentUser = (User) intent.getSerializableExtra("currentUser");
         if (currentUser == null) {
-            currentUser = selectGameViewModel.getUser().getValue();
+           selectGameViewModel.getUser().getValue();
         }
         setViews();
         setButtonListeners();
@@ -85,6 +85,7 @@ public class SelectGameActivity extends BaseActivity {
             @Override
             public void onChanged(User user) {
                 userNameTxtView.setText(user.getName());
+                currentUser = user;
             }
         };
         selectGameViewModel.getUser().observe(this, userObserver);

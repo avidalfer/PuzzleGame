@@ -19,6 +19,15 @@ public class Gallery {
         return gallery;
     }
 
+    public boolean isImageStored(String src){
+        for (Image img : imageList) {
+            if (img.getImgName() == src ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Image> getImageList() {
         return imageList;
     }

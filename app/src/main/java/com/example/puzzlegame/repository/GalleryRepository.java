@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.constraintlayout.motion.widget.Debug;
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.Image;
 
 import java.io.File;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -25,11 +28,14 @@ import java.util.concurrent.Executor;
 public class GalleryRepository {
 
     private static GalleryRepository galleryRepository;
+    private Gallery gallery;
     private List<Image> imageList;
     private Context appContext;
+    private AssetManager assetManager;
 
     private GalleryRepository() {
         imageList = new ArrayList<>();
+        gallery = Gallery.getGallery();
     }
 
     public static GalleryRepository getGalleryRepository() {
@@ -40,7 +46,7 @@ public class GalleryRepository {
     }
 
     public void addImage(Image image) {
-        imageList.add(image);
+        gallery.addImage(image);
     }
 
     public int removeImage(Image image) {
@@ -55,22 +61,60 @@ public class GalleryRepository {
         this.imageList = imageList;
     }
 
-    public List<Image> getImageList(final Context context) {
+    public  List<Image> getImageList (){
+        return imageList;
+    }
 
-        ArrayList<Image> tempImages = new ArrayList<>();
-        AssetManager assetManager = context.getAssets();
-        try {
-            String[] files = assetManager.list("img");
-            for (String src : files) {
-                    InputStream is = assetManager.open("img/"+src);
-                    Bitmap bitmap = BitmapFactory.decodeStream(is);
-                    Image img = new Image(src, bitmap, bitmap.getWidth(), bitmap.getHeight());
-                    tempImages.add(img);
+    public void updateImageList(AssetManager am) {
+        this.assetManager = am;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String[] list = assetManager.list("img");
+                    for (String src : list) {
+                        if (!gallery.isImageStored(src)) {
+                            Image img = createImage(src);
+                            addImage(img);
+                        }
+                    }
+                    imageList = gallery.getImageList();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                return tempImages;
-        } catch (IOException e){
-            Debug.logStack("getAssets", "Error when getting assets", 1);
+            }
+        }).start();
+    }
+
+    public Image createImage(String src) {
+
+        int thumbW = 120;
+        int thumbH = 120;
+
+        try {
+            InputStream is = assetManager.open("img/" + src);
+
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            int scaleFactor = Math.min(photoW / thumbW, photoH / thumbH);
+
+            is.reset();
+
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = scaleFactor;
+
+            Bitmap b = BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
+
+            Image img = new Image(src, b, photoW, photoH, thumbW, thumbH);
+            return img;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

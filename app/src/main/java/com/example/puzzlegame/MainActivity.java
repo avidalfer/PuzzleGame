@@ -1,13 +1,16 @@
 package com.example.puzzlegame;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.GameApp;
 import com.example.puzzlegame.model.Level;
+import com.example.puzzlegame.repository.GalleryRepository;
 import com.example.puzzlegame.repository.GameAppRepository;
 import com.example.puzzlegame.ui.SelectGame.SelectGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
@@ -18,6 +21,7 @@ public class MainActivity extends BaseActivity {
     Button btn1, btn2;
     Button[] buttons;
     GameAppRepository gameAppRepository;
+    GalleryRepository gallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +33,24 @@ public class MainActivity extends BaseActivity {
 
         gameAppRepository = GameAppRepository.getGameAppRepository();
 
-        getViews();
+        setViews();
+        updateGallery();
         startButtons();
+
     }
 
-    private void getViews() {
+    private void updateGallery() {
+        AssetManager am = getAssets();
+        gallery.updateImageList(am);
+    }
 
+    private void setViews() {
+        gallery = GalleryRepository.getGalleryRepository();
         btn1 = findViewById(R.id.button1);
         btn2 = findViewById(R.id.button2);
     }
 
     private void startButtons() {
-
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -112,10 +112,13 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void getLastLevelPlayed() {
-        int levelId = currentUser.getCurrentGameSession().getGameLvl().getId();
-        if (levelId == 0) {
+        GameSession lastSession = currentUser.getCurrentGameSession();
+        int levelId = 1;
+        if (lastSession == null) {
             levelId = currentUser.getUserLvl().getId();
-        }
+        } else
+            levelId = lastSession.getGameLvl().getId();
+
         setLvl(levelId);
     }
 

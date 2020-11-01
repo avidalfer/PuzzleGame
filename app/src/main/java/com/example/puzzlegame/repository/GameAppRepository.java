@@ -54,17 +54,11 @@ public class GameAppRepository {
         Level intermediate = new Level (2, "Intermediate", 4, 6);
         Level hard = new Level (3, "Hard", 6, 10);
         Level[] tempLevels = new Level[] {easy, intermediate, hard};
-        List<Level> defaultLevels = new ArrayList<>();
-        defaultLevels.addAll(Arrays.asList(tempLevels));
+        List<Level> defaultLevels = new ArrayList<>(Arrays.asList(tempLevels));
         gameApp.setLevels(defaultLevels);
     }
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
-    }
-
-    public List<Image> getGallery(Context context) {
-        GalleryRepository gallery = GalleryRepository.getGalleryRepository();
-        return gallery.getImageList(context);
     }
 }

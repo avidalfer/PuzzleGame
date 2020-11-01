@@ -1,15 +1,19 @@
 package com.example.puzzlegame.ui.gallery;
 
+import android.app.Application;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.ui.PuzzleGameActivity;
@@ -23,12 +27,17 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
     private GalleryViewModel galleryViewModel;
     private Level levelSelected;
     private List<Image> galleryImages;
-    RecyclerView galleryGridView;
+    private RecyclerView galleryGridView;
+    private RecyclerView.Adapter adapter;
+    private AssetManager assetManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+
+        Utils.createToolbar(this);
+        Utils.configDefaultAppBar(this);
 
         Intent intent = getIntent();
         levelSelected = (Level) intent.getSerializableExtra("levelSelected");
@@ -36,16 +45,16 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
     }
 
     private void setViews() {
-        galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
         galleryGridView = findViewById(R.id.gridGallery);
-        galleryGridView.setHasFixedSize(true);
+        galleryGridView.setHasFixedSize(false);
 
-        setListeners();
+        assetManager = getAssets();
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new GridLayoutManager(this, 3);
         galleryGridView.setLayoutManager(layoutManager);
 
-        showGallery();
+        galleryViewModel = new ViewModelProvider(this, new GalleryVMFactory(assetManager)).get(GalleryViewModel.class);
+        setListeners();
     }
 
     private void setListeners() {
@@ -56,14 +65,19 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
         final Observer<List<Image>> galleryImagesObserver = new Observer<List<Image>>() {
             @Override
             public void onChanged(List<Image> images) {
-                showGallery();
-            }
+                if (galleryImages == null) {
+                    galleryImages = images;
+                }
+                    inflateGallery(assetManager);
+                    adapter.notifyDataSetChanged();
+                    galleryViewModel.saveImageList(images);
+                }
         };
-        galleryViewModel.getGalleryImages(this).observe(this, galleryImagesObserver);
+        galleryViewModel.getImageListObserver().observe(this, galleryImagesObserver);
     }
 
-    private void showGallery() {
-        RecyclerView.Adapter<GalleryAdapter.MyViewHolder> adapter = new GalleryAdapter(galleryImages, this);
+    private void inflateGallery(AssetManager am) {
+        adapter = new GalleryAdapter(this, galleryImages, this, am);
         galleryGridView.setAdapter(adapter);
     }
 
