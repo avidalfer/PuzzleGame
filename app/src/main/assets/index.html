@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mapuzzled help</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <link href="https://fonts.googleapis.com/css2?family=Alef&display=swap" rel="stylesheet"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <!-- SCRIPT CONTROL DE COOKIES -->
+  <script type="text/javascript">
+    function controlcookies() {
+             // si variable no existe se crea (al clicar en Aceptar)
+    localStorage.controlcookie = (localStorage.controlcookie || 0);
+     
+    localStorage.controlcookie++; // incrementamos cuenta de la cookie
+    cookie1.style.display='none'; // Esconde la política de cookies
+    }
+  </script>
+</head>
+<body> 
+  <div id="titulo" class=" row col-xs-12 col-sm-12 col-md-12 col-l-12">
+    <div class="container col-xs-12 col-sm-12 col-md-12 col-l-12 col-centered">
+      <div class="row">
+    <div class="col-xs-4 col-sm-1 col-md-3 col-l-3"></div>
+    <div class="imagentitulo col-xs-4 col-sm-10 col-md-6 col-l-6"> <img src="logo.png" width="90%"></div>
+    <div class="col-xs-4 col-sm-1 col-md-3 col-l-3"></div>
+  </div>
+     <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-l-4"></div>
+    <div class="textotitulo col-xs-4 col-sm-4 col-md-4 col-l-4"> <h1>Ayuda</h1></div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-l-4"></div>
+  </div>
+     </div>
+    </div>
+  </div>
+    
+     <!-parrafo1->
+<div id="parrafo1" class=" row col-xs-12 col-sm-12 col-md-12 col-l-12">
+    <div class="container .containerparrafo1 col-xs-12 col-sm-12 col-md-12 col-l-12 col-centered">
+      <div class="row">
+          <div class="col-xs-1 col-sm-3 col-md-3 col-l-3"></div>
+          <div class="textoparrafo1 col-xs-10 col-sm-6 col-md-6 col-l-6 col-centered">
+          <h2>Ayuda</h2>
+          <h3>Minititulo</h3>
+          <p style="text-align:left;">Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.<br>
+          <p> Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.<p><br>
+      </div>
+    </div>
+  </div>
+  
+ <!--Párrafo2-->
+<div id="parrafo2" class="row col-xs-12 col-sm-12 col-md-12 col-l-12">
+    <div class="container .containerparrafo2 col-xs-12 col-sm-12 col-md-12 col-l-12 col-centered">
+      <div class="row">  
+        <div class="col-xs-1 col-sm-4 col-md-4 col-l-4"></div>
+        <div class="textoparrafo2 col-xs-8 col-sm-4 col-md-4 col-l-4 col-centered">
+         <h2>About us</h2>
+           <p style="text-align:left;">Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before. Many say exploration is part of our destiny, but it’s actually our duty to future generations and their quest to ensure the survival of the human species.</p></div>
+        <div class="col-xs-1 col-sm-4 col-md-4 col-l-4"></div>
+      </div>
+    </div>
+</div>
+
+
+ 
+</div>
+   <!--Código HTML de la política de cookies -->
+     
+    <!--La URL incluida es la parte que se ha de modificar -->
+     
+    <div class="cookiesms" id="cookie1">
+    Utilizamos cookies propias y de terceros para realizar el análisis de la navegación de los usuarios y mejorar nuestros servicios. Al pulsar Acepto consiente dichas cookies. Puede obtener más información, o bien conocer cómo cambiar la configuración, pulsando en Más Información.<button onclick="controlcookies()"> [Acepto]</button><button><a href="politicadecookies.html"> [Más información]</a> </button>
+
+    <div  class="cookies2" onmouseover="document.getElementById('cookie1').style.bottom = '0px';">Política de cookies + </div>
+    </div>
+    <script type="text/javascript">
+    if (localStorage.controlcookie>0){ 
+    document.getElementById('cookie1').style.bottom = '-50px';
+    }
+    </script>
+     
+    <!-- Fin del código de cookies --->
+</body>
+</html>

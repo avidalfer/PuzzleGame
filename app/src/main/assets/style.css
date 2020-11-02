@@ -1,0 +1,192 @@
+ @font-face {
+    font-family: blueberry;
+    src: url(blueberry.ttf)
+}
+ p{
+ 	font-family: 'Alef', sans-serif;
+ 	font-size:14px;
+ }
+h1{
+	color:#ffffff;
+	font-size:3em;
+    font-family: 'blueberry';
+    margin:0 auto;
+    text-align:center;
+}
+h2{
+	color:#6E4D99;
+	font-size:2em;
+    font-family: 'blueberry';
+}
+h3{
+	color:#560A99;
+	font-size:1em;
+    font-family: "Alef";
+}
+
+
+body{
+  background-image: url(fondo_morado_web.jpg);
+  background-repeat:repeat;
+  background-size:cover;
+  background-position: center center;
+  overflow-x: hidden;
+}
+
+@media (max-width:400px){
+	h3{
+		font-size:16px;
+	}
+}
+
+@media (max-width:400px){
+	p{
+		font-size:14px;
+	}
+}
+
+
+@media only screen
+  and (min-device-width: 320px) 
+  and (max-device-width: 768px)
+{
+}
+li{text-decoration:none;}
+
+.imagentitulo.col-xs-4.col-sm-10.col-md-6.col-l-6{
+	margin:0 auto;justify-content:center;padding:10px;}
+	
+}
+textotitulo.col-xs-4.col-sm-4.col-md-4.col-l-4{
+	margin:0 auto;justify-content:center;
+	
+}
+.parrafo1.col-xs-10.col-sm-6{
+width:100%;margin:0 auto;justify-content:center;padding:20px;}
+.parrafo2.col-xs-8.col-sm-4{
+width:100%;margin:0 auto;justify-content:center;}
+/*TITULO*/
+#titulo{
+	margin:0 auto;
+}
+/*PARRAFO1*/
+#parrafo1{
+	margin:0 auto;
+}
+.textoparrafo1{
+	color:#8654B2;
+	padding:30px;
+	background-color:#D39AFC;
+	margin:10px;
+	border-radius:15px;
+    -webkit-box-shadow: 10px 10px 17px -15px rgba(9,1,20,1);
+    -moz-box-shadow: 10px 10px 17px -15px rgba(9,1,20,1);
+    box-shadow: 10px 10px 17px -15px rgba(9,1,20,1);
+}
+
+/*Parrafo2*/
+#parrafo2{
+	margin:0 auto;
+}
+.textoparrafo2{
+	color:#8654B2;
+	padding:20px;
+	font-size:16px;
+	margin:10px;
+	padding:20px;
+    background-color:#D39AFC;
+  background-repeat:repeat;
+  background-size:cover;
+  background-position: center center;
+  z-index:-1;
+    border-radius:15px;
+  -webkit-box-shadow: 10px 10px 17px -15px rgba(9,1,20,1);
+  -moz-box-shadow: 10px 10px 17px -15px rgba(9,1,20,1);
+  box-shadow: 10px 10px 17px -15px rgba(9,1,20,1);
+	
+}
+
+ 
+@keyframes desaparecer
+{
+0%		{bottom: 0px;}
+80%		{bottom: 0px;}
+100%		{bottom: -90px;}
+}
+ 
+@-webkit-keyframes desaparecer /* Safari and Chrome */
+{
+0%		{bottom: 0px;}
+80%		{bottom: 0px;}
+100%		{bottom: -90px;}
+}
+ 
+@keyframes aparecer
+{
+0%		{bottom: 0px;}
+10%		{bottom: 0px;}
+90%		{bottom: 0px;}
+100%		{bottom: 0px;}
+}
+ 
+@-webkit-keyframes aparecer /* Safari and Chrome */
+{
+0%		{bottom: 0px;}
+10%		{bottom: 0px;}
+90%		{bottom: 0px;}
+100%		{bottom:0px;}
+}
+#cookiesms1:target {
+    display: none;
+}
+.cookiesms{	
+	width:100%;
+	height:120px;
+	margin:0 auto;
+	padding-left:1%;
+        padding-top:5px;
+        font-size: 1 em;
+	clear:both;
+        font-weight: strong;
+color: #333;
+bottom:0px;
+position:fixed;
+left: 0px;
+background-color: #FFF;
+opacity:0.7;
+filter:alpha(opacity=70); /* For IE8 and earlier */
+transition: bottom 1s;
+-webkit-transition:bottom 1s; /* Safari */
+-webkit-box-shadow: 3px -3px 1px rgba(50, 50, 50, 0.56);
+-moz-box-shadow:    3px -3px 1px rgba(50, 50, 50, 0.56);
+box-shadow:         3px -3px 1px rgba(50, 50, 50, 0.56);
+z-index:999999999;
+}
+ 
+.cookiesms:hover{
+bottom:-3000px;
+}
+.cookies2{
+background-color: #FFF;
+display:inline;
+opacity:0.95;
+filter:alpha(opacity=95);
+position:absolute; 
+left:1%; 
+top:-30px;
+font-size:15px;
+height:30px;
+padding-left:25px;
+padding-right:25px;
+-webkit-border-top-right-radius: 15px;
+-webkit-border-top-left-radius: 15px;
+-moz-border-radius-topright: 15px;
+-moz-border-radius-topleft: 15px;
+border-top-right-radius: 15px;
+border-top-left-radius: 15px;
+-webkit-box-shadow: 3px -3px 1px rgba(50, 50, 50, 0.56);
+-moz-box-shadow:    3px -3px 1px rgba(50, 50, 50, 0.56);
+box-shadow:         3px -3px 1px rgba(50, 50, 50, 0.56);
+}
+ 
+/* Fin del CSS para cookies */

@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/racoon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Help"></activity>
         <activity android:name=".ui.halloffame.HallOfFameActivity" />
         <activity android:name=".ui.winscreen.WinScreenActivity" />
         <activity android:name=".ui.SelectLevel.SelectLevelActivity" />
