@@ -17,19 +17,19 @@ public class User implements Serializable {
     @ColumnInfo (name = "name")
     private String name;
 
-    @ColumnInfo(name = "level")
+//    @ColumnInfo(name = "level")
     private Level userLvl;
 
-    @ColumnInfo(name = "language")
+//    @ColumnInfo(name = "language")
     private Language language;
 
-    @ColumnInfo (name = "currentGameSession")
+//    @ColumnInfo (name = "currentGameSession")
     private GameSession currentGameSession;
 
-    @ColumnInfo(name = "playedGames")
+//    @ColumnInfo(name = "playedGames")
     private List<GameSession> playedGames;
 
-    @ColumnInfo(name = "gameApp")
+//    @ColumnInfo(name = "gameApp")
     private GameApp gameApp;
 
 

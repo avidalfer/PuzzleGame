@@ -1,9 +1,6 @@
 package com.example.puzzlegame.model;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.widget.ImageView;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -23,6 +20,11 @@ public class Piece extends androidx.appcompat.widget.AppCompatImageView {
 
     public Piece(Context context) {
         super(context);
+    }
+
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 
     public int getxCoord() {

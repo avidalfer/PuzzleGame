@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.puzzlegame.R;
 import com.example.puzzlegame.ui.game.PuzzleGameActivity;
 
 public class PushPlay extends AppCompatActivity {
@@ -27,7 +26,7 @@ public class PushPlay extends AppCompatActivity {
         pushPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Help.this,PuzzleGameActivity.class));
+                startActivity(new Intent(getApplicationContext(),PuzzleGameActivity.class));
             }
         });
     }

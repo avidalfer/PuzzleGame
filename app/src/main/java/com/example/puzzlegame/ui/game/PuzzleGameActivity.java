@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -22,7 +20,6 @@ import com.example.puzzlegame.model.Piece;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,10 +39,8 @@ public class PuzzleGameActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
         Intent intent = getIntent();
         levelSelected = (Level) intent.getSerializableExtra("gameLevel");
-
         gameViewModel = new ViewModelProvider(this).get(PuzzleGameViewModel.class);
 
         setViews();
@@ -55,7 +50,7 @@ public class PuzzleGameActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         long playedTime = gameViewModel.getCurrentPlayedTime();
-        timer.setBase(playedTime);
+        timer.setBase(SystemClock.elapsedRealtime() - playedTime);
         timer.start();
         setBackgroundBitmap();
     }
@@ -71,7 +66,7 @@ public class PuzzleGameActivity extends BaseActivity {
     private void setViews() {
         puzzleLayout = findViewById(R.id.puzzle_layout);
         imageView = findViewById(R.id.board_view);
-        findViewById(R.id.title).setVisibility(View.INVISIBLE);
+        findViewById(R.id.title).setVisibility(View.GONE);
         timer = findViewById(R.id.timer);
         timer.setVisibility(View.VISIBLE);
 
