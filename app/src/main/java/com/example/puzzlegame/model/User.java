@@ -1,17 +1,35 @@
 package com.example.puzzlegame.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class User implements Serializable {
 
+    @PrimaryKey
     private long idUser;
+
+    @ColumnInfo (name = "name")
     private String name;
+
+    @ColumnInfo(name = "level")
     private Level userLvl;
+
+    @ColumnInfo(name = "language")
     private Language language;
+
+    @ColumnInfo (name = "currentGameSession")
     private GameSession currentGameSession;
+
+    @ColumnInfo(name = "playedGames")
     private List<GameSession> playedGames;
+
+    @ColumnInfo(name = "gameApp")
     private GameApp gameApp;
 
 

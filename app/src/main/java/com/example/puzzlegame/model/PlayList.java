@@ -1,10 +1,16 @@
 package com.example.puzzlegame.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+
 import java.util.List;
 
+@Entity
 public class PlayList {
 
+    @ColumnInfo(name = "playList")
     private static PlayList playList;
+    @ColumnInfo(name = "listOfSongs")
     private List<Song> listOfSongs;
 
     private PlayList(){ }

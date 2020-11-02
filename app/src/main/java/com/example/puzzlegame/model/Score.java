@@ -1,11 +1,21 @@
 package com.example.puzzlegame.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.example.puzzlegame.common.Utils;
 
+@Entity
 public class Score {
 
+    @PrimaryKey
     private Long id;
+
+    @ColumnInfo (name = "winnerName")
     private String winnerName;
+
+    @ColumnInfo(name = "gameSession")
     private GameSession gameSession;
 
     public Score(GameSession gameSession, String name) {

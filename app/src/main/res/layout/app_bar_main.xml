@@ -40,10 +40,15 @@
     </androidx.appcompat.widget.Toolbar>
 
     <fragment
-        android:id="@+id/article_fragment"
-        android:name="com.example.puzzlegame.ScrollingFragmentOptions"
-        android:layout_width="53dp"
-        android:layout_height="47dp"
-        android:layout_weight="10" />
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
 
 </com.google.android.material.appbar.AppBarLayout>

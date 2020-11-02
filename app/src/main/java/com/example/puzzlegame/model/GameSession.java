@@ -1,18 +1,27 @@
 package com.example.puzzlegame.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+
 import com.example.puzzlegame.model.Image;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
 public class GameSession implements Serializable {
 
+    @ColumnInfo(name = "id")
     public Long id;
+    @ColumnInfo(name = "user")
     public User user;
+    @ColumnInfo(name = "bgImage")
     public Image bgImage;
+    @ColumnInfo(name = "gameLvl")
     public Level gameLvl;
+    @ColumnInfo(name = "endTime")
     public Long endTime;
+    @ColumnInfo(name = "placedPieces")
     private List<Piece> placedPieces;
 
     public GameSession() {

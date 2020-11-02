@@ -5,11 +5,20 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.widget.ImageView;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+
+@Entity
 public class Piece extends androidx.appcompat.widget.AppCompatImageView {
+    @ColumnInfo (name = "xCoord")
     private int xCoord;
+    @ColumnInfo(name = "yCoord")
     private int yCoord;
+    @ColumnInfo(name = "pieceWidth")
     private int pieceWidth;
+    @ColumnInfo(name = "pieceHeight")
     private int pieceHeight;
+    @ColumnInfo(name = "canMove")
     private boolean canMove = true;
 
     public Piece(Context context) {

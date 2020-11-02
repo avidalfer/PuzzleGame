@@ -12,6 +12,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DBMapuzzle) {
+        BaseDeDatos.execSQL("create_table user(idUser long primary key, name String, userLvl String," +
+                "language String, currentGameSession String, playedGames String, gameApp String)");
 
     }
 

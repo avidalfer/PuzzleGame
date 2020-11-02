@@ -1,7 +1,14 @@
 package com.example.puzzlegame.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+
+@Entity
 public class Song {
+    @ColumnInfo (name = "source")
     private String source;
+
+    @ColumnInfo(name = "name")
     private String name;
 
     public Song(String source, String name) {
