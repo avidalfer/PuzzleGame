@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_morado"
-    tools:context="MainActivity">
+    tools:context=".PushPlay">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/pushPlayButton"
         android:layout_width="309dp"
         android:layout_height="129dp"
         android:layout_marginStart="40dp"
