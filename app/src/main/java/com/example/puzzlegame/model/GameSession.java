@@ -3,8 +3,6 @@ package com.example.puzzlegame.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
-import com.example.puzzlegame.model.Image;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,8 @@ public class GameSession implements Serializable {
     public Long endTime;
     @ColumnInfo(name = "placedPieces")
     private List<Piece> placedPieces;
+    @ColumnInfo(name = "totalPieces")
+    private List<Piece> totalPieces;
 
     public GameSession() {
     }
@@ -78,11 +78,15 @@ public class GameSession implements Serializable {
         this.placedPieces.add(piece);
     }
 
-    public List<Piece> getPlacedPieces() {
-        return placedPieces;
+    public void setTotalPieces(List<Piece> totalPieces) {
+        this.totalPieces = totalPieces;
     }
 
-    public void setPlacedPieces(List<Piece> placedPieces) {
-        this.placedPieces = placedPieces;
+    public List<Piece> getTotalPieces() {
+        return totalPieces;
+    }
+
+    public List<Piece> getPlacedPieces() {
+        return placedPieces;
     }
 }

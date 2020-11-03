@@ -1,7 +1,5 @@
 package com.example.puzzlegame.repository;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.Piece;
@@ -35,12 +33,16 @@ public class GameSessionRepository {
             GameSession currentGame = new GameSession(user, level);
             currentGame.setBgImage(galleryRepository.getCurrentImage());
             user.setCurrentGameSession(currentGame);
+            user.getCurrentGameSession().setTotalPieces(pieces);
+            user.getCurrentGameSession().setEndTime(playedTime);
         }
-        user.getCurrentGameSession().setPlacedPieces(pieces);
-        user.getCurrentGameSession().setEndTime(playedTime);
     }
 
     public void updateGameSate(Piece piece) {
         user.getCurrentGameSession().addPlacedPiece(piece);
+    }
+
+    public void updateGameSate(long playedTime) {
+        user.getCurrentGameSession().setEndTime(playedTime);
     }
 }

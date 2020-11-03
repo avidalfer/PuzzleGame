@@ -75,7 +75,7 @@ public class PuzzleGameActivity extends BaseActivity {
     }
 
     private void setListeners() {
-        //LiveData
+        //LiveData background image set
         final Observer<Image> backgroundImageObserver = new Observer<Image>() {
             @Override
             public void onChanged(Image image) {
@@ -84,6 +84,7 @@ public class PuzzleGameActivity extends BaseActivity {
         };
         gameViewModel.getBoardImageObservable().observe(this, backgroundImageObserver);
 
+        //Background finished charging
         final Observer<List<Piece>> piecesObserver = new Observer<List<Piece>>() {
             @Override
             public void onChanged(List<Piece> pieces) {
@@ -100,6 +101,16 @@ public class PuzzleGameActivity extends BaseActivity {
             }
         };
         gameViewModel.getPiecesObservable().observe(this, piecesObserver);
+
+        //gameOver
+        final Observer<Boolean> gameOverStateObserver = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                pauseTimer();
+                startActivity(new Intent(getApplicationContext(), WinScreenActivity.class));
+            }
+        };
+        gameViewModel.getGameOverObservable().observe(this, gameOverStateObserver);
     }
 
     private void setBackgroundBitmap() {
@@ -127,12 +138,6 @@ public class PuzzleGameActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        gameViewModel.saveGameStatus();
-    }
-
-    public void checkGameOver() {
-        if (gameViewModel.checkGameOver()) {
-            startActivity(new Intent(getApplicationContext(), WinScreenActivity.class));
-        }
+        gameViewModel.updateGameStatus();
     }
 }

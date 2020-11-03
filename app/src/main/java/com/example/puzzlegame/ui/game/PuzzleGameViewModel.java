@@ -20,16 +20,20 @@ public class PuzzleGameViewModel extends ViewModel {
     private final GameSessionRepository gameSessionRepository;
     private Level level;
     private GalleryRepository galleryRepository;
-    private MutableLiveData<List<Piece>> placedPieces;
+    private MutableLiveData<List<Piece>> totalPieces;
     private MutableLiveData<Image> boardImage;
+    private MutableLiveData<Boolean> gameOver;
     private long playedTime;
+    private ArrayList<Piece> placedPieces;
 
     public PuzzleGameViewModel() {
 
         galleryRepository = GalleryRepository.getGalleryRepository();
         gameSessionRepository = GameSessionRepository.getGameSessionRepository();
-        placedPieces = new MutableLiveData<>();
+        totalPieces = new MutableLiveData<>();
+        placedPieces = new ArrayList<>();
         boardImage = new MutableLiveData<>();
+        gameOver = new MutableLiveData<>();
     }
 
     public void setBackgroundBitmap() {
@@ -38,7 +42,7 @@ public class PuzzleGameViewModel extends ViewModel {
     }
 
     public MutableLiveData<List<Piece>> getPiecesObservable() {
-        return placedPieces;
+        return totalPieces;
     }
 
     public MutableLiveData<Image> getBoardImageObservable() {
@@ -46,10 +50,11 @@ public class PuzzleGameViewModel extends ViewModel {
     }
 
     public void saveGameStatus() {
-        if (placedPieces.getValue() == null) {
-            placedPieces.setValue(new ArrayList<Piece>());
+        if (totalPieces.getValue() == null) {
+            totalPieces.setValue(new ArrayList<Piece>());
+            gameSessionRepository.saveGameSession(totalPieces.getValue(), playedTime, level);
         }
-        gameSessionRepository.saveGameSession(placedPieces.getValue(), playedTime, level);
+        gameSessionRepository.updateGameSate(playedTime);
     }
 
     public Bitmap getCurrentBitmap() {
@@ -60,15 +65,15 @@ public class PuzzleGameViewModel extends ViewModel {
         PieceCreator pieceCreator = PieceCreator.getPieceCreator();
         ArrayList<Piece> gotPieces = pieceCreator.getPieces(imageView, level);
         Collections.shuffle(gotPieces);
-        placedPieces.postValue(gotPieces);
+        totalPieces.postValue(gotPieces);
         saveGameStatus();
     }
 
     public boolean checkGameOver() {
-        if (placedPieces.getValue() == null) {
-            placedPieces.setValue(new ArrayList<Piece>());
+        if (totalPieces.getValue() == null) {
+            totalPieces.setValue(new ArrayList<Piece>());
         }
-        for (Piece piece : placedPieces.getValue()) {
+        for (Piece piece : totalPieces.getValue()) {
             if (piece.canMove()) {
                 return false;
             }
@@ -77,11 +82,19 @@ public class PuzzleGameViewModel extends ViewModel {
     }
 
     public ArrayList<Piece> getpieces() {
-        return (ArrayList<Piece>) placedPieces.getValue();
+        return (ArrayList<Piece>) totalPieces.getValue();
     }
 
     public void placedPiece(Piece piece) {
         gameSessionRepository.updateGameSate(piece);
+        placedPieces.add(piece);
+        if (placedPieces.size() == totalPieces.getValue().size()){
+            gameOver.setValue(true);
+        }
+    }
+
+    public MutableLiveData<Boolean> getGameOverObservable () {
+        return gameOver;
     }
 
     public long getCurrentPlayedTime() {
@@ -90,5 +103,9 @@ public class PuzzleGameViewModel extends ViewModel {
 
     public void setCurrentTime(long playedTime) {
         this.playedTime = playedTime;
+    }
+
+    public void updateGameStatus() {
+        gameSessionRepository.updateGameSate(playedTime);
     }
 }

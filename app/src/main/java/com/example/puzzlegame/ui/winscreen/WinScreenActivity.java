@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
-import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
-import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
+import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
 
 public class WinScreenActivity extends BaseActivity {
 
@@ -30,9 +29,6 @@ public class WinScreenActivity extends BaseActivity {
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-
-        Intent intent = getIntent();
-        gameSessionId = intent.getExtras().getLong("gameSessionId");
 
         setViews();
         setListeners();
@@ -50,6 +46,7 @@ public class WinScreenActivity extends BaseActivity {
 
         winnerNameTxt = findViewById(R.id.win_editText_name);
         winnerNameTxt.setText(getUserName());
+
         }
 
     private String getUserName() {
