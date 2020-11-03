@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.puzzlegame.MainActivity;
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.model.Image;
 
 import java.io.IOException;
@@ -34,6 +35,10 @@ import static android.R.color.white;
  * Contains static functions for common activities behaviour (i.e. create a common toolbar)
  */
 public class Utils {
+
+    public static AppDataBase getDB(AppCompatActivity activity){
+        return AppDataBase.getAppDataBase(activity);
+    }
 
     public static void TODO(AppCompatActivity activity, View view) {
         Toast toast = Toast.makeText(activity.getApplicationContext(), "Function not implemented yet", Toast.LENGTH_SHORT);

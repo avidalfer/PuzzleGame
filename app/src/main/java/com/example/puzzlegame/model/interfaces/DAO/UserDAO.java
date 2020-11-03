@@ -11,18 +11,18 @@ import java.util.List;
 
 @Dao
 public interface UserDAO {
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM User")
     List<User> getAll();
 
-    @Query("SELECT * FROM user WHERE idUser IN (:userIds)")
+    @Query("SELECT * FROM User WHERE idUser IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 
-    @Query("SELECT * FROM user WHERE name LIKE :name")
+    @Query("SELECT * FROM User WHERE name LIKE :name")
     User findByName(String name);
 
     @Insert
-    void insertAll(User... users);
+    void insertAll(User... Users);
 
     @Delete
-    void delete(User user);
+    void delete(User User);
 }
