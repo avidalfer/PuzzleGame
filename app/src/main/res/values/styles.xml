@@ -8,6 +8,11 @@
         <item name="windowNoTitle">true</item>
         <item name="homeAsUpIndicator">@android:color/white</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterAnimation">@anim/comming_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/comming_out_anim</item>
+        <item name="android:windowHideAnimation">@anim/comming_out_anim</item>
+        <item name="android:windowShowAnimation">@anim/comming_in_anim</item>
     </style>
 
     <!-- App Button Theme red -->

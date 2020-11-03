@@ -7,32 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class ScrollingFragmentOptions extends Fragment {
 
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5,
             radioButton6, radioButton7, radioButton8, radioButton9;
 
-    ScrollingFragmentOptions(RadioButton radioButton1, RadioButton radioButton2, RadioButton radioButton3, RadioButton radioButton4, RadioButton radioButton5, RadioButton radioButton6, RadioButton radioButton7, RadioButton radioButton8, RadioButton radioButton9) {
-        this.radioButton1 = radioButton1;
-        this.radioButton2 = radioButton2;
-        this.radioButton3 = radioButton3;
-        this.radioButton4 = radioButton4;
-        this.radioButton5 = radioButton5;
-        this.radioButton6 = radioButton6;
-        this.radioButton7 = radioButton7;
-        this.radioButton8 = radioButton8;
-        this.radioButton9 = radioButton9;
-    }
-
-    public ScrollingFragmentOptions(){
-
-    }
+    public ScrollingFragmentOptions(){}
 
     @Nullable
     @Override

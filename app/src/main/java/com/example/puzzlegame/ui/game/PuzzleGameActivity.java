@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.Piece;
@@ -26,12 +27,12 @@ import java.util.Random;
 
 public class PuzzleGameActivity extends BaseActivity {
 
-    private PuzzleGameViewModel gameViewModel;
+    private static PuzzleGameViewModel gameViewModel;
     private Level levelSelected;
     private RelativeLayout puzzleLayout;
     private ImageView imageView;
     private ArrayList<Piece> totalPieces;
-    private Chronometer timer;
+    private static Chronometer timer;
     private Bitmap bimapBG;
     private static final String TAG = "PuzzleGameActivity";
 
@@ -43,15 +44,15 @@ public class PuzzleGameActivity extends BaseActivity {
         levelSelected = (Level) intent.getSerializableExtra("gameLevel");
         gameViewModel = new ViewModelProvider(this).get(PuzzleGameViewModel.class);
 
+        CommonBarMethods.createToolbar(this);
+        CommonBarMethods.configDefaultAppBar(this);
         setViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        long playedTime = gameViewModel.getCurrentPlayedTime();
-        timer.setBase(SystemClock.elapsedRealtime() - playedTime);
-        timer.start();
+        resumeTimer();
         setBackgroundBitmap();
     }
 
@@ -101,10 +102,6 @@ public class PuzzleGameActivity extends BaseActivity {
         gameViewModel.getPiecesObservable().observe(this, piecesObserver);
     }
 
-    private long getPlayedTime(){
-        return SystemClock.elapsedRealtime() - timer.getBase();
-    }
-
     private void setBackgroundBitmap() {
         gameViewModel.setBackgroundBitmap();
     }
@@ -112,8 +109,19 @@ public class PuzzleGameActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        pauseTimer();
+    }
+
+    public static void pauseTimer(){
         timer.stop();
-        gameViewModel.setCurrentTime(getPlayedTime());
+        long playedTime = SystemClock.elapsedRealtime() - timer.getBase();
+        gameViewModel.setCurrentTime(playedTime);
+    }
+
+    public static void resumeTimer(){
+        long playedTime = gameViewModel.getCurrentPlayedTime();
+        timer.setBase(SystemClock.elapsedRealtime() - playedTime);
+        timer.start();
     }
 
     @Override
