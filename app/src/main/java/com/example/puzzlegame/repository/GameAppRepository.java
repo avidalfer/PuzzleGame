@@ -3,6 +3,9 @@ package com.example.puzzlegame.repository;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.model.GameApp;
@@ -21,9 +24,12 @@ import java.util.List;
 
 public class GameAppRepository {
 
+
+
     private static GameAppRepository gameAppRepository;
     private GameApp gameApp;
     private User currentUser;
+    private Level userLvl;
     private MusicSettings musicSettings;
     private Song selectedSong;
     private List<User> listOfUsers;

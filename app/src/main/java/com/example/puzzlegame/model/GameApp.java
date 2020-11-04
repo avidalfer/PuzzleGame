@@ -1,15 +1,24 @@
 package com.example.puzzlegame.model;
 
-import android.app.Activity;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class GameApp implements Serializable {
+
     private static GameApp gameApp;
+    @PrimaryKey
     private User user;
+    @ColumnInfo(name = "level")
+    private Level userLvl;
+    @ColumnInfo(name = "users")
     private ArrayList<User> users;
+    @ColumnInfo(name = "levels")
     private ArrayList<Level> levels;
     public ArrayList<User> getUsers() {
         return users;
@@ -17,12 +26,14 @@ public class GameApp implements Serializable {
 
     public static GameApp getGameApp() {
         if (gameApp == null) {
-            gameApp = new GameApp();
+
         }
         return gameApp;
     }
 
-    private GameApp(){
+    private GameApp(Level userLvl, ArrayList<User> users){
+        this.userLvl = userLvl;
+        this.users = users;
         levels = new ArrayList<>();
     }
 
@@ -65,5 +76,13 @@ public class GameApp implements Serializable {
     public int removeLevel(Level level) {
         this.levels.remove(level);
         return levels.size();
+    }
+
+    public Level getUserLvl() {
+        return userLvl;
+    }
+
+    public void setUserLvl(Level userLvl) {
+        this.userLvl = userLvl;
     }
 }
