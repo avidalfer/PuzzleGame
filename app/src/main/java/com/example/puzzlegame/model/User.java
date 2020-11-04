@@ -1,6 +1,7 @@
 package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,19 +12,19 @@ import java.util.List;
 @Entity
 public class User implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     private long idUser;
 
     @ColumnInfo (name = "name")
     private String name;
 
-//    @ColumnInfo(name = "level")
+    @Embedded
     private Level userLvl;
 
-//    @ColumnInfo(name = "language")
+    @Embedded
     private Language language;
 
-//    @ColumnInfo (name = "currentGameSession")
+    @Embedded
     private GameSession currentGameSession;
 
 //    @ColumnInfo(name = "playedGames")

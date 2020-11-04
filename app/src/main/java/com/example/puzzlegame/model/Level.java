@@ -2,13 +2,14 @@ package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Level implements Serializable {
-    @ColumnInfo(name = "idLevel")
+    @PrimaryKey (autoGenerate = true)
     private int id;
     @ColumnInfo(name = "nameLevel")
     private String name;

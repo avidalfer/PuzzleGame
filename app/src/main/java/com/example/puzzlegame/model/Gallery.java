@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Gallery {
-    @ColumnInfo(name = "gallery")
+
     private static Gallery gallery;
     @ColumnInfo(name = "imageList")
     private List<Image> imageList;

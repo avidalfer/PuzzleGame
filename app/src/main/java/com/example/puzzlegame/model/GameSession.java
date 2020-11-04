@@ -2,6 +2,7 @@ package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 @Entity
 public class GameSession implements Serializable {
 
-    @ColumnInfo(name = "id")
+    @PrimaryKey (autoGenerate = true)
     public Long id;
     @ColumnInfo(name = "user")
     public User user;

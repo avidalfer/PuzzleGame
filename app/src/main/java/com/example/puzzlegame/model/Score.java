@@ -1,6 +1,7 @@
 package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,13 +10,13 @@ import com.example.puzzlegame.common.Utils;
 @Entity
 public class Score {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     private Long id;
 
     @ColumnInfo (name = "winnerName")
     private String winnerName;
 
-    @ColumnInfo(name = "gameSession")
+    @Embedded
     private GameSession gameSession;
 
     public Score(GameSession gameSession, String name) {
