@@ -15,7 +15,7 @@
         <activity android:name=".ui.SelectGame.SelectGameActivity" />
         <activity android:name=".ui.common.BaseActivity" />
         <activity android:name=".ui.game.PuzzleGameActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

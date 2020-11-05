@@ -9,28 +9,27 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    tools:context="com.example.puzzlegame.SplashScreen">
+    tools:context="com.example.puzzlegame.MainActivity">
 
-    <ImageView
-        android:id="@+id/loadingView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_marginBottom="-298dp"
-        android:contentDescription="animacion" />
 
     <LinearLayout
         android:id="@id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/logo" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="299dp"
+            android:src="@drawable/racoon1" />
     </LinearLayout>
+
 </RelativeLayout>

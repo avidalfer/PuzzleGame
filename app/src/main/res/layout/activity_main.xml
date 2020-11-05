@@ -11,65 +11,32 @@
         android:id="@+id/main_actionbar"
         layout="@layout/app_bar_main" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.582" />
     <Button
-           android:id="@+id/button1"
-           android:layout_marginTop="52dp"
-            android:text="Button"
-            style="@style/AppRedButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
+        android:id="@+id/button1"
+        style="@style/AppRedButton"
+        android:layout_marginTop="352dp"
+        android:text="@string/jugar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_marginTop="140dp"
-            android:text="Button"
-            style="@style/AppOrangeButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.544"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
+    <Button
+        android:id="@+id/button2"
+        style="@style/AppPurpleButton"
+        android:layout_marginTop="452dp"
+        android:text="@string/hall_of_fame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
 
-        <Button
-            android:id="@+id/button4"
-            style="@style/AppPurpleButton"
-            android:layout_marginTop="340dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.549"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
-
-        <Button
-            android:id="@+id/button3"
-            style="@style/SmallPurpleButton"
-            android:layout_marginTop="224dp"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="287dp"
+        android:layout_height="275dp"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="104dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
