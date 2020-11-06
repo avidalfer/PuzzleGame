@@ -12,10 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
 public class ScrollingFragmentOptions extends Fragment {
 
     private RadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5,
             radioButton6, radioButton7, radioButton8, radioButton9;
+    private Object SelectGameActivity;
+
 
     public ScrollingFragmentOptions(){}
 
@@ -51,15 +54,17 @@ public class ScrollingFragmentOptions extends Fragment {
         }
     }
 */
-    public void SeleccionReiniciar (View view){
-        if (radioButton6.isChecked() == true);
-           /*Intent i = getBaseContext().getPackageManager()
-                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);*/
-        else if (radioButton7.isChecked() == true){
+    public void SeleccionReiniciar (View view) {
+        if (radioButton6.isChecked() == true) {
+            Intent intent = new Intent();
+            Context actividad = null;
+            intent.setClass(actividad, actividad.getClass());
+            //llamamos a la actividad
+            actividad.startActivity(intent);
+            //finalizamos la actividad actual
 
-        }
+        }else radioButton7.isChecked();
+
     }
 
     private Context getBaseContext() {
@@ -72,9 +77,7 @@ public class ScrollingFragmentOptions extends Fragment {
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }else if  (radioButton9.isChecked() == true) {
-           
-        }
+        }else  radioButton9.isChecked();
 
     }
 }
