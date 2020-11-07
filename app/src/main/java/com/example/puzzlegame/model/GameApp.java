@@ -1,34 +1,34 @@
 package com.example.puzzlegame.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
+import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-import com.example.puzzlegame.model.interfaces.HallOfFame;
+import com.example.puzzlegame.basededatos.typeconverters.LevelConverter;
+import com.example.puzzlegame.basededatos.typeconverters.UserConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-@Entity
+@Fts4
+@Entity(tableName = "gameApp")
+@TypeConverters({LevelConverter.class, UserConverter.class, LevelConverter.class})
 public class GameApp implements Serializable {
 
     private static GameApp gameApp;
     @PrimaryKey
-    private int id;
-    private User user;
-    private Level userLvl;
-    @Ignore
-    private final ArrayList<User> users;
-    @Ignore
-    private ArrayList<Level> levels;
-    private HallOfFame hallOfFame;
-    @Ignore
-    public ArrayList<User> getUsers() {
-        return users;
-    }
+    @ColumnInfo(name = "rowid")
+    public Integer id;
+    public User user;
+    public Level userLvl;
+    public List<User> users;
+    public List<Level> levels;
 
-    private GameApp(Level userLvl, ArrayList<User> users){
+    public GameApp(){}
+
+    private GameApp(Level userLvl, List<User> users){
         this.userLvl = userLvl;
         if (users != null) {
             this.users = users;
@@ -36,6 +36,10 @@ public class GameApp implements Serializable {
             this.users = new ArrayList<>();
         }
         levels = new ArrayList<>();
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 
     public static GameApp getGameApp() {

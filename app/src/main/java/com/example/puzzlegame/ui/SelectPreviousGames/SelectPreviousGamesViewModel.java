@@ -25,7 +25,7 @@ public class SelectPreviousGamesViewModel extends ViewModel {
 
         List<GameSession> tempList = new ArrayList<>();
         for (GameSession game : user.getPlayedGames()) {
-            if (game.endTime == null) {
+            if (game.endTime == 0) {
                 tempList.add(game);
             }
         }

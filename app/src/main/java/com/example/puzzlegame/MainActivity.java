@@ -41,10 +41,8 @@ public class MainActivity extends BaseActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //init DB
-                gameAppRepository = GameAppRepository.initGameAppRepository(getApplication());
-                //init Gallery
                 galleryRepository = GalleryRepository.initGalleryRepository(getApplication());
+                gameAppRepository = GameAppRepository.initGameAppRepository(getApplication());
             }
         }).start();
     }

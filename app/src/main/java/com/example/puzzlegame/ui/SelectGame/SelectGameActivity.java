@@ -41,7 +41,7 @@ public class SelectGameActivity extends BaseActivity {
         Por ahora si no existe usuario (Producto 1) se genera un usario por defecto
          */
         if (currentUser == null) {
-           selectGameViewModel.getUser(getApplication()).getValue();
+            selectGameViewModel.getUser(getApplication()).getValue();
         }
         // Fin lógica usuario
 
@@ -59,29 +59,24 @@ public class SelectGameActivity extends BaseActivity {
 
     private void setButtonListeners() {
         //Buttons
-        new Thread() {
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                btnNewGame.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        newGame(v);
-                    }
-                });
-                btnContinueGame.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        continueGame(v);
-                    }
-                });
-                btnViewPreviousGames.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        viewPreviousGames(v);
-                    }
-                });
+            public void onClick(View v) {
+                newGame(v);
             }
-        }.start();
+        });
+        btnContinueGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                continueGame(v);
+            }
+        });
+        btnViewPreviousGames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPreviousGames(v);
+            }
+        });
 
         final Observer<User> userObserver = new Observer<User>() {
             @Override
@@ -91,6 +86,7 @@ public class SelectGameActivity extends BaseActivity {
             }
         };
         selectGameViewModel.getUser(getApplication()).observe(this, userObserver);
+
     }
         //LiveData userPlayingGames
     private void newGame(View view) {

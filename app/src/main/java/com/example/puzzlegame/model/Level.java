@@ -6,12 +6,13 @@ import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+
 @Fts4
 @Entity(tableName = "levels")
 public class Level implements Serializable {
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "rowid")
-    public int id;
+    public Integer id;
     public String name;
     public int numPieces;
     public int numCols;

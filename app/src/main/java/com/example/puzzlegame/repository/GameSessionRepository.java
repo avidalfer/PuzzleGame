@@ -41,7 +41,7 @@ public class GameSessionRepository {
      */
     public void saveGameSession(List<Piece> pieces, long playedTime, Level level, Application app) {
         db = Utils.getDB(app);
-        GameSession currentGame = new GameSession(user, level);
+        GameSession currentGame = new GameSession(level);
         currentGame.setBgImage(galleryRepository.getCurrentImage());
 
         user.setCurrentGameSession(currentGame);

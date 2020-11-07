@@ -2,29 +2,30 @@ package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Fts4;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.example.puzzlegame.basededatos.typeconverters.GameSessionConverter;
 import com.example.puzzlegame.basededatos.typeconverters.LanguageConverter;
+import com.example.puzzlegame.basededatos.typeconverters.LevelConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-@Fts4
+
 @Entity(tableName = "users")
+@TypeConverters({LanguageConverter.class,
+        LevelConverter.class,
+        GameSessionConverter.class})
 public class User implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "rowid")
-    public int id;
+    public Integer id;
     public String name;
     public Level userLvl;
-    @TypeConverters(LanguageConverter.class)
     public Language language;
     public GameSession currentGameSession;
-    @Ignore
     public List<GameSession> playedGames;
 
     public User(){}

@@ -1,35 +1,37 @@
 package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Fts4;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.puzzlegame.basededatos.typeconverters.ImageConverter;
+import com.example.puzzlegame.basededatos.typeconverters.LevelConverter;
+import com.example.puzzlegame.basededatos.typeconverters.PiecesConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 @Fts4
 @Entity(tableName = "gameSessions")
+@TypeConverters({LevelConverter.class, ImageConverter.class, PiecesConverter.class})
 public class GameSession implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
-    @ColumnInfo (name = "rowId")
+    @ColumnInfo (name = "rowid")
     public int id;
-    public User user;
     public Level gameLvl;
-    @Embedded
     public Image bgImage;
     public long endTime;
     @Ignore
     public List<Piece> pieces;
-
+    public List<PieceData> pieceDataList;
     public GameSession() {
     }
 
-    public GameSession(User user, Level level) {
-        this.user = user;
+    public GameSession(Level level) {
         this.gameLvl = level;
         this.endTime = 0L;
         this.pieces = new ArrayList<>();
@@ -41,14 +43,6 @@ public class GameSession implements Serializable {
 
     public long getId(){
         return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Image getBgImage() {

@@ -2,14 +2,13 @@ package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Fts4;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.puzzlegame.model.interfaces.HallOfFame;
 
 import java.util.ArrayList;
-@Fts4
+
 @Entity (tableName = "scores")
 public class LocalHallOfFame implements HallOfFame {
 

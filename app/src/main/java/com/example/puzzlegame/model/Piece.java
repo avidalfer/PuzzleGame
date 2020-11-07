@@ -2,28 +2,21 @@ package com.example.puzzlegame.model;
 
 import android.content.Context;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Fts4;
-import androidx.room.PrimaryKey;
-@Fts4
-@Entity(tableName = "pieces")
 public class Piece extends androidx.appcompat.widget.AppCompatImageView {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowId")
     public int id;
     public int xCoord;
     public int yCoord;
     public int pieceWidth;
     public int pieceHeight;
     public boolean canMove = true;
-    public GameSession gameSession;
 
     public Piece(Context context) {
         super(context);
     }
 
+    public Piece(int id, int xCoord, int yCoord, int pieceHeight, int pieceWidth, boolean canMove, Context context){
+        super (context);}
     @Override
     public boolean performClick() {
         return super.performClick();

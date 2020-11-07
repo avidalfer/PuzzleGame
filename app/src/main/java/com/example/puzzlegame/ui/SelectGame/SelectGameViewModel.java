@@ -18,7 +18,7 @@ public class SelectGameViewModel extends ViewModel {
 
     public LiveData<User> getUser(Application app) {
         GameAppRepository gameAppRepository = GameAppRepository.getGameAppRepository();
-        user.postValue(gameAppRepository.getCurrentUser());
+        user.setValue(gameAppRepository.getCurrentUser());
         return user;
     }
 

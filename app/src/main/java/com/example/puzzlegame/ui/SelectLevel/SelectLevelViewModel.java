@@ -2,6 +2,7 @@ package com.example.puzzlegame.ui.SelectLevel;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.repository.GameAppRepository;
@@ -22,11 +23,11 @@ public class SelectLevelViewModel extends ViewModel {
     }
 
     public Level getLastPlayedLevel(){
-        Level lastPlayedLevel = user.getCurrentGameSession().getGameLvl();
-        if ( lastPlayedLevel == null){
+        GameSession lastGameSession = user.getCurrentGameSession();
+        if ( lastGameSession == null){
             return user.getUserLvl();
         }
-        return lastPlayedLevel;
+        return lastGameSession.getGameLvl();
     }
 
     public void setGameLevelById(int lvlId) {

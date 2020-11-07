@@ -6,11 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.puzzlegame.model.GameApp;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.LocalHallOfFame;
-import com.example.puzzlegame.model.Piece;
+import com.example.puzzlegame.model.PieceData;
 import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.model.interfaces.DAO.AppDAO;
 import com.example.puzzlegame.model.interfaces.DAO.GalleryDAO;
@@ -23,13 +24,14 @@ import com.example.puzzlegame.model.interfaces.DAO.UserDAO;
         Level.class,
         Image.class,
         GameSession.class,
-        Piece.class,
+        PieceData.class,
+        GameApp.class,
         LocalHallOfFame.class,
 }, version = 1)
 public abstract class AppDataBase extends RoomDatabase {
-    private static AppDataBase appDataBase;
+    protected static AppDataBase appDataBase;
 
-    private AppDataBase() {}
+    protected AppDataBase() {}
 
     public static AppDataBase getAppDataBase(Application application) {
         if (appDataBase == null) {

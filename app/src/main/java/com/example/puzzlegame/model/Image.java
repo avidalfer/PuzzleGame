@@ -14,13 +14,15 @@ import java.io.Serializable;
 public class Image implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowId")
-    public int id;
+    @ColumnInfo(name = "rowid")
+    public Integer id;
     public String imgName;
     public int photoWidth;
     public int photoHeight;
     @Ignore
     public Bitmap bitmap;
+
+    public Image(){}
 
     public Image(String imgName, Bitmap thumbBitmap, int photoWidth, int photoHeight) {
         this.imgName = imgName;
