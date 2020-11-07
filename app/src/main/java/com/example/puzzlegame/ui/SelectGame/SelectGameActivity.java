@@ -1,6 +1,5 @@
 package com.example.puzzlegame.ui.SelectGame;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,22 +12,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
-import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.User;
-import com.example.puzzlegame.ui.game.PuzzleGameActivity;
 import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
 import com.example.puzzlegame.ui.SelectPreviousGames.SelectPreviousGamesActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
-
-import java.util.List;
+import com.example.puzzlegame.ui.game.PuzzleGameActivity;
 
 public class SelectGameActivity extends BaseActivity {
 
     SelectGameViewModel selectGameViewModel;
     Button btnNewGame, btnContinueGame, btnViewPreviousGames;
     TextView userNameTxtView;
-    List<GameSession> userPlayingGames;
     User currentUser;
 
     @Override
@@ -40,11 +35,16 @@ public class SelectGameActivity extends BaseActivity {
         CommonBarMethods.configDefaultAppBar(this);
 
         selectGameViewModel = new ViewModelProvider(this).get(SelectGameViewModel.class);
-        Intent intent = getIntent();
-        currentUser = (User) intent.getSerializableExtra("currentUser");
+
+        /* Lógica de usuario
+        Pendiente de saber cómo afecta el login en la lógica de la aplicación.
+        Por ahora si no existe usuario (Producto 1) se genera un usario por defecto
+         */
         if (currentUser == null) {
-           selectGameViewModel.getUser().getValue();
+           selectGameViewModel.getUser(getApplication()).getValue();
         }
+        // Fin lógica usuario
+
         setViews();
         setButtonListeners();
     }
@@ -86,20 +86,18 @@ public class SelectGameActivity extends BaseActivity {
         final Observer<User> userObserver = new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                userNameTxtView.setText(user.getName());
+                userNameTxtView.setText(user.getName() + "!");
                 currentUser = user;
             }
         };
-        selectGameViewModel.getUser().observe(this, userObserver);
+        selectGameViewModel.getUser(getApplication()).observe(this, userObserver);
     }
         //LiveData userPlayingGames
     private void newGame(View view) {
-        Intent intent = new Intent(getApplicationContext(), SelectLevelActivity.class);
-        intent.putExtra("currentUser", currentUser);
-        startActivity(intent);
+        startActivity(new Intent(getApplicationContext(), SelectLevelActivity.class));
     }
 
-    public void continueGame(View view) {
+    public void continueGame(View view) { //pendiente de revisión. Chequear qué valores tiene el user recibido desde BD
         GameSession currentGame = currentUser.getCurrentGameSession();
         Intent intent = new Intent(getApplicationContext(), PuzzleGameActivity.class);
         intent.putExtra("continueGame", currentGame);
@@ -107,9 +105,8 @@ public class SelectGameActivity extends BaseActivity {
     }
 
     public void viewPreviousGames(View view) {
-        if (userPlayingGames.size() == 0) {
-            Toast toast = Toast.makeText(this, this.getResources().getText(R.string.no_prev_games), Toast.LENGTH_LONG);
-            toast.show();
+        if (currentUser.getPlayedGames().size() == 0) {
+            Toast.makeText(this, this.getResources().getText(R.string.no_prev_games), Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(getApplicationContext(), SelectPreviousGamesActivity.class);
             intent.putExtra("userPlayedGames", currentUser);

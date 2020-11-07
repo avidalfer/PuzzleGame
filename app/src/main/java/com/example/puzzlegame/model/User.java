@@ -1,54 +1,48 @@
 package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Fts4;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.puzzlegame.basededatos.typeconverters.LanguageConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-@Entity
+@Fts4
+@Entity(tableName = "users")
 public class User implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
-    private long idUser;
+    @ColumnInfo(name = "rowid")
+    public int id;
+    public String name;
+    public Level userLvl;
+    @TypeConverters(LanguageConverter.class)
+    public Language language;
+    public GameSession currentGameSession;
+    @Ignore
+    public List<GameSession> playedGames;
 
-    @ColumnInfo (name = "name")
-    private String name;
+    public User(){}
 
-    @Embedded
-    private Level userLvl;
-
-    @Embedded
-    private Language language;
-
-    @Embedded
-    private GameSession currentGameSession;
-
-//    @ColumnInfo(name = "playedGames")
-    private List<GameSession> playedGames;
-
-//    @ColumnInfo(name = "gameApp")
-    private GameApp gameApp;
-
-
-    public User(long idUser, String name, Language language) {
-        this.idUser = idUser;
+    public User(int idUser, String name, Language language) {
+        this.id = idUser;
         this.name = name;
-        this.gameApp = GameApp.getGameApp();
-        setUserLvl(gameApp.getLevelById(1));
+        this.userLvl = new Level (1, "FÁCIL", 3, 4);
         this.language = language;
         this.playedGames = new ArrayList<>();
     }
 
-    public long getIdUser() {
-        return idUser;
+    public int getIdUser() {
+        return id;
     }
 
-    public void setIdUser(long idUser) {
-        this.idUser = idUser;
+    public void setIdUser(int idUser) {
+        this.id = idUser;
     }
 
     public String getName() {
@@ -64,9 +58,6 @@ public class User implements Serializable {
     }
 
     public void setUserLvl(Level userLvl) {
-        if (userLvl == null) {
-            this.userLvl = new Level (1, "FÁCIL", 3, 4);
-        }
         this.userLvl = userLvl;
     }
 

@@ -2,26 +2,22 @@ package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-@Entity
+@Fts4
+@Entity(tableName = "levels")
 public class Level implements Serializable {
     @PrimaryKey (autoGenerate = true)
-    private int id;
-    @ColumnInfo(name = "nameLevel")
-    private String name;
-    @ColumnInfo(name = "numPieces")
-    private int numPieces;
-    @ColumnInfo(name = "numCols")
-    private int numCols;
-    @ColumnInfo(name = "numRows")
-    private int numRows;
-    @ColumnInfo(name = "playedGames")
-    private List<GameSession> playedGames;
+    @ColumnInfo(name = "rowid")
+    public int id;
+    public String name;
+    public int numPieces;
+    public int numCols;
+    public int numRows;
 
+    public Level(){}
 
     public Level(int id, String name, int cols, int rows) {
         this.id = id;
@@ -29,7 +25,6 @@ public class Level implements Serializable {
         this.numCols = cols;
         this.numRows = rows;
         this.numPieces = numCols * numRows;
-        this.playedGames = new ArrayList<>();
     }
 
     public int getId(){
@@ -70,13 +65,5 @@ public class Level implements Serializable {
 
     public void setNumRows(int numRows) {
         this.numRows = numRows;
-    }
-
-    public List<GameSession> getPlayedGames() {
-        return playedGames;
-    }
-
-    public void setPlayedGames(List<GameSession> playedGames) {
-        this.playedGames = playedGames;
     }
 }

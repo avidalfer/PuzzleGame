@@ -1,8 +1,10 @@
 package com.example.puzzlegame.model;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.example.puzzlegame.model.interfaces.HallOfFame;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,28 +15,31 @@ public class GameApp implements Serializable {
 
     private static GameApp gameApp;
     @PrimaryKey
+    private int id;
     private User user;
-    @ColumnInfo(name = "level")
     private Level userLvl;
-    @ColumnInfo(name = "users")
-    private ArrayList<User> users;
-    @ColumnInfo(name = "levels")
+    @Ignore
+    private final ArrayList<User> users;
+    @Ignore
     private ArrayList<Level> levels;
+    private HallOfFame hallOfFame;
+    @Ignore
     public ArrayList<User> getUsers() {
         return users;
     }
 
-    public static GameApp getGameApp() {
-        if (gameApp == null) {
-
-        }
-        return gameApp;
-    }
-
     private GameApp(Level userLvl, ArrayList<User> users){
         this.userLvl = userLvl;
-        this.users = users;
+        if (users != null) {
+            this.users = users;
+        } else {
+            this.users = new ArrayList<>();
+        }
         levels = new ArrayList<>();
+    }
+
+    public static GameApp getGameApp() {
+        return gameApp;
     }
 
     public User getUser() {
@@ -55,27 +60,6 @@ public class GameApp implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Level> getLevels() {
-        return levels;
-    }
-
-    public Level getLevelById(int i) {
-        return levels.get(i);
-    }
-
-    public void setLevels(List<Level> levels) {
-        this.levels = (ArrayList<Level>) levels;
-    }
-
-    public void addLevel(Level newLevel) {
-        this.levels.add(newLevel);
-    }
-
-    public int removeLevel(Level level) {
-        this.levels.remove(level);
-        return levels.size();
     }
 
     public Level getUserLvl() {

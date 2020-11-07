@@ -4,19 +4,23 @@ import android.graphics.Bitmap;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Fts4;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-@Entity
+@Fts4
+@Entity(tableName = "images")
 public class Image implements Serializable {
 
-    @ColumnInfo(name = "imgName")
-    private String imgName;
-    @ColumnInfo(name = "bitmap")
-    private Bitmap bitmap;
-    @ColumnInfo(name = "photoWidth")
-    private int photoWidth;
-    @ColumnInfo(name = "phonoHeight")
-    private int photoHeight;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "rowId")
+    public int id;
+    public String imgName;
+    public int photoWidth;
+    public int photoHeight;
+    @Ignore
+    public Bitmap bitmap;
 
     public Image(String imgName, Bitmap thumbBitmap, int photoWidth, int photoHeight) {
         this.imgName = imgName;

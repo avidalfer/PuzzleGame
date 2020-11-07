@@ -1,13 +1,10 @@
 package com.example.puzzlegame.ui.winscreen;
 
-import android.widget.Toast;
-
 import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Language;
-import com.example.puzzlegame.model.Score;
 import com.example.puzzlegame.model.User;
 
 public class WinScreenViewModel extends ViewModel {
@@ -18,12 +15,11 @@ public class WinScreenViewModel extends ViewModel {
 
     public WinScreenViewModel() {
         //HallOfFame localHoF = GameApp.getLocalHof();
-        user = new User(1L, "Pepe", Language.ES);
+        user = new User(1, "Pepe", Language.ES);
         //user se saca del login.
         //User user = GameApp.getUser(id);
         //sessionId se pasa por intent desde la activity de juego
         //session = user.getCurrentSession(sessionId);
-
     }
 
     public Long getWinnerTime() {

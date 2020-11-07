@@ -8,19 +8,13 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
-import com.example.puzzlegame.common.Utils;
-import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Level;
-import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.gallery.GalleryActivity;
-
-import java.util.List;
 
 public class SelectLevelActivity extends BaseActivity {
 
@@ -30,10 +24,8 @@ public class SelectLevelActivity extends BaseActivity {
     private CompoundButton[] switches;
     private Button btnPlay;
 
-    private User currentUser;
-
-    private boolean automaticChanged;
     //true when switches change automatically ; false when the change is caused by user action
+    private boolean automaticChanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +35,6 @@ public class SelectLevelActivity extends BaseActivity {
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
 
-        Intent intent = getIntent();
-        currentUser = (User) intent.getSerializableExtra("currentUser");
         setViews();
         allowsAsUserLevel();
         setListeners();
@@ -84,14 +74,6 @@ public class SelectLevelActivity extends BaseActivity {
                 goToGalleryActivity();
             }
         });
-        //LiveData
-        final Observer<Level> observer = new Observer<Level>() {
-            @Override
-            public void onChanged(Level lvl) {
-                levelViewModel.setGameLevel(lvl);
-            }
-        };
-        levelViewModel.getGameLevel().observe(this, observer);
     }
 
     /**
@@ -100,7 +82,7 @@ public class SelectLevelActivity extends BaseActivity {
      */
     private void allowsAsUserLevel() {
         TextView levelTxt;
-        switch (currentUser.getUserLvl().getId()) {
+        switch (levelViewModel.getGameLevel().getId()) {
             case 3:
                 switches[2].setEnabled(true);
                 levelTxt = findViewById(R.id.hard_txt);
@@ -113,20 +95,13 @@ public class SelectLevelActivity extends BaseActivity {
     }
 
     private void getLastLevelPlayed() {
-        GameSession lastSession = currentUser.getCurrentGameSession();
-        int levelId = 1;
-        if (lastSession == null) {
-            levelId = currentUser.getUserLvl().getId();
-        } else
-            levelId = lastSession.getGameLvl().getId();
-
+        int levelId = levelViewModel.getLastPlayedLevel().getId();
         setLvl(levelId);
     }
 
     @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})
     private void setLvl(CompoundButton switchBtn) {
         int lvl = 1;
-        String levelTitle = "";
         switch (switchBtn.getId()) {
             case R.id.easy_switch:
                 btnPlay.setText(getText(R.string.easy_btn));
@@ -172,7 +147,7 @@ public class SelectLevelActivity extends BaseActivity {
 
     private void goToGalleryActivity() {
         Intent intent = new Intent(this, GalleryActivity.class);
-        Level selectedLevel = levelViewModel.getGameLevel().getValue();
+        Level selectedLevel = levelViewModel.getGameLevel();
         intent.putExtra("levelSelected", selectedLevel);
         startActivity(intent);
 

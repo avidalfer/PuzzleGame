@@ -1,13 +1,6 @@
 package com.example.puzzlegame.ui.gallery;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,28 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.model.Image;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
-    private final AssetManager am;
-    private List<Image> galleryImages;
+    private final List<Image> galleryImages;
     private final OnImageListener onImageListener;
     private final Context context;
 
-    public GalleryAdapter(Context context, List<Image> galleryImages, OnImageListener onImageListener, AssetManager am) {
+    public GalleryAdapter(Context context, List<Image> galleryImages, OnImageListener onImageListener) {
         this.galleryImages = galleryImages;
         this.onImageListener = onImageListener;
         this.context = context;
-        this.am = am;
-    }
-
-    public void setGalleryImages(List<Image> images) {
-        this.galleryImages = images;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -62,7 +45,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         }
         return this.galleryImages.size();
     }
-
 
     // ViewHolder Class
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

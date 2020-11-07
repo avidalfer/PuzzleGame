@@ -4,19 +4,21 @@ import android.content.Context;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-
-@Entity
+import androidx.room.Fts4;
+import androidx.room.PrimaryKey;
+@Fts4
+@Entity(tableName = "pieces")
 public class Piece extends androidx.appcompat.widget.AppCompatImageView {
-    @ColumnInfo (name = "xCoord")
-    private int xCoord;
-    @ColumnInfo(name = "yCoord")
-    private int yCoord;
-    @ColumnInfo(name = "pieceWidth")
-    private int pieceWidth;
-    @ColumnInfo(name = "pieceHeight")
-    private int pieceHeight;
-    @ColumnInfo(name = "canMove")
-    private boolean canMove = true;
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "rowId")
+    public int id;
+    public int xCoord;
+    public int yCoord;
+    public int pieceWidth;
+    public int pieceHeight;
+    public boolean canMove = true;
+    public GameSession gameSession;
 
     public Piece(Context context) {
         super(context);

@@ -1,30 +1,18 @@
 package com.example.puzzlegame.repository;
 
-import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.os.SystemClock;
-import android.util.Log;
 
-import androidx.constraintlayout.motion.widget.Debug;
-import androidx.loader.content.AsyncTaskLoader;
-
+import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Gallery;
 import com.example.puzzlegame.model.Image;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public class GalleryRepository {
 
@@ -35,55 +23,68 @@ public class GalleryRepository {
     private AssetManager assetManager;
     private Bitmap currentBGBitmap;
     private Image currentImage;
+    private AppDataBase db;
 
-    private GalleryRepository() {
+    private GalleryRepository(Application application) {
         imageList = new ArrayList<>();
-        gallery = Gallery.getGallery();
+        db = Utils.getDB(application);
     }
 
-    public static GalleryRepository getGalleryRepository() {
+    public static GalleryRepository initGalleryRepository(Application app) {
         if (galleryRepository == null) {
-            galleryRepository = new GalleryRepository();
+            galleryRepository = new GalleryRepository(app);
         }
         return galleryRepository;
     }
 
-    public void addImage(Image image) {
-        gallery.addImage(image);
-    }
-
-    public int removeImage(Image image) {
-        imageList.remove(image);
-        return imageList.size();
-    }
-
-    public void setImageList(List<Image> imgList) {
-        if (imgList == null) {
-            imgList = new ArrayList<>();
-        }
-        this.imageList = imageList;
+    public static GalleryRepository getGalleryRepository() {
+        return galleryRepository;
     }
 
     public List<Image> getImageList() {
         return imageList;
     }
 
-    public void updateImageList(AssetManager am) {
-        this.assetManager = am;
-        try {
-            String[] list = assetManager.list("img");
-            for (String src : list) {
-                if (!gallery.isImageStored(src)) {
-                    Image img = Utils.createImage(assetManager, src);
-                    addImage(img);
+    /**
+     * Check in assets img folder if there is a new image file. If found an image not stored, update database
+     * and store the whole images in cache.
+     *
+     * @param am
+     * @param refreshing
+     * @return
+     */
+    public boolean updateImageList(AssetManager am, boolean refreshing) {
+        // if is not the first time checking img folder vs db and not refreshing data -> exit
+        if (assetManager != null || !refreshing) {
+            return false;
+        }
+        assetManager = am;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String[] list = assetManager.list("img");
+                    for (String src : list) {
+                        Image img = db.galleryDAO().findByName(src);
+                        if (img == null) {
+                            img = Utils.createImage(assetManager, src);
+                            db.galleryDAO().insertImages(img);
+                        }
+                    }
+                    imageList = db.galleryDAO().getAllImages();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-            imageList = gallery.getImageList();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }).start();
+        return true;
     }
 
+    /**
+     * get bitmap from image selected
+     *
+     * @param img clicked image from galleryactivity
+     */
     public void setCurrentBGBitmap(Image img) {
         currentImage = img;
         int gameW = 683;
@@ -93,16 +94,14 @@ public class GalleryRepository {
         int photoW = img.getPhotoWidth();
         int photoH = img.getPhotoHeight();
 
-        Bitmap b = Utils.getScaledBitmap(assetManager, src, photoW, gameW, photoH, gameH);
-
-        currentBGBitmap = b;
+        currentBGBitmap = Utils.getScaledBitmap(assetManager, src, photoW, gameW, photoH, gameH);
     }
 
     public Bitmap getCurrentBGBitmap() {
         return currentBGBitmap;
     }
 
-    public Image getCurrentImage(){
+    public Image getCurrentImage() {
         return currentImage;
     }
 }

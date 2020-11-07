@@ -21,7 +21,6 @@ import com.example.puzzlegame.model.Piece;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -31,9 +30,8 @@ public class PuzzleGameActivity extends BaseActivity {
     private Level levelSelected;
     private RelativeLayout puzzleLayout;
     private ImageView imageView;
-    private ArrayList<Piece> totalPieces;
     private static Chronometer timer;
-    private Bitmap bimapBG;
+    private Bitmap bitmapBG;
     private static final String TAG = "PuzzleGameActivity";
 
     @Override
@@ -46,7 +44,7 @@ public class PuzzleGameActivity extends BaseActivity {
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-        setViews();
+        setViews(); //and Listeners
     }
 
     @Override
@@ -59,9 +57,9 @@ public class PuzzleGameActivity extends BaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        imageView.setImageBitmap(bimapBG);
+        imageView.setImageBitmap(bitmapBG);
         gameViewModel.createPieces(imageView, levelSelected);
-        totalPieces = gameViewModel.getpieces();
+        gameViewModel.saveGameStatus(getApplication());
     }
 
     private void setViews() {
@@ -79,7 +77,7 @@ public class PuzzleGameActivity extends BaseActivity {
         final Observer<Image> backgroundImageObserver = new Observer<Image>() {
             @Override
             public void onChanged(Image image) {
-                    bimapBG = gameViewModel.getCurrentBitmap();
+                    bitmapBG = gameViewModel.getCurrentBitmap();
             }
         };
         gameViewModel.getBoardImageObservable().observe(this, backgroundImageObserver);
@@ -105,9 +103,11 @@ public class PuzzleGameActivity extends BaseActivity {
         //gameOver
         final Observer<Boolean> gameOverStateObserver = new Observer<Boolean>() {
             @Override
-            public void onChanged(Boolean aBoolean) {
-                pauseTimer();
-                startActivity(new Intent(getApplicationContext(), WinScreenActivity.class));
+            public void onChanged(Boolean gameOver) {
+                if (gameOver) {
+                    pauseTimer();
+                    startActivity(new Intent(getApplicationContext(), WinScreenActivity.class));
+                }
             }
         };
         gameViewModel.getGameOverObservable().observe(this, gameOverStateObserver);

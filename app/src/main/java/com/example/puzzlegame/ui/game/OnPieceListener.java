@@ -54,7 +54,7 @@ public class OnPieceListener implements View.OnTouchListener {
                     piece.setLayoutParams(lParams);
                     piece.canMove(false);
                     sendViewToBack(piece);
-                    gameViewModel.placedPiece(piece);
+                    gameViewModel.checkGameOver();
                 }
                 break;
         }

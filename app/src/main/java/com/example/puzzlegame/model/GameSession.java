@@ -1,29 +1,29 @@
 package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Fts4;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-@Entity
+@Fts4
+@Entity(tableName = "gameSessions")
 public class GameSession implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
-    public Long id;
-    @ColumnInfo(name = "user")
+    @ColumnInfo (name = "rowId")
+    public int id;
     public User user;
-    @ColumnInfo(name = "bgImage")
-    public Image bgImage;
-    @ColumnInfo(name = "gameLvl")
     public Level gameLvl;
-    @ColumnInfo(name = "endTime")
-    public Long endTime;
-    @ColumnInfo(name = "placedPieces")
-    private List<Piece> placedPieces;
-    @ColumnInfo(name = "totalPieces")
-    private List<Piece> totalPieces;
+    @Embedded
+    public Image bgImage;
+    public long endTime;
+    @Ignore
+    public List<Piece> pieces;
 
     public GameSession() {
     }
@@ -32,10 +32,10 @@ public class GameSession implements Serializable {
         this.user = user;
         this.gameLvl = level;
         this.endTime = 0L;
-        this.placedPieces = new ArrayList<>();
+        this.pieces = new ArrayList<>();
     }
 
-    public void setId(long id){
+    public void setId(int id){
         this.id = id;
     }
 
@@ -75,19 +75,11 @@ public class GameSession implements Serializable {
         this.endTime = endTime;
     }
 
-    public void addPlacedPiece(Piece piece) {
-        this.placedPieces.add(piece);
+    public List<Piece> getPieces() {
+        return pieces;
     }
 
-    public void setTotalPieces(List<Piece> totalPieces) {
-        this.totalPieces = totalPieces;
-    }
-
-    public List<Piece> getTotalPieces() {
-        return totalPieces;
-    }
-
-    public List<Piece> getPlacedPieces() {
-        return placedPieces;
+    public void setPieces(List<Piece> pieces) {
+        this.pieces = pieces;
     }
 }

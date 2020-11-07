@@ -1,40 +1,35 @@
 package com.example.puzzlegame.ui.SelectLevel;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.model.Level;
-import com.example.puzzlegame.repository.UserRepository;
+import com.example.puzzlegame.model.User;
+import com.example.puzzlegame.repository.GameAppRepository;
 
 public class SelectLevelViewModel extends ViewModel {
-
-    private MutableLiveData<Level> lvl;
-    private UserRepository userRepository;
+    private GameAppRepository gameAppRepository;
+    private Level lvl;
+    private final User user;
 
     public SelectLevelViewModel(){
-        userRepository = new UserRepository();
-        lvl = new MutableLiveData<>();
-        lvl.setValue(userRepository.getUserLevel());
+        gameAppRepository = GameAppRepository.getGameAppRepository();
+        user = gameAppRepository.getCurrentUser();
+        lvl = user.getUserLvl();
     }
 
-    public LiveData<Level> getGameLevel() {
-        if (lvl == null) {
-            lvl = new MutableLiveData<Level>();
-        }
+    public Level getGameLevel() {
         return lvl;
     }
 
-    public void setGameLevel(Level gameLevel) {
-        lvl.postValue(gameLevel);
+    public Level getLastPlayedLevel(){
+        Level lastPlayedLevel = user.getCurrentGameSession().getGameLvl();
+        if ( lastPlayedLevel == null){
+            return user.getUserLvl();
+        }
+        return lastPlayedLevel;
     }
 
     public void setGameLevelById(int lvlId) {
-        //lvl.setValue(userRepository.getLevel(lvlId))
-        Level testLevel = new Level(1, "fácil", 3, 4);
-        lvl.postValue(testLevel);
+        lvl = gameAppRepository.getLevels().get(lvlId);
     }
 }

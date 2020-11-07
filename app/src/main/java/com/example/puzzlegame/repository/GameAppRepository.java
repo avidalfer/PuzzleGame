@@ -1,70 +1,85 @@
 package com.example.puzzlegame.repository;
 
-import android.content.Context;
+import android.app.Application;
+import android.content.res.AssetManager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import com.example.puzzlegame.R;
+import com.example.puzzlegame.basededatos.AppDataBase;
+import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameApp;
-import com.example.puzzlegame.model.GameSession;
-import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Language;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.MusicSettings;
 import com.example.puzzlegame.model.Song;
 import com.example.puzzlegame.model.User;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameAppRepository {
 
 
-
     private static GameAppRepository gameAppRepository;
-    private GameApp gameApp;
     private User currentUser;
-    private Level userLvl;
-    private MusicSettings musicSettings;
-    private Song selectedSong;
-    private List<User> listOfUsers;
+    private AppDataBase db;
+    private List<Level> levels;
 
-    private GameAppRepository() {
-        gameApp = GameApp.getGameApp();
-        setLevels();
+    private GameAppRepository(Application application) {
+        db = Utils.getDB(application);
+        updateLevels();
+        updateGallery(application);
     }
 
-    public static GameAppRepository getGameAppRepository() {
+    private void updateGallery(Application app) {
+        AssetManager am = app.getAssets();
+        GalleryRepository galleryRepository = GalleryRepository.getGalleryRepository();
+        galleryRepository.updateImageList(am, false);
+    }
+
+    public static GameAppRepository initGameAppRepository(Application application) {
         if (gameAppRepository == null) {
-            gameAppRepository = new GameAppRepository();
+            gameAppRepository = new GameAppRepository(application);
         }
         return gameAppRepository;
     }
 
-    public User getCurrentUser() {
+    public static GameAppRepository getGameAppRepository() {
+        return gameAppRepository;
+    }
 
-        if (currentUser == null){
+    public User getCurrentUser() {
+        if (currentUser != null) {
+            return currentUser;
+        }
+        currentUser = db.gameAppDAO().getCurrentUser();
+        if (currentUser == null) {
             currentUser = new User(1, "Mapache", Language.ES);
+            setCurrentUser(currentUser);
         }
         return currentUser;
     }
 
-    public void setLevels(){
-        //Habrá que controlar que exista en la base de datos o crearlo
-        Level easy = new Level (1, "Easy", 3, 4);
-        Level intermediate = new Level (2, "Intermediate", 4, 6);
-        Level hard = new Level (3, "Hard", 6, 10);
-        Level[] tempLevels = new Level[] {easy, intermediate, hard};
-        List<Level> defaultLevels = new ArrayList<>(Arrays.asList(tempLevels));
-        gameApp.setLevels(defaultLevels);
+    public void updateLevels() {
+        levels = db.levelDAO().getAll();
+        if (levels.size() == 0) {
+            Level easy = new Level(1, "Easy", 3, 4);
+            Level intermediate = new Level(2, "Intermediate", 4, 6);
+            Level hard = new Level(3, "Hard", 6, 10);
+            db.levelDAO().insertLevels(easy, intermediate, hard);
+        }
     }
 
+    /**
+     * Posible implementación de guardado del usuario desde el login
+     *
+     * @param user
+     */
     public void setCurrentUser(User user) {
-        this.currentUser = user;
+        if (db.userDAO().findByName(user.getName()) == null) {
+            db.userDAO().insertAll(user);
+        }
+        db.gameAppDAO().setCurrentUser(user);
+    }
+
+    public List<Level> getLevels(){
+        return levels;
     }
 }

@@ -1,28 +1,31 @@
 package com.example.puzzlegame.model.interfaces.DAO;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
-import com.example.puzzlegame.model.GameSession;
+import com.example.puzzlegame.model.GameSessionWithPieces;
+import com.example.puzzlegame.model.GameSessionsAndLevels;
+import com.example.puzzlegame.model.UserWithGameSessions;
 
 import java.util.List;
 
 @Dao
 public interface GameSessionDAO {
-    @Query("SELECT * FROM GameSession")
-    List<GameSession> getAll();
+    @Transaction
+    @Query("SELECT * FROM gameSessions")
+    List<GameSessionWithPieces> getGameSessionsWithPieces();
 
-    @Query("SELECT * FROM GameSession WHERE id IN (:sessionId)")
-    List<GameSession> loadAllByIds(int[] sessionId);
+    @Transaction
+    @Query("SELECT * FROM users")
+    List<UserWithGameSessions> getGameSessionsByUser();
 
-    @Query("SELECT * FROM GameSession WHERE user LIKE :user")
-    GameSession findByName(String user);
+    @Transaction
+    @Query("SELECT * FROM users WHERE name LIKE :name")
+    List<UserWithGameSessions> getUserGameSessions(String name);
 
-    @Insert
-    void insertAll(GameSession... gameSessions);
+    @Transaction
+    @Query("SELECT * FROM levels")
+    List<GameSessionsAndLevels> getLevelsAndGameSessions();
 
-    @Delete
-    void delete(GameSession GameSession);
 }

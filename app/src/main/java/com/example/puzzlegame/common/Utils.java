@@ -1,43 +1,28 @@
 package com.example.puzzlegame.common;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Application;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.renderscript.ScriptGroup;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import com.example.puzzlegame.MainActivity;
-import com.example.puzzlegame.R;
 import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.model.Image;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static android.R.color.white;
-
 /**
  * Contains static functions for common activities behaviour (i.e. create a common toolbar)
  */
 public class Utils {
 
-    public static AppDataBase getDB(AppCompatActivity activity){
-        return AppDataBase.getAppDataBase(activity);
+    public static AppDataBase getDB(Application application){
+        return AppDataBase.getAppDataBase(application);
     }
 
     public static void TODO(AppCompatActivity activity, View view) {
