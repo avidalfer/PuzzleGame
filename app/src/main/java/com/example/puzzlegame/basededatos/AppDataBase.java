@@ -27,7 +27,7 @@ import com.example.puzzlegame.model.interfaces.DAO.UserDAO;
         PieceData.class,
         GameApp.class,
         LocalHallOfFame.class,
-}, version = 1)
+}, version = 2)
 public abstract class AppDataBase extends RoomDatabase {
     protected static AppDataBase appDataBase;
 
@@ -36,7 +36,7 @@ public abstract class AppDataBase extends RoomDatabase {
     public static AppDataBase getAppDataBase(Application application) {
         if (appDataBase == null) {
             appDataBase = Room.databaseBuilder(application.getApplicationContext(),
-                    AppDataBase.class, "database-name").build();
+                    AppDataBase.class, "database-name").fallbackToDestructiveMigration().build();
         }
         return appDataBase;
     }

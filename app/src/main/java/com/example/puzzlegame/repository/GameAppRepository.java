@@ -51,7 +51,7 @@ public class GameAppRepository {
             public void run() {
                 currentUser = db.gameAppDAO().getCurrentUser();
                 if (currentUser == null) {
-                    currentUser = new User(1, "Mapache", Language.ES);
+                    currentUser = new User(1, "Racoon", Language.ES);
                     setCurrentUser(currentUser);
                 }
             }

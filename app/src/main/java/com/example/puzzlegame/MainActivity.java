@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity {
             public void run() {
                 galleryRepository = GalleryRepository.initGalleryRepository(getApplication());
                 gameAppRepository = GameAppRepository.initGameAppRepository(getApplication());
+                gameAppRepository.getCurrentUser(); // pendiente de actualización con la implementación del login
             }
         }).start();
     }

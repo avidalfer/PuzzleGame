@@ -55,7 +55,7 @@ public class GalleryRepository {
      */
     public boolean updateImageList(AssetManager am, boolean refreshing) {
         // if is not the first time checking img folder vs db and not refreshing data -> exit
-        if (assetManager != null || !refreshing) {
+        if (assetManager != null && !refreshing) {
             return false;
         }
         assetManager = am;

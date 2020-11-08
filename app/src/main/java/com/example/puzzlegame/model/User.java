@@ -2,6 +2,7 @@ package com.example.puzzlegame.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -12,7 +13,7 @@ import com.example.puzzlegame.basededatos.typeconverters.LevelConverter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+@Fts4
 @Entity(tableName = "users")
 @TypeConverters({LanguageConverter.class,
         LevelConverter.class,

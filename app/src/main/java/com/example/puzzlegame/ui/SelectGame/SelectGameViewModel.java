@@ -2,7 +2,6 @@ package com.example.puzzlegame.ui.SelectGame;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -16,9 +15,12 @@ public class SelectGameViewModel extends ViewModel {
         user = new MutableLiveData<User>();
     }
 
-    public LiveData<User> getUser(Application app) {
+    public void updateUserData(){
         GameAppRepository gameAppRepository = GameAppRepository.getGameAppRepository();
         user.setValue(gameAppRepository.getCurrentUser());
+    }
+
+    public MutableLiveData<User> getUserObservable(Application app) {
         return user;
     }
 

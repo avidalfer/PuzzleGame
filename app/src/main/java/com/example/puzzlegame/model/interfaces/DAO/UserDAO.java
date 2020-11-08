@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.puzzlegame.model.User;
 
@@ -20,6 +21,7 @@ public interface UserDAO {
     @Query("SELECT * FROM users WHERE name LIKE :name")
     User findByName(String name);
 
+    @Transaction
     @Insert
     void insertAll(User... Users);
 

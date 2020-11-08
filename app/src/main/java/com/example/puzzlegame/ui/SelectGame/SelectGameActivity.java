@@ -41,7 +41,7 @@ public class SelectGameActivity extends BaseActivity {
         Por ahora si no existe usuario (Producto 1) se genera un usario por defecto
          */
         if (currentUser == null) {
-            selectGameViewModel.getUser(getApplication()).getValue();
+            selectGameViewModel.updateUserData();
         }
         // Fin lógica usuario
 
@@ -81,11 +81,13 @@ public class SelectGameActivity extends BaseActivity {
         final Observer<User> userObserver = new Observer<User>() {
             @Override
             public void onChanged(User user) {
+                if (user != null){
                 userNameTxtView.setText(user.getName() + "!");
                 currentUser = user;
+                }
             }
         };
-        selectGameViewModel.getUser(getApplication()).observe(this, userObserver);
+        selectGameViewModel.getUserObservable(getApplication()).observe(this, userObserver);
 
     }
         //LiveData userPlayingGames
