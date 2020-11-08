@@ -1,7 +1,11 @@
-package com.example.puzzlegame.model;
+package com.example.puzzlegame.model.relations;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
+
+import com.example.puzzlegame.model.GameSession;
+import com.example.puzzlegame.model.Piece;
+import com.example.puzzlegame.model.PieceData;
 
 import java.util.List;
 
@@ -10,6 +14,6 @@ public class GameSessionAndPieces {
     public GameSession gameSession;
     @Relation(parentColumn = "id",
             entityColumn = "gameSession",
-            entity = Piece.class)
+            entity = PieceData.class)
     public List<Piece> totalPieces;
 }

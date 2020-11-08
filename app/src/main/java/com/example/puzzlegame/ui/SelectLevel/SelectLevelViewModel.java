@@ -10,12 +10,16 @@ import com.example.puzzlegame.repository.GameAppRepository;
 public class SelectLevelViewModel extends ViewModel {
     private GameAppRepository gameAppRepository;
     private Level lvl;
-    private final User user;
+    private User user;
 
     public SelectLevelViewModel(){
         gameAppRepository = GameAppRepository.getGameAppRepository();
         user = gameAppRepository.getCurrentUser();
         lvl = user.getUserLvl();
+        if (lvl == null) {
+            lvl = gameAppRepository.getLevels().get(0);
+            user = gameAppRepository.setUserLevel(0);
+        }
     }
 
     public Level getGameLevel() {

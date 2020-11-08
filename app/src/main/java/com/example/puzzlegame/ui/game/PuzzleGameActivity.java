@@ -59,7 +59,7 @@ public class PuzzleGameActivity extends BaseActivity {
         super.onWindowFocusChanged(hasFocus);
         imageView.setImageBitmap(bitmapBG);
         gameViewModel.createPieces(imageView, levelSelected);
-        gameViewModel.saveGameStatus(getApplication());
+        gameViewModel.saveGameStatus(getApplication(), levelSelected);
     }
 
     private void setViews() {

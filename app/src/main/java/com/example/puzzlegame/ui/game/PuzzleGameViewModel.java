@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.Piece;
@@ -19,11 +20,11 @@ import java.util.List;
 
 public class PuzzleGameViewModel extends ViewModel {
     private final GameSessionRepository gameSessionRepository;
-    private Level level;
     private GalleryRepository galleryRepository;
     private MutableLiveData<List<Piece>> totalPieces;
     private MutableLiveData<Image> boardImage;
     private MutableLiveData<Boolean> gameOver;
+    private GameSession currentGame;
     private long playedTime;
 
     public PuzzleGameViewModel() {
@@ -47,15 +48,19 @@ public class PuzzleGameViewModel extends ViewModel {
         return boardImage;
     }
 
-    public void saveGameStatus(Application app) {
+    public void saveGameStatus(Application app, Level levelSelected) {
         if (totalPieces.getValue() == null) {
             totalPieces.setValue(new ArrayList<Piece>());
         }
-        gameSessionRepository.saveGameSession(totalPieces.getValue(), playedTime, level, app);
+        currentGame = gameSessionRepository.saveGameSession(
+                totalPieces.getValue(),
+                playedTime,
+                levelSelected,
+                app);
     }
 
     public void updateGameStatus() {
-        gameSessionRepository.updateGameSession(totalPieces.getValue(), playedTime);
+        gameSessionRepository.updateGameSession(currentGame, playedTime);
     }
 
     public Bitmap getCurrentBitmap() {

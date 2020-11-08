@@ -2,14 +2,13 @@ package com.example.puzzlegame.ui.gallery;
 
 import android.content.res.AssetManager;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.repository.GalleryRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GalleryViewModel extends ViewModel {
@@ -23,21 +22,15 @@ public class GalleryViewModel extends ViewModel {
     }
 
     public void updateGallery(AssetManager assetManager) {
-        if (galleryRepository.updateImageList(assetManager, true)) {
-            ArrayList<Image> tempImage = new ArrayList<>();
-            List<Image> images = (galleryRepository.getImageList());
-            for (Image img : images){
-                tempImage.add(Utils.createImage(assetManager, img.getImgName()));
-            }
-            galleryImages.postValue(tempImage);
-        }
-    }
-
-    public MutableLiveData<List<Image>> getImageListObserver() {
-        return galleryImages;
+        galleryRepository.updateImageList(assetManager, true);
+        galleryImages.postValue(galleryRepository.getImageList());
     }
 
     public void setImageToBackground(Image image) {
         galleryRepository.setCurrentBGBitmap(image);
+    }
+
+    public LiveData<List<Image>> getImageList() {
+        return galleryImages;
     }
 }

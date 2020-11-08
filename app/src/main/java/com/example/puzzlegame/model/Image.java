@@ -2,20 +2,16 @@ package com.example.puzzlegame.model;
 
 import android.graphics.Bitmap;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Fts4;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-@Fts4
+
 @Entity(tableName = "images")
 public class Image implements Serializable {
-
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowid")
-    public Integer id;
+    public int imgId;
     public String imgName;
     public int photoWidth;
     public int photoHeight;

@@ -7,6 +7,7 @@ import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.Piece;
+import com.example.puzzlegame.model.PieceData;
 import com.example.puzzlegame.model.User;
 
 import java.util.List;
@@ -22,8 +23,10 @@ public class GameSessionRepository {
     private GameSessionRepository() {
         gameAppRepository = GameAppRepository.getGameAppRepository();
         galleryRepository = GalleryRepository.getGalleryRepository();
+        // en previsión de recuperar partida
         user = gameAppRepository.getCurrentUser();
         gameSession = user.getCurrentGameSession();
+        //
     }
 
     public static GameSessionRepository getGameSessionRepository() {
@@ -38,24 +41,36 @@ public class GameSessionRepository {
      * @param pieces
      * @param playedTime
      * @param level
+     * @return
      */
-    public void saveGameSession(List<Piece> pieces, long playedTime, Level level, Application app) {
+    public GameSession saveGameSession(final List<Piece> pieces, final long playedTime, Level level, Application app) {
         db = Utils.getDB(app);
-        GameSession currentGame = new GameSession(level);
-        currentGame.setBgImage(galleryRepository.getCurrentImage());
-
-        user.setCurrentGameSession(currentGame);
-        user.getCurrentGameSession().setPieces(pieces);
-        user.getCurrentGameSession().setEndTime(playedTime);
+        if (gameSession == null) {
+            gameSession = new GameSession(level);
+            gameSession.setUser(user);
+            gameSession.setPieces(pieces);
+            gameSession.setBgImage(galleryRepository.getCurrentImage());
+        }
+            new Thread(new Runnable() {
+            @Override
+            public void run() {
+                updateGameSession(gameSession, playedTime);
+            }
+        }).start();
+        return gameSession;
     }
 
     /**
      * Update pieces location and current last played time.
-     * @param pieces
      * @param playedTime
      */
-    public void updateGameSession(List<Piece> pieces, long playedTime) {
-        user.getCurrentGameSession().setPieces(pieces);
-        user.getCurrentGameSession().setEndTime(playedTime);
+    public void updateGameSession(GameSession currentGame, long playedTime) {
+        List<PieceData> dataPieces = Utils.piecesToData(currentGame.getPieces());
+        currentGame.pieceDataList = dataPieces;
+        currentGame.setEndTime(playedTime);
+        long gsId = db.gameSessionDAO().insertGameSession(currentGame);
+        currentGame.setId(gsId);
+        user.setCurrentGameSession(currentGame);
+        db.userDAO().updateUser(user);
     }
 }

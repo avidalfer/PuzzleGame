@@ -53,15 +53,21 @@ public class GalleryRepository {
      * @param refreshing
      * @return
      */
-    public boolean updateImageList(AssetManager am, boolean refreshing) {
+    public boolean updateImageList(AssetManager am, final boolean refreshing) {
         // if is not the first time checking img folder vs db and not refreshing data -> exit
         if (assetManager != null && !refreshing) {
             return false;
         }
+
+        final List<Image> temp = new ArrayList<>();
         assetManager = am;
+
         new Thread(new Runnable() {
             @Override
             public void run() {
+                int thumbW = 120;
+                int thumbH = 120;
+
                 try {
                     String[] list = assetManager.list("img");
                     for (String src : list) {
@@ -69,9 +75,20 @@ public class GalleryRepository {
                         if (img == null) {
                             img = Utils.createImage(assetManager, src);
                             db.galleryDAO().insertImages(img);
+                        } else {
+                            if (img.getBitmap() == null) {
+                                img.setBitmap(Utils.getScaledBitmap(assetManager, img.getImgName(), img.getPhotoWidth(), thumbW, img.getPhotoHeight(), thumbH));
+                                if (refreshing) {
+                                    temp.add(img);
+                                } else {
+                                    imageList.add(img);
+                                }
+                            }
                         }
                     }
-                    imageList = db.galleryDAO().getAllImages();
+                    if (temp.size() > 0) {
+                        imageList = temp;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

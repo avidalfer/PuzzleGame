@@ -1,18 +1,15 @@
 package com.example.puzzlegame.model;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Fts4;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Fts4
 @Entity(tableName = "levels")
 public class Level implements Serializable {
-    @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "rowid")
-    public Integer id;
+
+    @PrimaryKey
+    public Integer levelId;
     public String name;
     public int numPieces;
     public int numCols;
@@ -21,7 +18,7 @@ public class Level implements Serializable {
     public Level(){}
 
     public Level(int id, String name, int cols, int rows) {
-        this.id = id;
+        this.levelId = id;
         this.name = name;
         this.numCols = cols;
         this.numRows = rows;
@@ -29,11 +26,11 @@ public class Level implements Serializable {
     }
 
     public int getId(){
-        return id;
+        return levelId;
     }
 
     public void setId(int id){
-        this.id = id;
+        this.levelId = id;
     }
 
     public String getName() {

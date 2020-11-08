@@ -4,27 +4,29 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.example.puzzlegame.model.User;
 
 import java.util.List;
 
 @Dao
-public interface UserDAO {
+public abstract class UserDAO {
     @Query("SELECT * FROM users")
-    List<User> getAll();
+    public abstract List<User> getAll();
 
     @Query("SELECT * FROM users WHERE rowid IN (:userIds)")
-    List<User> loadAllByIds(int[] userIds);
+    public abstract List<User> loadAllByIds(int[] userIds);
 
     @Query("SELECT * FROM users WHERE name LIKE :name")
-    User findByName(String name);
+    public abstract User findByName(String name);
 
-    @Transaction
     @Insert
-    void insertAll(User... Users);
+    public abstract void insertUser(User... Users);
 
     @Delete
-    void delete(User User);
+    public abstract void delete(User User);
+
+    @Update
+    public abstract void updateUser(User user);
 }

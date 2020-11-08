@@ -15,6 +15,7 @@ import com.example.puzzlegame.model.PieceData;
 import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.model.interfaces.DAO.AppDAO;
 import com.example.puzzlegame.model.interfaces.DAO.GalleryDAO;
+import com.example.puzzlegame.model.interfaces.DAO.GameSessionDAO;
 import com.example.puzzlegame.model.interfaces.DAO.LevelDAO;
 import com.example.puzzlegame.model.interfaces.DAO.UserDAO;
 
@@ -27,7 +28,7 @@ import com.example.puzzlegame.model.interfaces.DAO.UserDAO;
         PieceData.class,
         GameApp.class,
         LocalHallOfFame.class,
-}, version = 2)
+}, version = 8)
 public abstract class AppDataBase extends RoomDatabase {
     protected static AppDataBase appDataBase;
 
@@ -50,4 +51,6 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract GalleryDAO galleryDAO();
 
     public abstract AppDAO gameAppDAO();
+
+    public abstract GameSessionDAO gameSessionDAO();
 }

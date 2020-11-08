@@ -12,16 +12,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.model.Image;
+import com.example.puzzlegame.model.Piece;
+import com.example.puzzlegame.model.PieceData;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains static functions for common activities behaviour (i.e. create a common toolbar)
  */
 public class Utils {
 
-    public static AppDataBase getDB(Application application){
+    public static AppDataBase getDB(Application application) {
         return AppDataBase.getAppDataBase(application);
     }
 
@@ -105,5 +109,45 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static List<PieceData> piecesToData(List<Piece> piecesList) {
+        List<PieceData> newListData = new ArrayList<>();
+        for (Piece piece : piecesList) {
+            PieceData pd = toPieceData(piece);
+            newListData.add(pd);
+        }
+        return newListData;
+    }
+
+    public static List<Piece> dataToPieces(List<PieceData> pieceDataList) {
+        List<Piece> newListPieces = new ArrayList<>();
+        for (PieceData Data : pieceDataList) {
+            Piece p = toPiece(Data);
+            newListPieces.add(p);
+        }
+        return newListPieces;
+    }
+
+    private static Piece toPiece(PieceData data) {
+        return new Piece(
+                data.pieceId,
+                data.xCoord,
+                data.yCoord,
+                data.pieceHeight,
+                data.pieceWidth,
+                data.canMove,
+                data.getContext());
+    }
+
+    private static PieceData toPieceData(Piece piece) {
+        return new PieceData(
+                piece.id,
+                piece.xCoord,
+                piece.yCoord,
+                piece.pieceHeight,
+                piece.pieceWidth,
+                piece.canMove,
+                piece.getContext());
     }
 }

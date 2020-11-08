@@ -1,50 +1,66 @@
 package com.example.puzzlegame.model;
 
-import androidx.room.ColumnInfo;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
-import androidx.room.Fts4;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.puzzlegame.basededatos.typeconverters.GameSessionConverter;
 import com.example.puzzlegame.basededatos.typeconverters.LanguageConverter;
-import com.example.puzzlegame.basededatos.typeconverters.LevelConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-@Fts4
-@Entity(tableName = "users")
-@TypeConverters({LanguageConverter.class,
-        LevelConverter.class,
-        GameSessionConverter.class})
+
+@Entity(tableName = "users", foreignKeys = {
+        @ForeignKey(entity = Level.class,
+        parentColumns = "levelId",
+        childColumns = "userLvlId",
+        onDelete = ForeignKey.RESTRICT,
+        onUpdate = ForeignKey.CASCADE),
+
+        @ForeignKey(entity = GameSession.class,
+        parentColumns = "gameId",
+        childColumns = "currentGameId",
+        onDelete = ForeignKey.SET_NULL,
+        onUpdate = ForeignKey.CASCADE)
+})
 public class User implements Serializable {
 
-    @PrimaryKey (autoGenerate = true)
-    @ColumnInfo(name = "rowid")
-    public Integer id;
+    @PrimaryKey(autoGenerate = true)
+    public Integer userId;
     public String name;
-    public Level userLvl;
-    public Language language;
-    public GameSession currentGameSession;
+    public int userLvlId;
+    @Nullable
+    public Long currentGameId;
+    @Ignore
+    private Level userLvl;
+    @TypeConverters(LanguageConverter.class)
+    private Language language;
+    @Ignore
+    private GameSession currentGameSession;
+    @Ignore
     public List<GameSession> playedGames;
 
-    public User(){}
+    public User() {
+    }
 
     public User(int idUser, String name, Language language) {
-        this.id = idUser;
+        this.userId = idUser;
         this.name = name;
-        this.userLvl = new Level (1, "FÁCIL", 3, 4);
+        this.userLvl = new Level(1, "FÁCIL", 3, 4);
+        this.userLvlId = userLvl.getId();
         this.language = language;
         this.playedGames = new ArrayList<>();
     }
 
     public int getIdUser() {
-        return id;
+        return userId;
     }
 
     public void setIdUser(int idUser) {
-        this.id = idUser;
+        this.userId = idUser;
     }
 
     public String getName() {
@@ -61,6 +77,7 @@ public class User implements Serializable {
 
     public void setUserLvl(Level userLvl) {
         this.userLvl = userLvl;
+        this.userLvlId = userLvl.getId();
     }
 
     public Language getLanguage() {
@@ -77,6 +94,7 @@ public class User implements Serializable {
 
     public void setCurrentGameSession(GameSession currentGameSession) {
         this.currentGameSession = currentGameSession;
+        currentGameId = currentGameSession.getId();
     }
 
     public List<GameSession> getPlayedGames() {

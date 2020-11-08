@@ -1,23 +1,39 @@
 package com.example.puzzlegame.model.interfaces.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.TypeConverters;
+import androidx.room.Transaction;
 
-import com.example.puzzlegame.basededatos.typeconverters.UserConverter;
 import com.example.puzzlegame.model.GameApp;
 import com.example.puzzlegame.model.User;
 
 @Dao
-@TypeConverters({UserConverter.class})
-public interface AppDAO {
+public abstract class AppDAO {
 
-    @Query("select user from Gameapp")
-    User getCurrentUser();
+    @Transaction
+    public User getCurrentUser(){
+        return getUserById(getCurrentUserId());
+    }
 
-    @Query("update GameApp set user = :user")
-    void setCurrentUser(User user);
+    @Query("select * from users where userId = :currentUserId")
+    protected abstract User getUserById(int currentUserId);
 
-    @Query("select * from GameApp")
-    GameApp getGameAppData();
+    @Query("select currentUser from gameApp")
+    public abstract int getCurrentUserId();
+
+    @Transaction
+    public void setCurrentUser(User user){
+        int userId = user.getIdUser();
+        updateUser(userId);
+    }
+
+    @Query("update gameApp set currentUser = :userId")
+    public abstract void updateUser(int userId);
+
+    @Query("select * from gameApp")
+    public abstract GameApp getGameAppData();
+
+    @Insert
+    public abstract void setGameAppData(GameApp gameApp);
 }
