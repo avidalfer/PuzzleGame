@@ -32,13 +32,15 @@
         app:layout_constraintTop_toBottomOf="@+id/main_actionbar" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="287dp"
-        android:layout_height="275dp"
-        android:layout_marginTop="52dp"
+        android:id="@+id/imageView3"
+        android:layout_width="384dp"
+        android:layout_height="311dp"
+        android:layout_marginTop="76dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_actionbar"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/racoon01" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
