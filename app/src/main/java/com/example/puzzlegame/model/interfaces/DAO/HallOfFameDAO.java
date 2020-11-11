@@ -11,18 +11,13 @@ import java.util.List;
 
 @Dao
 public interface HallOfFameDAO {
-    @Query("SELECT * FROM Score")
+    @Query("SELECT * FROM scores")
     List<Score> getAll();
 
-    @Query("SELECT * FROM Score WHERE id IN (:id)")
-    List<Score> loadAllByIds(int[] id);
+    @Insert(entity = Score.class)
+    void insertScore(Score... Scores);
 
-    @Query("SELECT * FROM Score WHERE winnerName LIKE :winnerName")
-    Score findByName(String winnerName);
-
-    @Insert
-    void insertAll(Score... Scores);
-
-    @Delete
+    @Delete(entity = Score.class)
     void delete(Score Score);
+
 }

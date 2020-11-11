@@ -1,6 +1,7 @@
 package com.example.puzzlegame.model.interfaces.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -48,4 +49,7 @@ public abstract class GameSessionDAO {
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     protected abstract long insert(GameSession gameSession);
+
+    @Delete
+    public abstract void deleteGame(GameSession currentGame);
 }

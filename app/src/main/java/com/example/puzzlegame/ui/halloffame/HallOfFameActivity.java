@@ -1,21 +1,16 @@
 package com.example.puzzlegame.ui.halloffame;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
-import com.example.puzzlegame.common.Utils;
-import com.example.puzzlegame.model.LocalHallOfFame;
 import com.example.puzzlegame.model.Score;
-import com.example.puzzlegame.model.interfaces.HallOfFame;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
 import java.util.List;
@@ -26,7 +21,7 @@ public class HallOfFameActivity extends BaseActivity {
     private Button btnNewGame;
     private ImageButton changeHoF;
 
-    private long scoreId;
+    private Score score;
 
     private RecyclerView winnersListView;
 
@@ -37,15 +32,16 @@ public class HallOfFameActivity extends BaseActivity {
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-
-        Intent intent = getIntent();
-        scoreId = intent.getExtras().getLong("scoreId");
+        init();
         setViews();
     }
 
-    private void setViews() {
+    private void init() {
+        hallOfFameViewModel = new ViewModelProvider(this).get(HallOfFameViewModel.class);
+        hallOfFameViewModel.init(getApplication());
+    }
 
-        hallOfFameViewModel = new HallOfFameViewModel();
+    private void setViews() {
         btnNewGame = findViewById(R.id.btn_newGame);
         winnersListView = findViewById(R.id.winners_list);
         winnersListView.setHasFixedSize(false);
@@ -57,14 +53,8 @@ public class HallOfFameActivity extends BaseActivity {
     }
 
     private void showLocalHallOfFame() {
-        HallOfFame hof = (LocalHallOfFame) hallOfFameViewModel.getLocalHof().getValue();
-        assert hof != null;
-        List<Score> scores = hallOfFameViewModel.getScores(hof).getValue();
-        RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> adapter = new HallOfFameAdapter(scores, scoreId);
+        List<Score> scores = hallOfFameViewModel.getScores();
+        RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> adapter = new HallOfFameAdapter(scores);
         winnersListView.setAdapter(adapter);
-    }
-
-    private LiveData<HallOfFame> getLocalHof(){
-        return hallOfFameViewModel.getLocalHof();
     }
 }

@@ -1,27 +1,29 @@
 package com.example.puzzlegame.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.example.puzzlegame.common.Utils;
+import com.example.puzzlegame.model.interfaces.HallOfFame;
 
-@Entity
-public class Score {
+import java.io.Serializable;
 
-    @PrimaryKey (autoGenerate = true)
-    private Long id;
+@Entity(tableName = "scores")
+public class Score implements Serializable {
 
-    @ColumnInfo (name = "winnerName")
-    private String winnerName;
+    @PrimaryKey(autoGenerate = true)
+    public Long id;
+    public String winnerName;
+    public long winTime;
+    public long hofId;
+    @Ignore
+    public LocalHallOfFame hallOfFame;
 
-    @Embedded
-    private GameSession gameSession;
+    public Score(){}
 
-    public Score(GameSession gameSession, String name) {
-        this.winnerName = name;
-        this.gameSession = gameSession;
+    public Score(String winnerName, long winTime) {
+        this.winnerName = winnerName;
+        this.winTime = winTime;
     }
 
     public void setId(Long id) {
@@ -32,23 +34,20 @@ public class Score {
         return id;
     }
 
-    public Long getTimeToFinish() {
-        return gameSession.getEndTime();
-    }
-
-    public String getFormattedTimeToFinish() {
-        return Utils.FormatTime(getTimeToFinish());
-    }
-
     public String getWinnerName() {
         return winnerName;
     }
 
-    public int getLevelId(){
-        return gameSession.getGameLvl().getId();
+    public long getWinTime() {
+        return winTime;
     }
 
-    public String getLevelName() {
-        return gameSession.getGameLvl().getName();
+    public HallOfFame getHallOfFame() {
+        return hallOfFame;
+    }
+
+    public void setHallOfFame(LocalHallOfFame hof) {
+        this.hallOfFame = LocalHallOfFame.getLocalHallOfFame();
+        this.hofId = hallOfFame.getId();
     }
 }

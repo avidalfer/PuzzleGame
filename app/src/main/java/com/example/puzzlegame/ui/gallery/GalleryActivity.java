@@ -28,6 +28,7 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
     private List<Image> galleryImages = new ArrayList<>();
     private RecyclerView galleryGridView;
     private RecyclerView.Adapter<GalleryAdapter.MyViewHolder> adapter;
+    AssetManager assetManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,10 +43,9 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
     }
 
     private void init() {
-        AssetManager assetManager = getAssets();
+        assetManager = getAssets();
 
         galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
-        galleryViewModel.updateGallery(assetManager);
 
         galleryImages = galleryViewModel.getImageList().getValue();
 
@@ -61,6 +61,8 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
         galleryGridView.setLayoutManager(layoutManager);
 
         setListeners();
+
+        galleryViewModel.updateGallery(assetManager);
     }
 
     private void setListeners() {

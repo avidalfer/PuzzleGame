@@ -38,14 +38,9 @@ public class MainActivity extends BaseActivity {
      * run on background
      */
     private void init() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
                 galleryRepository = GalleryRepository.initGalleryRepository(getApplication());
                 gameAppRepository = GameAppRepository.initGameAppRepository(getApplication());
                 gameAppRepository.getCurrentUser(); // pendiente de actualización con la implementación del login
-            }
-        }).start();
     }
 
     private void setViews() {

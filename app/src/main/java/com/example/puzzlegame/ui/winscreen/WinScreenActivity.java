@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
-import com.example.puzzlegame.model.GameSession;
+import com.example.puzzlegame.model.Score;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
 
@@ -19,8 +19,7 @@ public class WinScreenActivity extends BaseActivity {
 
     private WinScreenViewModel winScreenViewModel;
     private EditText winnerNameTxt;
-    private long gameSessionId;
-    private GameSession gameSession;
+    private long winTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,31 +29,30 @@ public class WinScreenActivity extends BaseActivity {
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
 
+        Intent intent = getIntent();
+        winTime = intent.getExtras().getLong("winTime");
+
+        //check if has arrived from game finished properly
+        if (winTime == 0) {
+            finish();
+        }
+        init();
         setViews();
         setListeners();
     }
 
-    private void getDBData(){
-        gameSession = winScreenViewModel.getGameSessionById(gameSessionId);
+    private void init() {
+        winScreenViewModel = new ViewModelProvider(this).get(WinScreenViewModel.class);
+        winScreenViewModel.initRepo(getApplication());
     }
 
     private void setViews() {
-        winScreenViewModel = new ViewModelProvider(this).get(WinScreenViewModel.class);
 
         TextView winTimeTxt = findViewById(R.id.time);
-        winTimeTxt.setText(getWinnerTime());
+        winTimeTxt.setText(winScreenViewModel.getFormattedTime(winTime));
 
         winnerNameTxt = findViewById(R.id.win_editText_name);
-        winnerNameTxt.setText(getUserName());
-
-        }
-
-    private String getUserName() {
-        return winScreenViewModel.getUserName();
-    }
-
-    private String getWinnerTime() {
-        return winScreenViewModel.getFormattedTime();
+        winnerNameTxt.setText(winScreenViewModel.getUserName());
     }
 
     private void setListeners() {
@@ -64,10 +62,10 @@ public class WinScreenActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String winnerName = winnerNameTxt.getText().toString();
-                long scoreId = winScreenViewModel.addNewScore(winnerName, gameSession);
-                Intent intent = new Intent(getApplicationContext(), HallOfFameActivity.class);
-                intent.putExtra("scoreId", scoreId);
-                startActivity(intent);
+                Score score = new Score(winnerName, winTime);
+                winScreenViewModel.saveScore(score);
+
+                startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
             }
         });
     }

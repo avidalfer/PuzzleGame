@@ -105,8 +105,10 @@ public class PuzzleGameActivity extends BaseActivity {
             @Override
             public void onChanged(Boolean gameOver) {
                 if (gameOver) {
-                    pauseTimer();
-                    startActivity(new Intent(getApplicationContext(), WinScreenActivity.class));
+                    long winTime = pauseTimer();
+                    Intent intent = new Intent(getApplicationContext(), WinScreenActivity.class);
+                    intent.putExtra("winTime", winTime);
+                    startActivity(intent);
                 }
             }
         };
@@ -123,10 +125,11 @@ public class PuzzleGameActivity extends BaseActivity {
         pauseTimer();
     }
 
-    public static void pauseTimer(){
+    public static long pauseTimer(){
         timer.stop();
         long playedTime = SystemClock.elapsedRealtime() - timer.getBase();
         gameViewModel.setCurrentTime(playedTime);
+        return playedTime;
     }
 
     public static void resumeTimer(){

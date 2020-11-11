@@ -83,6 +83,7 @@ public class PuzzleGameViewModel extends ViewModel {
                 return;
             }
         }
+        gameSessionRepository.gameOver();
         gameOver.setValue(true);
     }
 

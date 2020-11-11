@@ -15,14 +15,19 @@ public class LocalHallOfFame implements HallOfFame {
     private static final LocalHallOfFame localHallOfFame = new LocalHallOfFame();
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowid")
-    public int id;
+    @ColumnInfo(name = "lHofId")
+    public long id;
     @Ignore
     public final ArrayList<Score> localScores = new ArrayList<>();
 
+    public LocalHallOfFame(){}
 
     public static LocalHallOfFame getLocalHallOfFame() {
         return localHallOfFame;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void addScore(Score score) {
@@ -31,15 +36,6 @@ public class LocalHallOfFame implements HallOfFame {
 
     public Score getScoreAtPosition(int position) {
         return localScores.get(position);
-    }
-
-    public Score getScoreByName(String name) {
-        for (Score sc : localScores) {
-            if (sc.getWinnerName().compareTo(name) == 0) {
-                return sc;
-            }
-        }
-        return null;
     }
 
     public ArrayList<Score> getLocalScores() {
@@ -54,5 +50,10 @@ public class LocalHallOfFame implements HallOfFame {
     private int removeScore(Score score) {
         localScores.remove(score);
         return localScores.size();
+    }
+
+    @Override
+    public void setId(long insertHof) {
+        this.id = insertHof;
     }
 }

@@ -1,8 +1,5 @@
 package com.example.puzzlegame.ui.halloffame;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,21 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
-import com.example.puzzlegame.model.LocalHallOfFame;
+import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Score;
-import com.example.puzzlegame.model.interfaces.HallOfFame;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HallOfFameAdapter extends RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> {
 
     private final List<Score> scores;
-    private final long scoreId;
 
     @NonNull
     @Override
@@ -35,7 +28,11 @@ public class HallOfFameAdapter extends RecyclerView.Adapter<HallOfFameAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bind(scores.get(position), position, scoreId);
+        boolean last = false;
+        if (position == scores.size()){
+            last = true;
+        }
+        holder.bind(scores.get(position), position, last);
     }
 
     @Override
@@ -43,9 +40,8 @@ public class HallOfFameAdapter extends RecyclerView.Adapter<HallOfFameAdapter.My
         return scores.size();
     }
 
-    public HallOfFameAdapter(List<Score> scores, long scoreId) {
+    public HallOfFameAdapter(List<Score> scores) {
         this.scores = scores;
-        this.scoreId = scoreId;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -63,10 +59,10 @@ public class HallOfFameAdapter extends RecyclerView.Adapter<HallOfFameAdapter.My
         }
 
         //set values and custom appearance for each row of the adapter views
-        public void bind(Score score, int position, long scoreId) {
+        public void bind(Score score, int position, boolean last) {
             //check if the score being checked is the very last played game
             //if it is, and is API compatible, highlight the row with color background
-            if (score.getId().equals(scoreId)){
+            if (last){
                 ViewGroup currentRowScore = (ViewGroup) positionTView.getParent();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     currentRowScore.setBackgroundColor(currentRowScore.getContext().getColor(R.color.colorPrimary));
@@ -88,7 +84,7 @@ public class HallOfFameAdapter extends RecyclerView.Adapter<HallOfFameAdapter.My
             }
             positionTView.setText(String.valueOf(position+1));
             nameTView.setText(score.getWinnerName());
-            scoreTView.setText(score.getFormattedTimeToFinish());
+            scoreTView.setText(Utils.FormatTime(score.getWinTime()));
         }
     }
 }

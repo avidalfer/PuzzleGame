@@ -1,55 +1,42 @@
 package com.example.puzzlegame.ui.winscreen;
 
+import android.app.Application;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
-import com.example.puzzlegame.model.Language;
+import com.example.puzzlegame.model.Score;
 import com.example.puzzlegame.model.User;
+import com.example.puzzlegame.repository.GameAppRepository;
+import com.example.puzzlegame.repository.HallOfFameRepository;
 
 public class WinScreenViewModel extends ViewModel {
 
     private GameSession session;
     private int sessionId;
     private User user;
+    private HallOfFameRepository hallOfFameRepository;
+    private GameAppRepository gameAppRepository;
 
     public WinScreenViewModel() {
-        //HallOfFame localHoF = GameApp.getLocalHof();
-        user = new User(1, "Pepe", Language.ES);
-        //user se saca del login.
-        //User user = GameApp.getUser(id);
-        //sessionId se pasa por intent desde la activity de juego
-        //session = user.getCurrentSession(sessionId);
+        gameAppRepository = GameAppRepository.getGameAppRepository();
+        hallOfFameRepository = HallOfFameRepository.getInstance();
     }
 
-    public Long getWinnerTime() {
-        //localHof.getSession().getResolvedTime();
-        return 70000L;
-    }
-
-    public void setWinnerName(String winnerName) {
-        //localHoF.getSession().setWinnerName(winnerName);
-    }
-
-    public String getFormattedTime() {
-        long winTime = getWinnerTime();
+    public String getFormattedTime(long winTime) {
         return Utils.FormatTime(winTime);
     }
 
     public String getUserName() {
-        if (user != null) {
-            return user.getName();
-        }
-        return "";
+        return gameAppRepository.getCurrentUser().getName();
     }
 
-    public GameSession getGameSessionById(long gameSessionId) {
-        //find in repository gameSession by id
-        return new GameSession();
+    public void saveScore(Score score) {
+        hallOfFameRepository.saveScore(score);
     }
 
-    public long addNewScore(String winnerName, GameSession gameSession) {
-        //call LocalHallOfFame repository to create new score with this params.
-        return 0;
+    public void initRepo(Application application) {
+        hallOfFameRepository.initHallOfFameRepository(application);
     }
 }

@@ -24,7 +24,7 @@ public class SelectLevelActivity extends BaseActivity {
     private CompoundButton[] switches;
     private Button btnPlay;
 
-    //true when switches change automatically ; false when the change is caused by user action
+    //true when switches change automatically / false when the change is caused by user action
     private boolean automaticChanged;
 
     @Override
@@ -121,7 +121,7 @@ public class SelectLevelActivity extends BaseActivity {
         }
 
         setRestLevelsOff(switchBtn);
-        levelViewModel.setGameLevelById(lvl);
+        levelViewModel.setGameLevelById(lvl-1); //because arrays begin at 0 index
     }
 
     private void setLvl(int levelId) {
