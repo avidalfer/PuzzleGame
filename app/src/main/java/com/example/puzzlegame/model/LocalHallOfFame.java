@@ -9,7 +9,7 @@ import com.example.puzzlegame.model.interfaces.HallOfFame;
 
 import java.util.ArrayList;
 
-@Entity (tableName = "scores")
+@Entity (tableName = "score")
 public class LocalHallOfFame implements HallOfFame {
 
     private static final LocalHallOfFame localHallOfFame = new LocalHallOfFame();

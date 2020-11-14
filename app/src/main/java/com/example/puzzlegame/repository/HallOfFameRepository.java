@@ -1,17 +1,19 @@
 package com.example.puzzlegame.repository;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.Score;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HallOfFameRepository {
     private static HallOfFameRepository hallOfFameRepository;
     private AppDataBase db;
-    private ArrayList<Score> scores;
+    private List<Score>scores;
 
     public static HallOfFameRepository getInstance(){
         if (hallOfFameRepository == null) {
@@ -22,25 +24,39 @@ public class HallOfFameRepository {
 
     public void initHallOfFameRepository(Application application){
         db = Utils.getDB(application);
+        scores = new ArrayList<>();
+        try{
+            Thread t = new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    scores =  db.hallOfFameDAO().getAll();
+                }
+            });
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            Log.d("HallOfFame", "initHallOfFameRepository: Error on getScores" + e);
+        }
     }
 
     //from winScreen
     public void saveScore(final Score score) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                db.hallOfFameDAO().insertScore(score);
-            }
-        }).start();
+        try {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    db.hallOfFameDAO().insertScore(score);
+                }
+            });
+            t.start();
+            t.join();
+        } catch (Exception e){
+            Log.d("HallOfFame", "saveScore: failed" + e);
+        }
+
     }
 
-    public ArrayList<Score> getScores(){
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                 scores = (ArrayList<Score>) db.hallOfFameDAO().getAll();
-            }
-        }).start();
+    public List<Score> getScores(){
         return scores;
     }
 }

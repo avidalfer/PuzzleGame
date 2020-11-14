@@ -2,13 +2,14 @@ package com.example.puzzlegame.model;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.example.puzzlegame.model.interfaces.HallOfFame;
 
 import java.io.Serializable;
 
-@Entity(tableName = "scores")
+@Entity(tableName = "scores", indices = @Index(value = "winTime"))
 public class Score implements Serializable {
 
     @PrimaryKey(autoGenerate = true)

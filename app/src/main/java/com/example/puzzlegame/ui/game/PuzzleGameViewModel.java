@@ -60,7 +60,7 @@ public class PuzzleGameViewModel extends ViewModel {
     }
 
     public void updateGameStatus() {
-        gameSessionRepository.updateGameSession(currentGame, playedTime);
+        gameSessionRepository.updateGameSession(playedTime);
     }
 
     public Bitmap getCurrentBitmap() {

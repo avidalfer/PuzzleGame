@@ -1,9 +1,12 @@
 package com.example.puzzlegame.ui.halloffame;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.model.Score;
+import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
 import java.util.List;
@@ -34,6 +38,7 @@ public class HallOfFameActivity extends BaseActivity {
         CommonBarMethods.configDefaultAppBar(this);
         init();
         setViews();
+        hallOfFameViewModel.getScores();
     }
 
     private void init() {
@@ -49,12 +54,20 @@ public class HallOfFameActivity extends BaseActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         winnersListView.setLayoutManager(layoutManager);
 
-        showLocalHallOfFame();
-    }
+        final Observer<List<Score>> scoreObserver = new Observer<List<Score>>() {
+            @Override
+            public void onChanged(List<Score> scores) {
+                RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> adapter = new HallOfFameAdapter(scores);
+                winnersListView.setAdapter(adapter);
+            }
+        };
+        hallOfFameViewModel.getScoresObservable().observe(this, scoreObserver);
 
-    private void showLocalHallOfFame() {
-        List<Score> scores = hallOfFameViewModel.getScores();
-        RecyclerView.Adapter<HallOfFameAdapter.MyViewHolder> adapter = new HallOfFameAdapter(scores);
-        winnersListView.setAdapter(adapter);
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SelectLevelActivity.class));
+            }
+        });
     }
 }

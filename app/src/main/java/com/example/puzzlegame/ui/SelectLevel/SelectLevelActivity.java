@@ -83,11 +83,11 @@ public class SelectLevelActivity extends BaseActivity {
     private void allowsAsUserLevel() {
         TextView levelTxt;
         switch (levelViewModel.getGameLevel().getId()) {
-            case 3:
+            case 2:
                 switches[2].setEnabled(true);
                 levelTxt = findViewById(R.id.hard_txt);
                 levelTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-            case 2:
+            case 1:
                 switches[1].setEnabled(true);
                 levelTxt = findViewById(R.id.medium_txt);
                 levelTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -101,39 +101,39 @@ public class SelectLevelActivity extends BaseActivity {
 
     @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})
     private void setLvl(CompoundButton switchBtn) {
-        int lvl = 1;
+        int lvl = 0;
         switch (switchBtn.getId()) {
             case R.id.easy_switch:
                 btnPlay.setText(getText(R.string.easy_btn));
                 btnPlay.setBackground(getDrawable(R.drawable.btn_purple_states));
-                lvl = 1;
+                lvl = 0;
                 break;
             case R.id.medium_switch:
                 btnPlay.setText(getText(R.string.medium_btn));
                 btnPlay.setBackground(getDrawable(R.drawable.btn_orange_states));
-                lvl = 2;
+                lvl = 1;
                 break;
             case R.id.hard_switch:
                 btnPlay.setText(getText(R.string.hard_btn));
                 btnPlay.setBackground(getDrawable(R.drawable.btn_red_states));
-                lvl = 3;
+                lvl = 2;
                 break;
         }
 
         setRestLevelsOff(switchBtn);
-        levelViewModel.setGameLevelById(lvl-1); //because arrays begin at 0 index
+        levelViewModel.setGameLevelById(lvl); //because arrays begin at 0 index
     }
 
     private void setLvl(int levelId) {
         switch (levelId) {
             case 1:
-                easySW.setChecked(true);
-                break;
-            case 2:
                 mediumSW.setChecked(true);
                 break;
-            case 3:
+            case 2:
                 hardSW.setChecked(true);
+                break;
+            default:
+                easySW.setChecked(true);
                 break;
         }
     }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Dao
 public interface HallOfFameDAO {
-    @Query("SELECT * FROM scores")
+    @Query("SELECT * FROM scores order by winTime")
     List<Score> getAll();
 
     @Insert(entity = Score.class)

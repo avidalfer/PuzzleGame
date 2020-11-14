@@ -27,7 +27,7 @@ public class GameAppRepository {
     private LocalHallOfFame hof;
 
     private GameAppRepository(final Application application) {
-       db = Utils.getDB(application);
+        db = Utils.getDB(application);
         initGameAppData();
         updateLevels();
         updateGallery(application);
@@ -65,33 +65,41 @@ public class GameAppRepository {
         if (currentUser != null) {
             return currentUser;
         }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                currentUser = db.gameAppDAO().getCurrentUser();
-                if (currentUser == null) {
-                    currentUser = new User(1, "Racoon", Language.ES);
-                    setCurrentUser(currentUser);
+        try {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    currentUser = db.gameAppDAO().getCurrentUser();
+                    if (currentUser == null) {
+                        currentUser = new User(1, "Racoon", Language.ES);
+                        setCurrentUser(currentUser);
+                    }
+                        Level lvl = db.levelDAO().getLevel(currentUser.userLvlId);
+                        currentUser.setUserLvl(lvl);
                 }
-            }
-        }).start();
+            });
+            t.start();
+            t.join();
+        } catch (Exception e) {
+            currentUser = new User(1, "Racoon", Language.ES);
+        }
         return currentUser;
     }
 
     public void updateLevels() {
-       new Thread(new Runnable() {
-           @Override
-           public void run() {
-               levels = db.levelDAO().getAll();
-               if (levels.size() == 0) {
-                   Level easy = new Level(1, "Easy", 3, 4);
-                   Level intermediate = new Level(2, "Intermediate", 4, 6);
-                   Level hard = new Level(3, "Hard", 6, 10);
-                   levels.addAll(Arrays.asList(easy, intermediate, hard));
-                   db.levelDAO().insertLevels(easy, intermediate, hard);
-               }
-           }
-       }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                levels = db.levelDAO().getAll();
+                if (levels.size() == 0) {
+                    Level easy = new Level(0, "Easy", 3, 4);
+                    Level intermediate = new Level(1, "Intermediate", 4, 6);
+                    Level hard = new Level(2, "Hard", 6, 10);
+                    levels.addAll(Arrays.asList(easy, intermediate, hard));
+                    db.levelDAO().insertLevels(easy, intermediate, hard);
+                }
+            }
+        }).start();
     }
 
     /**

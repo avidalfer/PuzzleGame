@@ -51,7 +51,7 @@ public class GameSessionRepository {
             gameSession.setPieces(pieces);
             gameSession.setBgImage(galleryRepository.getCurrentImage());
         }
-            updateGameSession(gameSession, playedTime);
+            updateGameSession(playedTime);
         return gameSession;
     }
 
@@ -59,31 +59,33 @@ public class GameSessionRepository {
      * Update pieces location and current last played time.
      * @param playedTime
      */
-    public void updateGameSession(final GameSession currentGame, final long playedTime) {
+    public void updateGameSession(final long playedTime) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<PieceData> dataPieces = Utils.piecesToData(currentGame.getPieces());
-                currentGame.pieceDataList = dataPieces;
-                currentGame.setEndTime(playedTime);
-                long gsId = db.gameSessionDAO().insertGameSession(currentGame);
-                currentGame.setId(gsId);
-                user.setCurrentGameSession(currentGame);
-                db.userDAO().updateUser(user);
+                List<PieceData> dataPieces = Utils.piecesToData(gameSession.getPieces());
+                gameSession.pieceDataList = dataPieces;
+                gameSession.setEndTime(playedTime);
+                long gsId = db.gameSessionDAO().insertGameSession(gameSession);
+                gameSession.setId(gsId);
+                user.setCurrentGameSession(gameSession);
             }
         }).start();
     }
 
     public void gameOver(){
         increaseUserLvl();
-        deleteCurrentGame();
     }
 
     private void increaseUserLvl() {
-        List<Level> levels = gameAppRepository.getLevels(); // (+1) because level array begins at 0
+        List<Level> levels = gameAppRepository.getLevels();
         int userLvlid = user.getUserLvl().getId();
-        if (userLvlid < (levels.size() + 1)) {
-            gameAppRepository.setUserLevel(userLvlid+1);
+        if (gameSession.gameLvlId == userLvlid) {
+            if (userLvlid < (levels.size())) {
+                {
+                    gameAppRepository.setUserLevel(userLvlid+1);
+                }
+            }
         }
     }
 

@@ -49,8 +49,8 @@ public class User implements Serializable {
     public User(int idUser, String name, Language language) {
         this.userId = idUser;
         this.name = name;
-        this.userLvl = new Level(1, "FÁCIL", 3, 4);
-        this.userLvlId = userLvl.getId();
+        this.userLvl = null;
+        this.userLvlId = 0;
         this.language = language;
         this.playedGames = new ArrayList<>();
     }

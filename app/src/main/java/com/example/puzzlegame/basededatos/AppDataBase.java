@@ -29,7 +29,7 @@ import com.example.puzzlegame.model.interfaces.DAO.UserDAO;
         PieceData.class,
         GameApp.class,
         Score.class
-}, version = 10)
+}, version = 14)
 public abstract class AppDataBase extends RoomDatabase {
     protected static AppDataBase appDataBase;
 

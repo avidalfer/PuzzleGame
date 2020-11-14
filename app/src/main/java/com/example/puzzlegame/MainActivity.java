@@ -8,9 +8,10 @@ import android.widget.Button;
 import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.repository.GalleryRepository;
 import com.example.puzzlegame.repository.GameAppRepository;
+import com.example.puzzlegame.repository.HallOfFameRepository;
 import com.example.puzzlegame.ui.SelectGame.SelectGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
-import com.example.puzzlegame.ui.winscreen.WinScreenActivity;
+import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -18,6 +19,7 @@ public class MainActivity extends BaseActivity {
     Button[] buttons;
     GameAppRepository gameAppRepository;
     GalleryRepository galleryRepository;
+    HallOfFameRepository hallOfFameRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,9 @@ public class MainActivity extends BaseActivity {
     private void init() {
                 galleryRepository = GalleryRepository.initGalleryRepository(getApplication());
                 gameAppRepository = GameAppRepository.initGameAppRepository(getApplication());
+                hallOfFameRepository = HallOfFameRepository.getInstance();
                 gameAppRepository.getCurrentUser(); // pendiente de actualización con la implementación del login
+                hallOfFameRepository.initHallOfFameRepository(getApplication());
     }
 
     private void setViews() {
@@ -52,16 +56,14 @@ public class MainActivity extends BaseActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SelectGameActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(v.getContext(), SelectGameActivity.class));
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), WinScreenActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
             }
         });
 
