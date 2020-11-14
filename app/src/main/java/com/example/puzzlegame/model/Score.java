@@ -9,7 +9,7 @@ import com.example.puzzlegame.model.interfaces.HallOfFame;
 
 import java.io.Serializable;
 
-@Entity(tableName = "scores", indices = @Index(value = "winTime"))
+@Entity(tableName = "scores", indices = @Index(value = "id"))
 public class Score implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
