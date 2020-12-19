@@ -4,7 +4,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
+import android.animation.ObjectAnimator;
 import com.example.puzzlegame.model.Piece;
 
 import static java.lang.Math.abs;
@@ -27,7 +27,6 @@ public class OnPieceListener implements View.OnTouchListener {
         float x = motionEvent.getRawX();
         float y = motionEvent.getRawY();
         final double tolerance = sqrt(pow(view.getWidth(), 2) + pow(view.getHeight(), 2)) / 10;
-
         Piece piece = (Piece) view;
         if (!piece.canMove()) {
             return true;
@@ -39,6 +38,7 @@ public class OnPieceListener implements View.OnTouchListener {
                 xDelta = x - lParams.leftMargin;
                 yDelta = y - lParams.topMargin;
                 piece.bringToFront();
+
                 break;
             case MotionEvent.ACTION_MOVE:
                 lParams.leftMargin = (int) (x - xDelta);
@@ -54,6 +54,9 @@ public class OnPieceListener implements View.OnTouchListener {
                     piece.setLayoutParams(lParams);
                     piece.canMove(false);
                     sendViewToBack(piece);
+                    ObjectAnimator animation = ObjectAnimator.ofFloat(piece, "rotation", 5,-5,5,-5,5,-5,0);
+                    animation.setDuration(300);
+                    animation.start();
                     gameViewModel.checkGameOver();
                 }
                 break;
