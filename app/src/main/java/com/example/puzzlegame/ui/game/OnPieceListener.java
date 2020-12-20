@@ -38,6 +38,9 @@ public class OnPieceListener implements View.OnTouchListener {
                 xDelta = x - lParams.leftMargin;
                 yDelta = y - lParams.topMargin;
                 piece.bringToFront();
+                ObjectAnimator animation1 = ObjectAnimator.ofFloat(piece, "alpha", 0.5f,1f);
+                animation1.setDuration(600);
+                animation1.start();
 
                 break;
             case MotionEvent.ACTION_MOVE:
