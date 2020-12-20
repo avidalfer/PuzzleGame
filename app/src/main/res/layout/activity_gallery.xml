@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
         android:layout_marginEnd="56dp"
-        android:onClick="onImageFromCameraClick"
+        android:onClick="setListeners"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gridGallery"
         app:srcCompat="@android:drawable/ic_menu_camera" />
