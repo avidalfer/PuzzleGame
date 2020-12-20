@@ -1,6 +1,7 @@
 package com.example.puzzlegame.model;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -61,5 +62,8 @@ public class Image implements Serializable {
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public void setImageURI(Uri path) {
     }
 }
