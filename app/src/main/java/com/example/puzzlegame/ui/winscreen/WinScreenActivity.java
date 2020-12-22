@@ -1,12 +1,15 @@
 package com.example.puzzlegame.ui.winscreen;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
@@ -14,6 +17,9 @@ import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.model.Score;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class WinScreenActivity extends BaseActivity {
 
@@ -32,6 +38,10 @@ public class WinScreenActivity extends BaseActivity {
         Intent intent = getIntent();
         winTime = intent.getExtras().getLong("winTime");
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            addScoreToCalendar(winTime);
+        }
+
         //check if has arrived from game finished properly
         if (winTime == 0) {
             finish();
@@ -39,6 +49,20 @@ public class WinScreenActivity extends BaseActivity {
         init();
         setViews();
         setListeners();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void addScoreToCalendar(long winTime) {
+        Date beginTime = Calendar.getInstance().getTime();
+        Date endTime = Calendar.getInstance().getTime();
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime)
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, Calendar.getInstance().getTime())
+                .putExtra(CalendarContract.Events.TITLE, "New Score" + winTime)
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Score String")
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, "Mapuzzled");
+        startActivity(intent);
     }
 
     private void init() {

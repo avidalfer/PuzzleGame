@@ -10,7 +10,6 @@
         android:roundIcon="@drawable/racoon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AddScoreToCalendar"></activity>
         <activity android:name=".Help" />
         <activity android:name=".ui.halloffame.HallOfFameActivity" />
         <activity android:name=".ui.winscreen.WinScreenActivity" />
