@@ -1,10 +1,14 @@
 package com.example.puzzlegame.ui.game;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.animation.ObjectAnimator;
+
+import com.example.puzzlegame.R;
 import com.example.puzzlegame.model.Piece;
 
 import static java.lang.Math.abs;
@@ -16,6 +20,7 @@ public class OnPieceListener implements View.OnTouchListener {
     private float xDelta;
     private float yDelta;
     private PuzzleGameViewModel gameViewModel;
+    private Context context;
 
     public OnPieceListener(PuzzleGameViewModel gameViewModel) {
         this.gameViewModel = gameViewModel;
