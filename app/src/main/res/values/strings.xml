@@ -59,4 +59,9 @@
     <string name="no_prev_games">No hay partidas empezadas</string>
     <string name="jugar">Jugar</string>
     <string name="hall_of_fame">Hall of Fame</string>
+    <string name="record">¡Has batido un nuevo record!</string>
+    <string name="notiftxt">\"Vas en cabeza con un record de \"</string>
+    <string name="channel_description">canal de notificaciones de mappuzzled</string>
+    <string name="idcanal">canal_mapuzzled_01</string>
+    <string name="canalname">canal de notificaciones mapuzzled</string>
 </resources>

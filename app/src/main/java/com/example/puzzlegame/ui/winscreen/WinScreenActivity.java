@@ -7,6 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+<<<<<<< Updated upstream
+=======
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+>>>>>>> Stashed changes
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
@@ -63,10 +68,17 @@ public class WinScreenActivity extends BaseActivity {
             public void onClick(View v) {
                 String winnerName = winnerNameTxt.getText().toString();
                 Score score = new Score(winnerName, winTime);
+                if (winScreenViewModel.isRecord(score)) {
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),getString(R.string.idcanal) )
+                            .setSmallIcon(R.drawable.copa_icon)
+                            .setContentTitle(getString(R.string.record))
+                            .setContentText(getString(R.string.notiftxt))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                };
                 winScreenViewModel.saveScore(score);
-
                 startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
             }
         });
+
     }
 }

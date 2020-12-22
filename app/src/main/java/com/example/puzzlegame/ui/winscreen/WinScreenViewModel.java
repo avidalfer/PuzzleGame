@@ -11,6 +11,8 @@ import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.repository.GameAppRepository;
 import com.example.puzzlegame.repository.HallOfFameRepository;
 
+import java.util.List;
+
 public class WinScreenViewModel extends ViewModel {
 
     private GameSession session;
@@ -39,4 +41,15 @@ public class WinScreenViewModel extends ViewModel {
     public void initRepo(Application application) {
         hallOfFameRepository.initHallOfFameRepository(application);
     }
+
+    public Boolean isRecord(Score score) {
+        List<Score> savedScores = hallOfFameRepository.getScores();
+        for (Score sc: savedScores) {
+            if (sc.winTime > score.winTime) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
+
