@@ -45,7 +45,7 @@
 
     <!-- adjust menu texts -->
 
-    <string name="on_off">On/Off</string>
+    <string name="on_off">Off/On</string>
     <string name="cargar_canci_n_propia">Cargar canción propia</string>
     <string name="mapuzzled_official_theme">Mapuzzled Official Theme</string>
     <string name="pista">Pista</string>
@@ -59,9 +59,10 @@
     <string name="no_prev_games">No hay partidas empezadas</string>
     <string name="jugar">Jugar</string>
     <string name="hall_of_fame">Hall of Fame</string>
-    <string name="record">¡Has batido un nuevo record!</string>
-    <string name="notiftxt">\"Vas en cabeza con un record de \"</string>
-    <string name="channel_description">canal de notificaciones de mappuzzled</string>
-    <string name="idcanal">canal_mapuzzled_01</string>
-    <string name="canalname">canal de notificaciones mapuzzled</string>
+    <string name="No_AudioFile">No audio File : No se han encontrado archivos de audio</string>
+    <string name="Error_File">Track Failure: Error al intentar cargar el archivo</string>
+    <string name="play_music">Disfruta de tu canción!</string>
+    <string name="record">Has logrado superar el mejor tiempo con : </string>
+    <string name="gallery_button">Imagen de galería</string>
+    <string name="not_available">Funcionalidad no permitida en este dispositivo</string>
 </resources>

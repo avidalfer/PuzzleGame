@@ -1,13 +1,15 @@
-package com.example.puzzlegame.ui.SelectLevel;
+package com.example.puzzlegame.ui.selectLevel;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.puzzlegame.R;
@@ -59,7 +61,9 @@ public class SelectLevelActivity extends BaseActivity {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (!automaticChanged) {
                         if (isChecked) {
-                            setLvl(buttonView);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                setLvl(buttonView);
+                            }
                         }
                         buttonView.setChecked(true);
                         automaticChanged = false;
@@ -99,6 +103,7 @@ public class SelectLevelActivity extends BaseActivity {
         setLvl(levelId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint({"NonConstantResourceId", "UseCompatLoadingForDrawables"})
     private void setLvl(CompoundButton switchBtn) {
         int lvl = 0;

@@ -15,6 +15,8 @@ import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Piece;
 import com.example.puzzlegame.model.PieceData;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -92,11 +94,57 @@ public class Utils {
         }
     }
 
+    public static Image createImage(String src) {
+
+        int thumbW = 120;
+        int thumbH = 120;
+
+        try {
+            File imageFile = new File(src);
+            FileInputStream is = new FileInputStream(imageFile);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
+            int photoW = bmOptions.outWidth;
+            int photoH = bmOptions.outHeight;
+
+            is.reset();
+
+            Bitmap b = getScaledBitmap(src, photoW, thumbW, photoH, thumbH);
+
+            return new Image(src, b, photoW, photoH);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static Bitmap getScaledBitmap(AssetManager assetManager, String src, int originalW, int targetW, int originalH, int targetH) {
 
         InputStream is = null;
         try {
             is = assetManager.open("img/" + src);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+
+            bmOptions.inJustDecodeBounds = false;
+            bmOptions.inSampleSize = Math.min(originalW / targetW, originalH / targetH);
+
+            Bitmap b = BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
+
+            return b;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Bitmap getScaledBitmap(String src, int originalW, int targetW, int originalH, int targetH) {
+
+        InputStream is = null;
+        try {
+            File imageFile = new File(src);
+            is = new FileInputStream(src);
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 
             bmOptions.inJustDecodeBounds = false;

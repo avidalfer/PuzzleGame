@@ -51,5 +51,5 @@ public class WinScreenViewModel extends ViewModel {
         }
         return true;
     }
-}
 
+}

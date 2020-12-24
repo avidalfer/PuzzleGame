@@ -121,4 +121,9 @@ public class GalleryRepository {
     public Image getCurrentImage() {
         return currentImage;
     }
+
+    public void addImage(Image img) {
+        imageList.add(img);
+        gallery.addImage(img);
+    }
 }

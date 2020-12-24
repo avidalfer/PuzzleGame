@@ -6,7 +6,7 @@
     app:startDestination="@id/scrollingFragmentOptions">
     <fragment
         android:id="@+id/scrollingFragmentOptions"
-        android:name="com.example.puzzlegame.ScrollingFragmentOptions"
+        android:name="com.example.puzzlegame.ui.settings.SettingsFragment"
         android:label="fragment_scrolling_options"
         tools:layout="@layout/fragment_scrolling_options" />
     <fragment

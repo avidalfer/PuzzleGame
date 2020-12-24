@@ -14,9 +14,9 @@ public class GameApp implements Serializable {
 
     @PrimaryKey
     public Integer appId;
+
     @ColumnInfo(name = "currentUser")
     public int currentUserId;
-    public int songId;
 
     //from musicSettings.class see https://developer.android.com/reference/androidx/room/Insert
     public boolean playingMusic;

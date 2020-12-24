@@ -1,34 +1,30 @@
 package com.example.puzzlegame.model;
 
-import androidx.room.ColumnInfo;
+import android.net.Uri;
+
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class Song {
-    @ColumnInfo (name = "source")
-    private String source;
+    @PrimaryKey
+    public Integer songId;
 
-    @ColumnInfo(name = "name")
-    private String name;
+    public Uri source;
 
-    public Song(String source, String name) {
+    public String name;
+
+    public Song(Uri source, String title) {
         this.source = source;
-        this.name = name;
+        this.name = title;
     }
+    public Song() { }
 
-    public String getSource() {
+    public Uri getSource() {
         return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

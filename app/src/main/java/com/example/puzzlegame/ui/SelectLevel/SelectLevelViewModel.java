@@ -1,4 +1,4 @@
-package com.example.puzzlegame.ui.SelectLevel;
+package com.example.puzzlegame.ui.selectLevel;
 
 import androidx.lifecycle.ViewModel;
 

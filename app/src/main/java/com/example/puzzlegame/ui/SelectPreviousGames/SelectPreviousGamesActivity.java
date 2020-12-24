@@ -1,4 +1,4 @@
-package com.example.puzzlegame.ui.SelectPreviousGames;
+package com.example.puzzlegame.ui.selectPreviousGames;
 
 import android.content.Intent;
 import android.os.Bundle;

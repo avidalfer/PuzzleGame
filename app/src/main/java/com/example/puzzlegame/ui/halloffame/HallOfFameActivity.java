@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.model.Score;
-import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
+import com.example.puzzlegame.ui.selectLevel.SelectLevelActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 
 import java.util.List;
@@ -22,7 +22,6 @@ import java.util.List;
 public class HallOfFameActivity extends BaseActivity {
 
     private HallOfFameViewModel hallOfFameViewModel;
-    private Button btnNewGame;
     private ImageButton changeHoF;
 
     private Score score;
@@ -47,9 +46,8 @@ public class HallOfFameActivity extends BaseActivity {
     }
 
     private void setViews() {
-        btnNewGame = findViewById(R.id.btn_newGame);
+        Button btnNewGame = findViewById(R.id.btn_newGame);
         winnersListView = findViewById(R.id.winners_list);
-        winnersListView.setHasFixedSize(false);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         winnersListView.setLayoutManager(layoutManager);

@@ -21,7 +21,6 @@ public class HallOfFameViewModel extends ViewModel {
     public void init(Application application) {
         hallOfFameRepository = new HallOfFameRepository();
         hallOfFameRepository.initHallOfFameRepository(application);
-
     }
 
     public void getScores(){

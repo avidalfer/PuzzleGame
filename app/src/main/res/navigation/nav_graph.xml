@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/scrollingFragmentOptions2"
-        android:name="com.example.puzzlegame.ScrollingFragmentOptions"
+        android:name="com.example.puzzlegame.ui.settings.SettingsFragment"
         android:label="fragment_scrolling_options"
         tools:layout="@layout/fragment_scrolling_options" />
 </navigation>
