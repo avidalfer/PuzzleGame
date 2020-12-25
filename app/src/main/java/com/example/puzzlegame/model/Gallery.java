@@ -5,9 +5,10 @@ import androidx.room.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.google.firebase.FirebaseApp;
 @Entity
 public class Gallery {
-
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     private static Gallery gallery;
     @ColumnInfo(name = "imageList")
     private List<Image> imageList;

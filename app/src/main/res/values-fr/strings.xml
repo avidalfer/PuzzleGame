@@ -1,0 +1,65 @@
+<resources>
+    <string name="action_help">Aidez-moi</string>
+    <string name="continue_game">Continuer vers Puzzle</string>
+    <string name="new_game">Nouveau puzzle</string>
+    <string name="previous_games">Puzzles précédents</string>
+    <string name="selector_welcome_msg">Bienvenue </string>
+    <string name="selector_selectGameOptions">Qu est-ce que je veux faire aujourd hui?</string>
+    <string name="select_level">Sélectionnez le difficulté</string>
+    <string name="easy_txt">Facile : 3 x 3</string>
+    <string name="play_game">Jouez</string>
+    <string name="medium_txt">Intermédiaire : 4 x 4</string>
+    <string name="hard_txt">Dur : 5 x 5</string>
+    <string name="easy_btn">FACILE</string>
+    <string name="medium_btn">INTERMÉDIAIRE</string>
+    <string name="hard_btn">DUR</string>
+    <string name="title_activity_navigation_drawer">navigationDrawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_win">WinActivity</string>
+    <string name="congrats">Félicitations !!!</string>
+    <string name="win_msg">Heureux de gagner!</string>
+    <string name="your_time_is">Vous l avez résolu en</string>
+    <string name="toHoF">Voyez Hall of Fame</string>
+    <string name="store_score">Sauvegardez le score</string>
+    <string name="name_label">Inserter votre nom</string>
+    <string name="local_HoF_txt">LOCAL HALL OF FAME</string>
+
+    <!-- help menu texts -->
+
+    <string name="user">Raton</string>
+    <string name="volumen">Volume </string>
+    <string name="musica">Music</string>
+    <string name="reiniciar">Réinitialiser</string>
+    <string name="desea_reiniciar">Souhaitez-vous réinitialiser le jeu?</string>
+    <string name="si_reiniciar">Ouais, quelque chose s est passé</string>
+    <string name="no_reiniciar">Nah, je suis heureux ici</string>
+    <string name="help">Aidez moi</string>
+    <string name="select">Selectioner</string>
+    <string name="creditos">Crédits</string>
+    <string name="salir">Sortie</string>
+
+    <!-- adjust menu texts -->
+
+    <string name="on_off">On/Off</string>
+    <string name="cargar_canci_n_propia">Charger sa propre chanson</string>
+    <string name="mapuzzled_official_theme">Mapuzzled Official Theme</string>
+    <string name="pista">Ensemble</string>
+    <string name="Cancion_guardada_1">Chanson enregistrée 1</string>
+    <string name="Cancion_guardada_2">Chanson enregistrée song 2</string>
+    <string name="Cancion_guardada_3">Chanson enregistrée song 3</string>
+    <string name="saber_mas">Savoir plus</string>
+    <string name="detalle_creditos">Mapuzzled 2020-21 created by A3</string>
+    <string name="desea_salir">Voulez-vous sortir?</string>
+    <string name="app_name">Mapuzzle</string>
+    <string name="no_prev_games">Aucun jeu n a commencé</string>
+    <string name="jugar">Jouez</string>
+    <string name="hall_of_fame">Hall of Fame</string>
+    <string name="Login">Login</string>
+    <string name="default_web_client_id">922953858685-sgi520cj3932lnktvjf0gco11tmngqr3.apps.googleusercontent.com</string>
+    <string name="logOut">Sign Out</string>
+</resources>
