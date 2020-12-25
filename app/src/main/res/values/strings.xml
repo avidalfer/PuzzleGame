@@ -59,4 +59,7 @@
     <string name="no_prev_games">No hay partidas empezadas</string>
     <string name="jugar">Jugar</string>
     <string name="hall_of_fame">Hall of Fame</string>
+    <string name="Login">Login</string>
+    <string name="default_web_client_id">922953858685-sgi520cj3932lnktvjf0gco11tmngqr3.apps.googleusercontent.com</string>
+    <string name="logOut">Sign Out</string>
 </resources>

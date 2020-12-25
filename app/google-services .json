@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "922953858685",
+    "project_id": "mapuzzled",
+    "storage_bucket": "mapuzzled.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922953858685:android:1754efd40652c1b86b7b14",
+        "android_client_info": {
+          "package_name": "com.example.puzzlegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922953858685-sgi520cj3932lnktvjf0gco11tmngqr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkTv0G-I3Ld0-WV30Yn0x3jsN-qzsodGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922953858685-sgi520cj3932lnktvjf0gco11tmngqr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
