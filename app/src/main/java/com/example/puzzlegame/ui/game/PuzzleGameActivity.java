@@ -1,5 +1,6 @@
 package com.example.puzzlegame.ui.game;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class PuzzleGameActivity extends BaseActivity {
     private ImageView imageView;
     private static Chronometer timer;
     private Bitmap bitmapBG;
+    private Activity act;
     private static final String TAG = "PuzzleGameActivity";
 
     @Override
@@ -41,6 +43,7 @@ public class PuzzleGameActivity extends BaseActivity {
         Intent intent = getIntent();
         levelSelected = (Level) intent.getSerializableExtra("gameLevel");
         gameViewModel = new ViewModelProvider(this).get(PuzzleGameViewModel.class);
+        act = this;
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
@@ -86,7 +89,7 @@ public class PuzzleGameActivity extends BaseActivity {
         final Observer<List<Piece>> piecesObserver = new Observer<List<Piece>>() {
             @Override
             public void onChanged(List<Piece> pieces) {
-                OnPieceListener onPieceTouchListener = new OnPieceListener(gameViewModel);
+                OnPieceListener onPieceTouchListener = new OnPieceListener(act, gameViewModel);
                 for (Piece piece : pieces) {
                     piece.setOnTouchListener(onPieceTouchListener);
                     puzzleLayout.addView(piece);

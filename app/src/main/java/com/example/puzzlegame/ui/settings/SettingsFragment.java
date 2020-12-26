@@ -1,9 +1,8 @@
 package com.example.puzzlegame.ui.settings;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,8 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,6 +50,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
     private List<Song> cachedPlayList;
     private boolean soundActive;
     private MusicSettings settings;
+    private AudioManager manager;
 
 
     @Override
@@ -90,8 +88,10 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
     }
 
     private void setViews() {
-        onOffMusic = _fragmentItems.findViewById(R.id.switchONOFF);
+        manager = (AudioManager) baseActivity.getSystemService(Context.AUDIO_SERVICE);
         volumeBar = _fragmentItems.findViewById(R.id.volBar);
+        volumeBar.setMax(manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        onOffMusic = _fragmentItems.findViewById(R.id.switchONOFF);
         rb_officialThemeMusic = _fragmentItems.findViewById(R.id.rb_officialTheme);
         rb_newSong = _fragmentItems.findViewById(R.id.rb_ownerMusic);
 
@@ -102,6 +102,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
 
     public void setListeners() {
         btn_musicSelection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
                 if (rb_officialThemeMusic.isChecked()) {
