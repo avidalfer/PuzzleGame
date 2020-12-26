@@ -14,7 +14,7 @@ public interface GalleryDAO {
     @Query("SELECT * FROM Images")
     List<Image> getAllImages();
 
-    @Query("SELECT * FROM Images WHERE imgName = :name")
+    @Query("SELECT * FROM Images WHERE imgName = :name limit 1")
     Image findByName(String name);
 
     @Insert

@@ -1,4 +1,4 @@
-package com.example.puzzlegame.ui.SelectGame;
+package com.example.puzzlegame.ui.selectGame;
 
 import android.app.Application;
 

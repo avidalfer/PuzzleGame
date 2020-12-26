@@ -1,4 +1,4 @@
-package com.example.puzzlegame.ui.SelectPreviousGames;
+package com.example.puzzlegame.ui.selectPreviousGames;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

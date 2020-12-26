@@ -5,21 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.puzzlegame.common.CommonBarMethods;
-import com.example.puzzlegame.repository.GalleryRepository;
-import com.example.puzzlegame.repository.GameAppRepository;
-import com.example.puzzlegame.repository.HallOfFameRepository;
-import com.example.puzzlegame.ui.SelectGame.SelectGameActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
+import com.example.puzzlegame.ui.selectGame.SelectGameActivity;
+import com.example.puzzlegame.ui.settings.SettingsViewModel;
 
 public class MainActivity extends BaseActivity {
 
     Button btn1, btn2;
-    Button[] buttons;
-    GameAppRepository gameAppRepository;
-    GalleryRepository galleryRepository;
-    HallOfFameRepository hallOfFameRepository;
+    SettingsViewModel settingsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,25 +25,17 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-
-        init();
+        settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
+        settingsViewModel.initRepository(this);
+        super.begin();
         setViews();
         setListeners();
-
     }
 
     /**
      * getDataBase instance for the first time and set all levels if they are not set
      * run on background
      */
-    private void init() {
-                galleryRepository = GalleryRepository.initGalleryRepository(getApplication());
-                gameAppRepository = GameAppRepository.initGameAppRepository(getApplication());
-                hallOfFameRepository = HallOfFameRepository.getInstance();
-                gameAppRepository.getCurrentUser(); // pendiente de actualización con la implementación del login
-                hallOfFameRepository.initHallOfFameRepository(getApplication());
-    }
-
     private void setViews() {
         btn1 = findViewById(R.id.button1);
         btn2 = findViewById(R.id.button2);
@@ -66,6 +55,5 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
             }
         });
-
     }
 }

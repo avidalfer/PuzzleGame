@@ -1,6 +1,6 @@
 package com.example.puzzlegame.ui.winscreen;
 
-import android.app.Application;
+import android.app.Activity;
 
 import androidx.lifecycle.ViewModel;
 
@@ -10,6 +10,8 @@ import com.example.puzzlegame.model.Score;
 import com.example.puzzlegame.model.User;
 import com.example.puzzlegame.repository.GameAppRepository;
 import com.example.puzzlegame.repository.HallOfFameRepository;
+
+import java.util.List;
 
 public class WinScreenViewModel extends ViewModel {
 
@@ -36,7 +38,18 @@ public class WinScreenViewModel extends ViewModel {
         hallOfFameRepository.saveScore(score);
     }
 
-    public void initRepo(Application application) {
-        hallOfFameRepository.initHallOfFameRepository(application);
+    public void initRepo(Activity act) {
+        hallOfFameRepository.initHallOfFameRepository(act);
     }
+
+    public Boolean isRecord(Score score) {
+        List<Score> savedScores = hallOfFameRepository.getScores();
+        for (Score sc: savedScores) {
+            if (sc.winTime > score.winTime) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

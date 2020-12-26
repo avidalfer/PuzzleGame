@@ -54,7 +54,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         public MyViewHolder(@NonNull View view, OnImageListener onImageListener) {
             super(view);
-            this.imageView = (ImageView) view.findViewById(R.id.gridImageview);
+            this.imageView = view.findViewById(R.id.gridImageview);
             this.onImageListener = onImageListener;
 
             imageView.setOnClickListener(this);

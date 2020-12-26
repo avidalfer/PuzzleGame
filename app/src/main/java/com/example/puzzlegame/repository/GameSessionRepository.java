@@ -7,18 +7,17 @@ import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.Level;
 import com.example.puzzlegame.model.Piece;
-import com.example.puzzlegame.model.PieceData;
 import com.example.puzzlegame.model.User;
 
 import java.util.List;
 
 public class GameSessionRepository {
     private static GameSessionRepository gameSessionRepository;
-    private GameAppRepository gameAppRepository;
-    private GalleryRepository galleryRepository;
+    private final GameAppRepository gameAppRepository;
+    private final GalleryRepository galleryRepository;
     private GameSession gameSession;
     private AppDataBase db;
-    private User user;
+    private final User user;
 
     private GameSessionRepository() {
         gameAppRepository = GameAppRepository.getGameAppRepository();
@@ -63,8 +62,7 @@ public class GameSessionRepository {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<PieceData> dataPieces = Utils.piecesToData(gameSession.getPieces());
-                gameSession.pieceDataList = dataPieces;
+                gameSession.pieceDataList = Utils.piecesToData(gameSession.getPieces());
                 gameSession.setEndTime(playedTime);
                 long gsId = db.gameSessionDAO().insertGameSession(gameSession);
                 gameSession.setId(gsId);

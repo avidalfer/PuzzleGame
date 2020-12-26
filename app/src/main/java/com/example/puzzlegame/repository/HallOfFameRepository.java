@@ -1,6 +1,6 @@
 package com.example.puzzlegame.repository;
 
-import android.app.Application;
+import android.app.Activity;
 import android.util.Log;
 
 import com.example.puzzlegame.basededatos.AppDataBase;
@@ -22,8 +22,8 @@ public class HallOfFameRepository {
         return hallOfFameRepository;
     }
 
-    public void initHallOfFameRepository(Application application){
-        db = Utils.getDB(application);
+    public void initHallOfFameRepository(Activity act){
+        db = Utils.getDB(act.getApplication());
         scores = new ArrayList<>();
         try{
             Thread t = new Thread(new Runnable(){
@@ -53,7 +53,6 @@ public class HallOfFameRepository {
         } catch (Exception e){
             Log.d("HallOfFame", "saveScore: failed" + e);
         }
-
     }
 
     public List<Score> getScores(){

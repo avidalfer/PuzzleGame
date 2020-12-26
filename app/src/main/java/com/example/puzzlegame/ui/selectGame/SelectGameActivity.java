@@ -1,4 +1,4 @@
-package com.example.puzzlegame.ui.SelectGame;
+package com.example.puzzlegame.ui.selectGame;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,8 @@ import com.example.puzzlegame.R;
 import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.model.GameSession;
 import com.example.puzzlegame.model.User;
-import com.example.puzzlegame.ui.SelectLevel.SelectLevelActivity;
-import com.example.puzzlegame.ui.SelectPreviousGames.SelectPreviousGamesActivity;
+import com.example.puzzlegame.ui.selectLevel.SelectLevelActivity;
+import com.example.puzzlegame.ui.selectPreviousGames.SelectPreviousGamesActivity;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.game.PuzzleGameActivity;
 

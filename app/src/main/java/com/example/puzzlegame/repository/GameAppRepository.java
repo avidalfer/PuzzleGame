@@ -1,7 +1,6 @@
 package com.example.puzzlegame.repository;
 
-import android.app.Application;
-import android.content.res.AssetManager;
+import android.app.Activity;
 
 import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.common.Utils;
@@ -26,11 +25,11 @@ public class GameAppRepository {
     private List<Level> levels;
     private LocalHallOfFame hof;
 
-    private GameAppRepository(final Application application) {
-        db = Utils.getDB(application);
+    private GameAppRepository(Activity act) {
+        db = Utils.getDB(act.getApplication());
         initGameAppData();
         updateLevels();
-        updateGallery(application);
+        updateGallery(act);
     }
 
     private void initGameAppData() {
@@ -44,15 +43,14 @@ public class GameAppRepository {
         }).start();
     }
 
-    private void updateGallery(Application app) {
-        AssetManager am = app.getAssets();
+    private void updateGallery(Activity act) {
         GalleryRepository galleryRepository = GalleryRepository.getGalleryRepository();
-        galleryRepository.updateImageList(am, false);
+        galleryRepository.updateImageList(act, false);
     }
 
-    public static GameAppRepository initGameAppRepository(Application application) {
+    public static GameAppRepository initGameAppRepository(Activity act) {
         if (gameAppRepository == null) {
-            gameAppRepository = new GameAppRepository(application);
+            gameAppRepository = new GameAppRepository(act);
         }
         return gameAppRepository;
     }
@@ -75,7 +73,10 @@ public class GameAppRepository {
                         setCurrentUser(currentUser);
                     }
                         Level lvl = db.levelDAO().getLevel(currentUser.userLvlId);
-                        currentUser.setUserLvl(lvl);
+                        if (lvl == null) {
+                            lvl = new Level(1, "Easy", 3, 4);
+                        }
+                    currentUser.setUserLvl(lvl);
                 }
             });
             t.start();

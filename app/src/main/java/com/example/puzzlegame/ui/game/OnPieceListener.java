@@ -69,7 +69,6 @@ public class OnPieceListener implements View.OnTouchListener {
                 }
                 break;
         }
-
         return true;
     }
 

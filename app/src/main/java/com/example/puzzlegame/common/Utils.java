@@ -1,21 +1,25 @@
 package com.example.puzzlegame.common;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
-import android.content.res.AssetManager;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-import android.view.View;
-import android.widget.Toast;
+import android.net.Uri;
+import android.os.Build;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.puzzlegame.basededatos.AppDataBase;
 import com.example.puzzlegame.model.Image;
 import com.example.puzzlegame.model.Piece;
 import com.example.puzzlegame.model.PieceData;
+import com.example.puzzlegame.ui.gallery.GalleryActivity;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +29,13 @@ import java.util.List;
  */
 public class Utils {
 
+    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private static final int REQUEST_READ_EXTERNAL_STORAGE = 2;
+    private static final int REQUEST_OPEN_DOC_EXTERNAL_STORAGE = 3;
+    private static final int REQUEST_CAPTURE_IMAGE = 4;
+
     public static AppDataBase getDB(Application application) {
         return AppDataBase.getAppDataBase(application);
-    }
-
-    public static void TODO(AppCompatActivity activity, View view) {
-        Toast toast = Toast.makeText(activity.getApplicationContext(), "Function not implemented yet", Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     public static String FormatTime(long winTime) {
@@ -66,37 +70,31 @@ public class Utils {
         return formatedTime;
     }
 
-    public static Image createImage(AssetManager assetManager, String src) {
+    public static Image createImage(InputStream is, Uri uri) {
 
         int thumbW = 120;
         int thumbH = 120;
 
         try {
-            InputStream is = assetManager.open("img/" + src);
-
+            String src = uri.toString();
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             bmOptions.inJustDecodeBounds = true;
             BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
             int photoW = bmOptions.outWidth;
             int photoH = bmOptions.outHeight;
 
-            is.reset();
-
-            Bitmap b = getScaledBitmap(assetManager, src, photoW, thumbW, photoH, thumbH);
+            Bitmap b = getScaledBitmap(is, photoW, thumbW, photoH, thumbH);
 
             return new Image(src, b, photoW, photoH);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static Bitmap getScaledBitmap(AssetManager assetManager, String src, int originalW, int targetW, int originalH, int targetH) {
-
-        InputStream is = null;
+    public static Bitmap getScaledBitmap(InputStream is, int originalW, int targetW, int originalH, int targetH) {
         try {
-            is = assetManager.open("img/" + src);
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 
             bmOptions.inJustDecodeBounds = false;
@@ -105,7 +103,7 @@ public class Utils {
             Bitmap b = BitmapFactory.decodeStream(is, new Rect(-1, -1, -1, -1), bmOptions);
 
             return b;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -149,5 +147,40 @@ public class Utils {
                 piece.pieceWidth,
                 piece.canMove,
                 piece.getContext());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static boolean hasWritePermission(Activity act) {
+        act.onRequestPermissionsResult(REQUEST_WRITE_EXTERNAL_STORAGE, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, new int[]{PackageManager.PERMISSION_GRANTED});
+        if (ContextCompat.checkSelfPermission(act, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.shouldShowRequestPermissionRationale(act, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(act, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL_STORAGE);
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static boolean hasReadPermission(Activity act) {
+        act.onRequestPermissionsResult(REQUEST_READ_EXTERNAL_STORAGE, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, new int[]{PackageManager.PERMISSION_GRANTED});
+        if (ContextCompat.checkSelfPermission(act, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.shouldShowRequestPermissionRationale(act, Manifest.permission.READ_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(act, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_EXTERNAL_STORAGE);
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hasCameraPermission(GalleryActivity act) {
+        act.onRequestPermissionsResult(REQUEST_CAPTURE_IMAGE, new String[]{Manifest.permission.CAMERA}, new int[]{PackageManager.PERMISSION_GRANTED});
+        if (ContextCompat.checkSelfPermission(act, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.shouldShowRequestPermissionRationale(act, Manifest.permission.CAMERA);
+            ActivityCompat.requestPermissions(act, new String[]{Manifest.permission.CAMERA}, REQUEST_READ_EXTERNAL_STORAGE);
+        } else {
+            return true;
+        }
+        return false;
     }
 }

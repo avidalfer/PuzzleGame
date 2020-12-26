@@ -9,18 +9,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo"
-    tools:context=".ScrollingFragmentOptions">
+    android:background="@drawable/fondo">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="SeleccionSalir"
         android:orientation="vertical"
         android:scrollbarSize="20dp"
         android:visibility="visible"
         tools:ignore="UseSwitchCompatOrMaterialXml"
-        tools:visibility="visible">
+        tools:visibility="visible"
+        tools:context=".ui.common.BaseActivity">
 
         <TextView
             style="@style/CreditTitlesText"
@@ -30,8 +29,8 @@
             android:layout_marginTop="44dp"
             android:text="@string/musica" />
 
-        <Switch
-            android:id="@+id/switch1"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchONOFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -57,7 +56,7 @@
             tools:checked="true" />
 
         <SeekBar
-            android:id="@+id/seekBar"
+            android:id="@+id/volBar"
             android:layout_width="180dp"
             android:layout_height="48dp"
             android:layout_marginStart="174dp"
@@ -83,7 +82,7 @@
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/radioButton1"
+                android:id="@+id/rb_officialTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -95,7 +94,7 @@
                 android:textSize="24sp" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/rb_ownerMusic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -108,7 +107,7 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/btn_seleccionar"
+            android:id="@+id/btn_selMusic"
             style="@style/SmallPurpleButton"
             android:layout_width="100dp"
             android:layout_marginStart="260dp"
@@ -117,49 +116,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton2" />
+            app:layout_constraintTop_toBottomOf="@+id/rb_ownerMusic" />
 
-        <RadioGroup
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RV_songs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:buttonTint="@color/cardview_light_background"
-                android:text="@string/Cancion_guardada_1"
-                android:textColor="?attr/colorAccent"
-                android:textSize="24sp" />
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:buttonTint="@color/cardview_light_background"
-                android:text="@string/Cancion_guardada_2"
-                android:textColor="?attr/colorAccent"
-                android:textSize="24sp" />
-
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:buttonTint="@color/cardview_light_background"
-                android:text="@string/Cancion_guardada_3"
-                android:textColor="?attr/colorAccent"
-                android:textSize="24sp" />
-        </RadioGroup>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             style="@style/CreditTitlesText"

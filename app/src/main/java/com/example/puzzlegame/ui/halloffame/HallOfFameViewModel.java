@@ -1,6 +1,6 @@
 package com.example.puzzlegame.ui.halloffame;
 
-import android.app.Application;
+import android.app.Activity;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,10 +18,9 @@ public class HallOfFameViewModel extends ViewModel {
 
     public HallOfFameViewModel() {}
 
-    public void init(Application application) {
+    public void init(Activity act) {
         hallOfFameRepository = new HallOfFameRepository();
-        hallOfFameRepository.initHallOfFameRepository(application);
-
+        hallOfFameRepository.initHallOfFameRepository(act);
     }
 
     public void getScores(){

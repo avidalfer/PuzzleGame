@@ -1,6 +1,7 @@
 package com.example.puzzlegame.ui.gallery;
 
-import android.content.res.AssetManager;
+import android.app.Activity;
+import android.net.Uri;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,13 +22,23 @@ public class GalleryViewModel extends ViewModel {
         galleryImages = new MutableLiveData<>();
     }
 
-    public void updateGallery(AssetManager assetManager) {
-        galleryRepository.updateImageList(assetManager, true);
-        galleryImages.postValue(galleryRepository.getImageList());
+    public void updateGallery(Activity act) {
+        galleryRepository.updateImageList(act, true);
+        updateGallery();
     }
 
-    public void setImageToBackground(Image image) {
-        galleryRepository.setCurrentBGBitmap(image);
+    private void updateGallery() {
+        galleryImages.setValue(galleryRepository.getImageList());
+    }
+
+    public Image addImage(Activity act, Uri uri){
+        Image img = galleryRepository.addImageToList(act, uri);
+        updateGallery();
+        return img;
+    }
+
+    public void setImageToBackground(Activity act, Image image) {
+        galleryRepository.setCurrentBGBitmap(act, image);
     }
 
     public LiveData<List<Image>> getImageList() {

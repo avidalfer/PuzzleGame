@@ -53,9 +53,9 @@ public class HallOfFameAdapter extends RecyclerView.Adapter<HallOfFameAdapter.My
         //on create get the cach the resource view objects
         public MyViewHolder(View view) {
            super(view);
-           this.positionTView = (TextView) view.findViewById(R.id.position);
-           this.nameTView = (TextView) view.findViewById(R.id.name);
-           this.scoreTView = (TextView) view.findViewById(R.id.score);
+           this.positionTView = view.findViewById(R.id.position);
+           this.nameTView = view.findViewById(R.id.name);
+           this.scoreTView = view.findViewById(R.id.score);
         }
 
         //set values and custom appearance for each row of the adapter views

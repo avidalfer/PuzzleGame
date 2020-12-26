@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo_amarillo"
-    tools:context=".ui.SelectLevel.SelectLevelActivity">
+    tools:context=".ui.selectLevel.SelectLevelActivity">
 
     <!-- Main AppBar -->
 

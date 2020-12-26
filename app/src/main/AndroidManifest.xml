@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.puzzlegame">
+
     <uses-sdk android:minSdkVersion="14" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera2" android:required="false"/>
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
     <application
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/racoon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".Help" />
         <activity android:name=".ui.halloffame.HallOfFameActivity" />
         <activity android:name=".ui.winscreen.WinScreenActivity" />
-        <activity android:name=".ui.SelectLevel.SelectLevelActivity" />
-        <activity android:name=".ui.SelectGame.SelectGameActivity" />
+        <activity android:name=".ui.selectLevel.SelectLevelActivity" />
+        <activity android:name=".ui.selectGame.SelectGameActivity" />
         <activity android:name=".ui.common.BaseActivity" />
         <activity android:name=".ui.game.PuzzleGameActivity" />
         <activity
@@ -27,6 +39,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.gallery.GalleryActivity" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>
