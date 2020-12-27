@@ -36,7 +36,7 @@ import com.example.puzzlegame.model.interfaces.DAO.UserDAO;
         Song.class,
         MusicSettings.class,
         Score.class
-}, version = 1)
+}, version = 2)
 @TypeConverters(UriConverter.class)
 public abstract class AppDataBase extends RoomDatabase {
     protected static AppDataBase appDataBase;

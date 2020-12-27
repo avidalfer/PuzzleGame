@@ -51,7 +51,6 @@ public class BaseActivity extends AppCompatActivity {
             }
 
             if (mediaPlayer.isMainTheme()) {
-                mediaPlayer.setCurrentSong(null);
                 settingsViewModel.setCurrentSong(null);
             }
         }

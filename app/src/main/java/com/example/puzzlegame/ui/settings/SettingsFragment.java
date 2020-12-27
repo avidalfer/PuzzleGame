@@ -158,6 +158,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
             Uri uri = data.getData();
             Song song = new Song(uri, data.getStringExtra("Name"));
             mediaPlayer.setCurrentSong(song);
+            mediaPlayer.setMediaPlayerListener();
         }
     }
 

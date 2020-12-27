@@ -40,11 +40,11 @@ public class MediaPlayerController {
     }
 
     public void setCurrentSong(Song nsong) {
-        if (nsong == null) {
-            playRawTheme();
-            return;
+        if (_song != null) {
+           if (_song == nsong) {
+               return;
+           }
         }
-        if (_song != null && _song.source.equals(nsong.source)) return;
         _song = nsong;
         startSong();
     }
@@ -105,7 +105,6 @@ public class MediaPlayerController {
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build());
         mediaPlayer.prepareAsync();
-        setMediaPlayerListener();
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -122,12 +121,12 @@ public class MediaPlayerController {
     }
 
     public void setMediaPlayerListener() {
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                playRawTheme();
-            }
-        });
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                playRawTheme();
+//            }
+//        });
     }
 
     public boolean isMainTheme() {
