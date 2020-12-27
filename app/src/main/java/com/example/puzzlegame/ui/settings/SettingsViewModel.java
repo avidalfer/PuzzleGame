@@ -35,10 +35,10 @@ public class SettingsViewModel extends ViewModel {
     private void refreshData() {
         boolean state =_repo.getMusicState();
         settings = _repo.getSettings();
-        _musicState.postValue(state);
+        _musicState.setValue(state);
         List<Song> listSong = _repo.getPlayList();
         _playList.postValue(listSong);
-        _volume.postValue(_repo.getVolume());
+        _volume.setValue(_repo.getVolume());
         _lastPlayedSong.setValue(_repo.getLastPlayedSong());
     }
 

@@ -36,7 +36,6 @@ public class SelectLevelActivity extends BaseActivity {
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-
         setViews();
         allowsAsUserLevel();
         setListeners();

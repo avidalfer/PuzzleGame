@@ -34,6 +34,7 @@ public class WinScreenActivity extends BaseActivity {
     private WinScreenViewModel winScreenViewModel;
     private EditText winnerNameTxt;
     private long winTime;
+    private boolean scoreSaved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,6 @@ public class WinScreenActivity extends BaseActivity {
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-
         Intent intent = getIntent();
         winTime = intent.getExtras().getLong("winTime");
 
@@ -72,9 +72,9 @@ public class WinScreenActivity extends BaseActivity {
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime)
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, Calendar.getInstance().getTime())
-                .putExtra(CalendarContract.Events.TITLE, getString(R.string.congrats))
-                .putExtra(CalendarContract.Events.DESCRIPTION, getString(R.string.record) + Utils.FormatTime(winTime))
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime)
+                .putExtra(CalendarContract.Events.TITLE, getString(R.string.puzzle_solved) + Utils.FormatTime(winTime))
+                .putExtra(CalendarContract.Events.DESCRIPTION, getString(R.string.record))
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, "Mapuzzled");
         startActivity(intent);
     }
@@ -99,6 +99,7 @@ public class WinScreenActivity extends BaseActivity {
         btnToHOF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                scoreSaved = true;
                 String winnerName = winnerNameTxt.getText().toString();
                 Score score = new Score(winnerName, winTime);
                 if (winScreenViewModel.isRecord(score)) {
@@ -108,7 +109,6 @@ public class WinScreenActivity extends BaseActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     addScoreToCalendar(winTime);
                 }
-                startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
             }
         });
     }
@@ -122,5 +122,13 @@ public class WinScreenActivity extends BaseActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
         notificationManager.notify(1, builder.build());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (scoreSaved) {
+            startActivity(new Intent(getApplicationContext(), HallOfFameActivity.class));
+        }
     }
 }

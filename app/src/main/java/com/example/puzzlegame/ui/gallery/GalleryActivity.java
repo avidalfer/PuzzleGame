@@ -63,7 +63,6 @@ public class GalleryActivity extends BaseActivity implements GalleryAdapter.OnIm
 
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-
         init();
         setViews(); // and listeners
     }

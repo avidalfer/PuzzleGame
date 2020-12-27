@@ -30,6 +30,7 @@ public class OnPieceListener implements View.OnTouchListener {
     private float volume;
     private boolean loaded;
     private int soundPieceSet;
+    private int soundPiecePicked;
 
     public OnPieceListener(Activity act, PuzzleGameViewModel gameViewModel) {
         this.gameViewModel = gameViewModel;
@@ -65,7 +66,8 @@ public class OnPieceListener implements View.OnTouchListener {
             }
         });
 
-        this.soundPieceSet = this.soundPool.load(act.getApplicationContext(), getFileResId(act, "plop"), 1);
+        this.soundPieceSet = this.soundPool.load(act.getApplicationContext(), getFileResId(act, "shine"), 1);
+        this.soundPiecePicked = this.soundPool.load(act.getApplicationContext(), getFileResId(act, "plop"), 1);
     }
 
     private int getFileResId(Activity act, String resName) {
@@ -89,16 +91,16 @@ public class OnPieceListener implements View.OnTouchListener {
                 xDelta = x - lParams.leftMargin;
                 yDelta = y - lParams.topMargin;
                 piece.bringToFront();
-                ObjectAnimator animation1 = ObjectAnimator.ofFloat(piece, "alpha", 0.5f, 1f);
-                animation1.setDuration(600);
-                animation1.start();
-
+                animPieceAlpha(piece);
+                playPickPieceSound();
                 break;
+
             case MotionEvent.ACTION_MOVE:
                 lParams.leftMargin = (int) (x - xDelta);
                 lParams.topMargin = (int) (y - yDelta);
                 view.setLayoutParams(lParams);
                 break;
+
             case MotionEvent.ACTION_UP:
                 int xDiff = abs(piece.getxCoord() - lParams.leftMargin);
                 int yDiff = abs(piece.getyCoord() - lParams.topMargin);
@@ -108,13 +110,21 @@ public class OnPieceListener implements View.OnTouchListener {
                     piece.setLayoutParams(lParams);
                     piece.canMove(false);
                     sendViewToBack(piece);
-                    animPiece(piece);
+                    animPieceRotate(piece);
                     playSetPieceSound();
                     gameViewModel.checkGameOver();
                 }
                 break;
         }
         return true;
+    }
+
+    private void playPickPieceSound() {
+        if (loaded) {
+            float leftVolume = volume;
+            float rightVolume = volume;
+            this.soundPool.play(soundPiecePicked, leftVolume, rightVolume, 1, 0, 1f);
+        }
     }
 
     private void playSetPieceSound() {
@@ -125,7 +135,13 @@ public class OnPieceListener implements View.OnTouchListener {
         }
     }
 
-    private void animPiece(Piece piece) {
+    private void animPieceAlpha(Piece piece) {
+        ObjectAnimator animation1 = ObjectAnimator.ofFloat(piece, "alpha", 0.5f, 1f);
+        animation1.setDuration(600);
+        animation1.start();
+    }
+
+    private void animPieceRotate(Piece piece) {
         ObjectAnimator animation = ObjectAnimator.ofFloat(piece, "rotation", 5, -5, 5, -5, 5, -5, 0);
         animation.setDuration(300);
         animation.start();

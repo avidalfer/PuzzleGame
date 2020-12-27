@@ -20,10 +20,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.puzzlegame.R;
+import com.example.puzzlegame.common.MediaPlayerController;
 import com.example.puzzlegame.common.Utils;
 import com.example.puzzlegame.model.MusicSettings;
 import com.example.puzzlegame.model.Song;
@@ -48,19 +48,15 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
     private SettingsViewModel settingsViewModel;
     private RecyclerView.Adapter<PlayListAdapter.MyViewHolder> adapter;
     private List<Song> cachedPlayList;
-    private boolean soundActive;
+    private MediaPlayerController mediaPlayer = MediaPlayerController.getInstance();
     private MusicSettings settings;
-    private AudioManager manager;
-
 
     @Override
     public void onAttach(@NonNull Context activity) {
-
         super.onAttach(activity);
     }
 
     public SettingsFragment() {
-
     }
 
     @Nullable
@@ -71,7 +67,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
 
         _fragmentItems = inflater.inflate(R.layout.fragment_scrolling_options, container, false);
         baseActivity = (BaseActivity) getActivity();
-        settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
+        settingsViewModel = baseActivity.settingsViewModel;
         setViews();
         setSettingsValues();
         setListeners();
@@ -81,14 +77,12 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
 
     private void setSettingsValues() {
         settings = settingsViewModel.getSettings();
-        boolean isMainThemePlaying = settings.currentSong.toString().equals("main");
-        rb_officialThemeMusic.setChecked(isMainThemePlaying);
         onOffMusic.setChecked(settings.playingMusic);
         volumeBar.setProgress(settings.musicVol);
     }
 
     private void setViews() {
-        manager = (AudioManager) baseActivity.getSystemService(Context.AUDIO_SERVICE);
+        AudioManager manager = (AudioManager) baseActivity.getSystemService(Context.AUDIO_SERVICE);
         volumeBar = _fragmentItems.findViewById(R.id.volBar);
         volumeBar.setMax(manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
         onOffMusic = _fragmentItems.findViewById(R.id.switchONOFF);
@@ -106,9 +100,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
             @Override
             public void onClick(View v) {
                 if (rb_officialThemeMusic.isChecked()) {
-                    Song song = new Song(Uri.parse("main"), "main_theme");
-                    settingsViewModel.setCurrentSong(song);
-                    baseActivity.playRawTheme();
+                    mediaPlayer.setCurrentSong(null);
                 } else if (rb_newSong.isChecked()) {
                     getSong();
                 } else
@@ -120,12 +112,10 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    soundActive = true;
-                    baseActivity.changeSong(null);
+                    mediaPlayer.startSong();
                     settingsViewModel.setMusicPlaying(true);
                 } else {
-                    soundActive = false;
-                    baseActivity.pauseMusic();
+                    mediaPlayer.releaseMusicPlayer();
                     settingsViewModel.setMusicPlaying(false);
                 }
             }
@@ -137,7 +127,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 _setVolume = progress;
-                baseActivity.setVolume(progress);
+                mediaPlayer.setVolume(progress);
             }
 
             @Override
@@ -147,13 +137,6 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (seekBar.getProgress() == 0)
-                    baseActivity.pauseMusic();
-                else {
-                    if (soundActive) {
-                        baseActivity.restartSong();
-                    }
-                }
                 settingsViewModel.set_volume(_setVolume);
             }
         });
@@ -174,8 +157,7 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
         if (requestCode == REQUEST_READ_EXTERNAL_STORAGE && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             Song song = new Song(uri, data.getStringExtra("Name"));
-            baseActivity.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            settingsViewModel.setCurrentSong(song);
+            mediaPlayer.setCurrentSong(song);
         }
     }
 
@@ -191,31 +173,6 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
             }
         };
         settingsViewModel.getPlayListObservable().observe(getViewLifecycleOwner(), playListObserver);
-
-        final Observer<Song> lastPlayedSongObserver = new Observer<Song>() {
-            @Override
-            public void onChanged(Song song) {
-                baseActivity.changeSong(song);
-            }
-        };
-        settingsViewModel.getLastPlayedSongObservable().observe(getViewLifecycleOwner(), lastPlayedSongObserver);
-
-        final Observer<Boolean> musicStateObserver = new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean state) {
-                soundActive = state;
-                onOffMusic.setChecked(state);
-            }
-        };
-        settingsViewModel.getMusicStateObservable().observe(getViewLifecycleOwner(), musicStateObserver);
-
-        final Observer<Integer> volumeObserver = new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer vol) {
-                volumeBar.setProgress(vol);
-            }
-        };
-        settingsViewModel.getVolumeObservable().observe(getViewLifecycleOwner(), volumeObserver);
     }
 
     private void inflatePlayList() {
@@ -225,7 +182,6 @@ public class SettingsFragment extends Fragment implements PlayListAdapter.OnSong
 
     private void MusicOff() {
         onOffMusic.setChecked(false);
-        baseActivity.pauseMusic();
     }
 
     public void SeleccionReiniciar(View view) {

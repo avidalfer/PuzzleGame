@@ -34,7 +34,7 @@ public class MusicSettings {
         this.playingMusic = play;
     }
 
-    public double getMusicVol() {
+    public int getMusicVol() {
         return musicVol;
     }
 

@@ -3,23 +3,31 @@ package com.example.puzzlegame.model.interfaces.DAO;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.puzzlegame.model.Image;
 
 import java.util.List;
 
 @Dao
-public interface GalleryDAO {
+public abstract class GalleryDAO {
     @Query("SELECT * FROM Images")
-    List<Image> getAllImages();
+    public abstract List<Image> getAllImages();
 
     @Query("SELECT * FROM Images WHERE imgName = :name limit 1")
-    Image findByName(String name);
+    public abstract Image findByName(String name);
 
-    @Insert
-    void insertImages(Image... Images);
+    @Transaction
+    public long insertImages(Image image){
+        final long id = insert(image);
+        return id;
+    }
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    protected abstract long insert(Image image);
 
     @Delete
-    void delete(Image Image);
+    abstract void delete(Image Image);
 }

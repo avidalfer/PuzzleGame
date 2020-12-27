@@ -23,6 +23,7 @@
     <string name="title_activity_win">WinActivity</string>
     <string name="congrats">¡¡¡Enhorabuena!!!</string>
     <string name="win_msg">¡Mapachiona \n ganar!</string>
+    <string name="puzzle_solved">Puzle resuelto en </string>
     <string name="your_time_is">Lo has resuelto en sólo</string>
     <string name="toHoF">Ver Hall of Fame</string>
     <string name="store_score">Guarda la puntuación</string>

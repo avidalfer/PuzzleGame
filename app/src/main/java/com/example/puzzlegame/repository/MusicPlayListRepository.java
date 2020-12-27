@@ -150,7 +150,7 @@ public class MusicPlayListRepository {
     }
 
     public void setCurrentSong(final Song song) {
-        settings.setCurrentSong(song.source);
+        if (song == null) return;
         try {
             Thread t = new Thread(new Runnable() {
                 @Override
@@ -190,4 +190,5 @@ public class MusicPlayListRepository {
     public MusicSettings getSettings() {
         return settings;
     }
+
 }

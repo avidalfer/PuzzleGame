@@ -181,6 +181,7 @@ public class GalleryRepository {
 
     public Image addImageToList(final Activity act, final Uri uri) {
         final Image[] _img = new Image[1];
+        final int[] id = new int[1];
         int thumbW = 120;
         int thumbH = 120;
         try {
@@ -202,7 +203,7 @@ public class GalleryRepository {
                 Thread t1 = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        db.galleryDAO().insertImages(_img[0]);
+                        id[0] = (int) db.galleryDAO().insertImages(_img[0]);
                     }
                 });
                 t1.start();
@@ -212,6 +213,12 @@ public class GalleryRepository {
             if (tempImg.getBitmap() == null) {
                 tempImg.setBitmap(Utils.getScaledBitmap(is, tempImg.getPhotoWidth(), thumbW, tempImg.getPhotoHeight(), thumbH));
                 imageList.add(tempImg);
+                tempImg.imgId = id[0];
+                if (currentImage == null) {
+                    currentImage = tempImg;
+                } else {
+                    currentImage.imgId = id[0];
+                }
                 return tempImg;
             }
         } catch (Exception ex) {

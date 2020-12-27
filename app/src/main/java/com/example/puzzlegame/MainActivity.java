@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import com.example.puzzlegame.common.CommonBarMethods;
 import com.example.puzzlegame.ui.common.BaseActivity;
 import com.example.puzzlegame.ui.halloffame.HallOfFameActivity;
@@ -25,9 +23,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         CommonBarMethods.createToolbar(this);
         CommonBarMethods.configDefaultAppBar(this);
-        settingsViewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
-        settingsViewModel.initRepository(this);
-        super.begin();
+        begin();
+        beginMedia();
         setViews();
         setListeners();
     }
